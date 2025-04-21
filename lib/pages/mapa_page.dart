@@ -1,4 +1,5 @@
-import 'package:emulando_figma/pages/home_page.dart';
+import 'package:emulando_figma/_core/widgets/appbar.dart';
+import 'package:emulando_figma/_core/widgets/bottombar.dart';
 import 'package:flutter/material.dart';
 
 class MapaPage extends StatefulWidget {
@@ -14,42 +15,8 @@ class _MyHomePageState extends State<MapaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.purple,
-        toolbarHeight: MediaQuery.of(context).size.height * 0.12,
-        leadingWidth: MediaQuery.of(context).size.width,
-        leading: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: 130,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: Image.asset('assets/imagens/logo.jpg', height: 80.0),
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Container(
-                decoration: BoxDecoration(color: Colors.amber),
-                child: PopupMenuButton(
-                  itemBuilder: (context) {
-                    return <PopupMenuItem<String>>[
-                      PopupMenuItem(child: Text("Mapa")),
-                      PopupMenuItem(child: Text('Estabelecimentos')),
-                    ];
-                  },
-                ),
-              );
-            },
-            icon: Icon(Icons.menu_rounded, color: Colors.white, size: 60),
-          ),
-        ],
-        iconTheme: IconThemeData(size: 60, opacity: 0.9),
-      ),
-
+      appBar: getAppBar(context: context),
+      endDrawer: getDrawer(),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -246,76 +213,7 @@ class _MyHomePageState extends State<MapaPage> {
         ),
       ),
 
-      bottomNavigationBar: BottomAppBar(
-        height: MediaQuery.of(context).size.height * 0.145,
-        color: Colors.purple,
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 6.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Column(
-              children: [
-                Icon(Icons.home, color: Colors.white, size: 38),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MyHomePage(title: ''),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    "Home",
-                    style: TextStyle(fontSize: 11, color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              spacing: 10,
-              children: [
-                Icon(Icons.local_dining_sharp, color: Colors.white, size: 38),
-                Text(
-                  "Restaurantes",
-                  style: TextStyle(fontSize: 11, color: Colors.white),
-                ),
-              ],
-            ),
-            Column(
-              spacing: 10,
-              children: [
-                Icon(Icons.add_location_rounded, color: Colors.white, size: 38),
-                Text(
-                  "P.Turísticos",
-                  style: TextStyle(fontSize: 11, color: Colors.white),
-                ),
-              ],
-            ),
-            Column(
-              spacing: 10,
-              children: [
-                Icon(Icons.edit_road_rounded, color: Colors.white, size: 38),
-                Text(
-                  "Roteiro",
-                  style: TextStyle(fontSize: 11, color: Colors.white),
-                ),
-              ],
-            ),
-            Column(
-              spacing: 10,
-              children: [
-                Icon(Icons.person_pin, color: Colors.white, size: 38),
-                Text(
-                  "Perfil",
-                  style: TextStyle(fontSize: 11, color: Colors.white),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: getBottomBar(context: context),
     );
   }
 }
