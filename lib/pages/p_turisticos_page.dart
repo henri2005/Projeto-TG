@@ -1,3 +1,4 @@
+import 'package:emulando_figma/_core/appcolors.dart';
 import 'package:emulando_figma/_core/widgets/appbar.dart';
 import 'package:emulando_figma/_core/widgets/bottombar.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,8 @@ class _MyHomePageState extends State<PontosTuristicosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getAppBar(context: context),
-      endDrawer: getDrawer(),
+      endDrawer: getDrawer(context: context),
+      backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -71,7 +73,7 @@ class _MyHomePageState extends State<PontosTuristicosPage> {
                           Container(
                             padding: EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: Colors.cyan[700],
+                              color: AppColors.buttonColor,
                               borderRadius: BorderRadius.circular(5),
                               boxShadow: [
                                 BoxShadow(
@@ -149,7 +151,7 @@ class _MyHomePageState extends State<PontosTuristicosPage> {
                           Container(
                             padding: EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: Colors.cyan[700],
+                              color: AppColors.buttonColor,
                               borderRadius: BorderRadius.circular(5),
                               boxShadow: [
                                 BoxShadow(
@@ -227,7 +229,7 @@ class _MyHomePageState extends State<PontosTuristicosPage> {
                           Container(
                             padding: EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: Colors.cyan[700],
+                              color: AppColors.buttonColor,
                               borderRadius: BorderRadius.circular(5),
                               boxShadow: [
                                 BoxShadow(

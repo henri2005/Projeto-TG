@@ -1,4 +1,10 @@
 import 'package:emulando_figma/_core/appcolors.dart';
+import 'package:emulando_figma/pages/destaques_page.dart';
+import 'package:emulando_figma/pages/estabelecimentos_page.dart';
+import 'package:emulando_figma/pages/favoritos_page.dart';
+import 'package:emulando_figma/pages/mapa_page.dart';
+import 'package:emulando_figma/pages/p_turisticos_page.dart';
+import 'package:emulando_figma/pages/perfil_page.dart';
 import 'package:flutter/material.dart';
 
 AppBar getAppBar({required BuildContext context, String? title}) {
@@ -11,7 +17,7 @@ AppBar getAppBar({required BuildContext context, String? title}) {
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 10.0),
-          child: Image.asset('assets/imagens/logo_turisr.png', height: 80.0),
+          child: Image.asset('imagens/logo_turisr.png', height: 80.0),
         ),
       ],
     ),
@@ -19,22 +25,41 @@ AppBar getAppBar({required BuildContext context, String? title}) {
   );
 }
 
-Drawer getDrawer() {
+Drawer getDrawer({required BuildContext context}) {
   return Drawer(
     backgroundColor: AppColors.menuColor,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => MapaPage(title: '')),
+            );
+          },
           child: Text("Mapa", style: TextStyle(fontSize: 20)),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EstabelecimentosPage(title: ''),
+              ),
+            );
+          },
           child: Text("Estabelecimentos", style: TextStyle(fontSize: 20)),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PontosTuristicosPage(title: ''),
+              ),
+            );
+          },
           child: Text("Pontos Turísticos", style: TextStyle(fontSize: 20)),
         ),
         TextButton(
@@ -42,15 +67,30 @@ Drawer getDrawer() {
           child: Text("Roteiro de Viagem", style: TextStyle(fontSize: 20)),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => DestaquesPage(title: '')),
+            );
+          },
           child: Text("Destaques", style: TextStyle(fontSize: 20)),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => FavoritosPage(title: '')),
+            );
+          },
           child: Text("Favoritos", style: TextStyle(fontSize: 20)),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => PerfilPage()),
+            );
+          },
           child: Text("Perfil do Usuário", style: TextStyle(fontSize: 20)),
         ),
       ],

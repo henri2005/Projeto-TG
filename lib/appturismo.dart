@@ -1,4 +1,5 @@
-import 'package:emulando_figma/pages/home_page.dart';
+import 'package:emulando_figma/pages/perfil_editar_page.dart';
+import 'package:emulando_figma/pages/perfil_sobre_page.dart';
 import 'package:flutter/material.dart';
 
 class AppTurismo extends StatelessWidget {
@@ -13,7 +14,7 @@ class AppTurismo extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Product Listing'),
+      home: const PerfilSobrePage(),
     );
   }
 }

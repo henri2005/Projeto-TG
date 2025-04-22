@@ -1,3 +1,4 @@
+import 'package:emulando_figma/_core/appcolors.dart';
 import 'package:emulando_figma/_core/widgets/appbar.dart';
 import 'package:emulando_figma/_core/widgets/bottombar.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,8 @@ class _MyHomePageState extends State<FavoritosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getAppBar(context: context),
-      endDrawer: getDrawer(),
+      endDrawer: getDrawer(context: context),
+      backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Center(
           child: Column(

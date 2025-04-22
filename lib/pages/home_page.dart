@@ -1,5 +1,7 @@
+import 'package:emulando_figma/_core/appcolors.dart';
 import 'package:emulando_figma/_core/widgets/appbar.dart';
 import 'package:emulando_figma/_core/widgets/bottombar.dart';
+import 'package:emulando_figma/pages/mapa_page.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -16,7 +18,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getAppBar(context: context),
-      endDrawer: getDrawer(),
+      endDrawer: getDrawer(context: context),
+      backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -98,22 +101,27 @@ class _MyHomePageState extends State<MyHomePage> {
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height * 0.2,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.lightBlue,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: Icon(
-                                Icons.search,
-                                size: 40,
-                                color: Colors.white,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: AppColors.buttonColor,
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Icon(
+                                    Icons.search,
+                                    size: 40,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
                       ],
                     ),
@@ -129,23 +137,35 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       Text("Conheça São Roque", style: TextStyle(fontSize: 25)),
                       Image.asset(
-                        'assets/portal.png',
+                        'imagens/portal.png',
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 0.2,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.lightBlue,
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Icon(
-                            Icons.search,
-                            size: 40,
-                            color: Colors.white,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.buttonColor,
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MapaPage(title: ''),
+                                  ),
+                                );
+                              },
+                              icon: Icon(
+                                Icons.search,
+                                size: 40,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ],
                   ),

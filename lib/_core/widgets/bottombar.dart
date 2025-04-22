@@ -2,6 +2,7 @@ import 'package:emulando_figma/_core/appcolors.dart';
 import 'package:emulando_figma/pages/estabelecimentos_page.dart';
 import 'package:emulando_figma/pages/home_page.dart';
 import 'package:emulando_figma/pages/p_turisticos_page.dart';
+import 'package:emulando_figma/pages/perfil_page.dart';
 import 'package:flutter/material.dart';
 
 BottomAppBar getBottomBar({required BuildContext context}) {
@@ -102,7 +103,12 @@ BottomAppBar getBottomBar({required BuildContext context}) {
             Column(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => PerfilPage()),
+                    );
+                  },
                   icon: Icon(Icons.person_pin, color: Colors.white, size: 38),
                 ),
                 Text(
