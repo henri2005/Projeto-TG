@@ -1,8 +1,9 @@
 import 'package:emulando_figma/_core/appcolors.dart';
 import 'package:emulando_figma/_core/widgets/appbar.dart';
 import 'package:emulando_figma/_core/widgets/bottombar.dart';
-import 'package:emulando_figma/pages/inicial_page.dart';
-import 'package:emulando_figma/pages/perfil_editar_page.dart';
+import 'package:emulando_figma/pages_usuario/inicial_page.dart';
+import 'package:emulando_figma/pages_usuario/perfil_editar_page.dart';
+import 'package:emulando_figma/pages_usuario/perfil_sobre_page.dart';
 import 'package:flutter/material.dart';
 
 class PerfilPage extends StatelessWidget {
@@ -25,7 +26,7 @@ class PerfilPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.3,
+                      width: MediaQuery.of(context).size.width * 0.35,
                       height: MediaQuery.of(context).size.height * 0.07,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -43,7 +44,7 @@ class PerfilPage extends StatelessWidget {
                       ),
                     ),
 
-                    ElevatedButton(
+                    TextButton(
                       onPressed: () {
                         Navigator.pop(
                           context,
@@ -53,7 +54,7 @@ class PerfilPage extends StatelessWidget {
                         );
                       },
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.3,
+                        width: MediaQuery.of(context).size.width * 0.35,
                         height: MediaQuery.of(context).size.height * 0.07,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
@@ -74,16 +75,21 @@ class PerfilPage extends StatelessWidget {
                   ],
                 ),
 
-                CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
-                  ),
-                  radius: 80,
+                Column(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(
+                        'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+                      ),
+                      radius: 80,
+                    ),
+                    Text("João da Silva", style: TextStyle(fontSize: 20)),
+                  ],
                 ),
 
-                ElevatedButton(
+                TextButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => PerfilEditarPage(),
@@ -91,7 +97,7 @@ class PerfilPage extends StatelessWidget {
                     );
                   },
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.3,
+                    width: MediaQuery.of(context).size.width * 0.35,
                     height: MediaQuery.of(context).size.height * 0.07,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -233,7 +239,7 @@ class PerfilPage extends StatelessWidget {
 
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
-                  height: MediaQuery.of(context).size.height * 0.251,
+                  height: MediaQuery.of(context).size.height * 0.27,
                   child: Column(
                     spacing: 10,
                     children: [
@@ -249,9 +255,16 @@ class PerfilPage extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Sobre", style: TextStyle(fontSize: 30)),
+                              Text("Sobre", style: TextStyle(fontSize: 28)),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PerfilSobrePage(),
+                                    ),
+                                  );
+                                },
                                 icon: Icon(Icons.arrow_right, size: 45),
                               ),
                             ],
@@ -260,7 +273,7 @@ class PerfilPage extends StatelessWidget {
                       ),
 
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.12,
+                        height: MediaQuery.of(context).size.height * 0.13,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(color: Colors.black),
@@ -273,7 +286,7 @@ class PerfilPage extends StatelessWidget {
                             children: [
                               Text(
                                 "Acessibilidade",
-                                style: TextStyle(fontSize: 30),
+                                style: TextStyle(fontSize: 28),
                               ),
                               IconButton(
                                 onPressed: () {},

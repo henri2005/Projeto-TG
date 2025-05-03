@@ -1,13 +1,13 @@
 import 'package:emulando_figma/_core/appcolors.dart';
-import 'package:emulando_figma/pages/estabelecimentos_page.dart';
-import 'package:emulando_figma/pages/home_page.dart';
-import 'package:emulando_figma/pages/p_turisticos_page.dart';
-import 'package:emulando_figma/pages/perfil_page.dart';
+import 'package:emulando_figma/pages_usuario/estabelecimentos_page.dart';
+import 'package:emulando_figma/pages_usuario/home_page.dart';
+import 'package:emulando_figma/pages_usuario/p_turisticos_page.dart';
+import 'package:emulando_figma/pages_usuario/perfil_page.dart';
 import 'package:flutter/material.dart';
 
 BottomAppBar getBottomBar({required BuildContext context}) {
   return BottomAppBar(
-    height: MediaQuery.of(context).size.height * 0.12,
+    height: MediaQuery.of(context).size.height * 0.13,
     color: AppColors.mainColor,
     padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 6.0),
     child: Row(

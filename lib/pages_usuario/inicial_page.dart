@@ -1,5 +1,5 @@
-import 'package:emulando_figma/pages/cadastro_page.dart';
-import 'package:emulando_figma/pages/login_page.dart';
+import 'package:emulando_figma/pages_usuario/cadastro_page.dart';
+import 'package:emulando_figma/pages_usuario/login_page.dart';
 import 'package:flutter/material.dart';
 
 class InicialPage extends StatefulWidget {
@@ -31,7 +31,7 @@ class _MyHomePageState extends State<InicialPage> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Image.asset(
-                      'assets/imagens/logo.png',
+                      'assets/imagens/logo_turisr.png',
                       width: MediaQuery.of(context).size.width * 0.7,
                     ),
                   ),
@@ -59,7 +59,7 @@ class _MyHomePageState extends State<InicialPage> {
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: TextButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (context) => LoginPage(title: ''),
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<InicialPage> {
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: TextButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (context) => CadastroPage(title: ''),

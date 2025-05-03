@@ -1,7 +1,8 @@
 import 'package:emulando_figma/_core/appcolors.dart';
 import 'package:emulando_figma/_core/widgets/appbar.dart';
+import 'package:emulando_figma/_core/widgets/appbar_convidado.dart';
 import 'package:emulando_figma/_core/widgets/bottombar.dart';
-import 'package:emulando_figma/pages/mapa_page.dart';
+import 'package:emulando_figma/pages_usuario/mapa_page.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -18,7 +19,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getAppBar(context: context),
-      endDrawer: getDrawer(context: context),
+      endDrawer: getDrawerConvidado(context: context),
       backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Center(

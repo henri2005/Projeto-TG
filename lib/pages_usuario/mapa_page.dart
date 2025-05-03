@@ -33,6 +33,7 @@ class _MyHomePageState extends State<MapaPage> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
+                  spacing: 30,
                   children: [
                     Container(
                       width: MediaQuery.of(context).size.width * 0.8,

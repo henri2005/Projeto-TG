@@ -1,3 +1,4 @@
+import 'package:emulando_figma/pages_usuario/recuperarsenha2_page.dart';
 import 'package:flutter/material.dart';
 
 class RecuperarPage extends StatefulWidget {
@@ -56,30 +57,40 @@ class _MyHomePageState extends State<RecuperarPage> {
                 ),
               ),
 
-              Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.08,
-                padding: EdgeInsets.only(left: 20.0),
-                decoration: BoxDecoration(
-                  color: Colors.cyan[700],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  spacing: 15,
-                  children: [
-                    Text(
-                      "Continuar",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Recuperar2Page(title: ''),
                     ),
+                  );
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  padding: EdgeInsets.only(left: 20.0),
+                  decoration: BoxDecoration(
+                    color: Colors.cyan[700],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    spacing: 15,
+                    children: [
+                      Text(
+                        "Continuar",
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
 
-                    Icon(
-                      Icons.arrow_right_outlined,
-                      color: Colors.white,
-                      size: 50,
-                    ),
-                  ],
+                      Icon(
+                        Icons.arrow_right_outlined,
+                        color: Colors.white,
+                        size: 50,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

@@ -1,4 +1,4 @@
-import 'package:emulando_figma/pages/login_page.dart';
+import 'package:emulando_figma/pages_usuario/login_page.dart';
 import 'package:flutter/material.dart';
 
 class CadastroPage extends StatefulWidget {
@@ -262,11 +262,21 @@ class _MyHomePageState extends State<CadastroPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("Já tem conta? ", style: TextStyle(fontSize: 17)),
-                        Text(
-                          "Entrar",
-                          style: TextStyle(
-                            fontSize: 17,
-                            decoration: TextDecoration.underline,
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginPage(title: ''),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "Entrar",
+                            style: TextStyle(
+                              fontSize: 17,
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
                         ),
                       ],

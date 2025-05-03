@@ -1,5 +1,6 @@
-import 'package:emulando_figma/pages/cadastro_page.dart';
-import 'package:emulando_figma/pages/home_page.dart';
+import 'package:emulando_figma/pages_usuario/cadastro_page.dart';
+import 'package:emulando_figma/pages_usuario/home_page.dart';
+import 'package:emulando_figma/pages_usuario/recuperarsenha1_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _MyHomePageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Image.asset(
-                          'assets/imagens/logo.png',
+                          'assets/imagens/logo_turisr.png',
                           width: MediaQuery.of(context).size.width * 0.7,
                         ),
                       ),
@@ -90,11 +91,22 @@ class _MyHomePageState extends State<LoginPage> {
                             color: Colors.grey,
                           ),
                           Text("Lembrar-me"),
-                          Text(
-                            "Esqueceu a senha?",
-                            style: TextStyle(
-                              fontSize: 18,
-                              decoration: TextDecoration.underline,
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => RecuperarPage(title: ''),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "Esqueceu a senha?",
+                              style: TextStyle(
+                                fontSize: 18,
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
                           ),
                         ],
@@ -115,7 +127,7 @@ class _MyHomePageState extends State<LoginPage> {
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: TextButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (context) => MyHomePage(title: ''),

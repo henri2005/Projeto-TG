@@ -1,4 +1,5 @@
 import 'package:emulando_figma/_core/widgets/appbar.dart';
+import 'package:emulando_figma/_core/widgets/appbar_convidado.dart';
 import 'package:emulando_figma/_core/widgets/bottombar.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class _MyHomePageState extends State<DestaquesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getAppBar(context: context),
-      endDrawer: getDrawer(context: context),
+      endDrawer: getDrawerConvidado(context: context),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),
         child: Column(
