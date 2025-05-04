@@ -1,6 +1,6 @@
-import 'package:emulando_figma/pages_usuario/cadastro_page.dart';
-import 'package:emulando_figma/pages_usuario/home_page.dart';
-import 'package:emulando_figma/pages_usuario/recuperarsenha1_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/cadastro_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/home_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/recuperarsenha1_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {

@@ -1,8 +1,9 @@
 import 'package:emulando_figma/_core/appcolors.dart';
-import 'package:emulando_figma/pages_usuario/estabelecimentos_page.dart';
-import 'package:emulando_figma/pages_usuario/home_page.dart';
-import 'package:emulando_figma/pages_usuario/p_turisticos_page.dart';
-import 'package:emulando_figma/pages_usuario/perfil_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/estabelecimentos_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/home_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/p_turisticos_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/perfil_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/roteiro_page.dart';
 import 'package:flutter/material.dart';
 
 BottomAppBar getBottomBar({required BuildContext context}) {
@@ -82,7 +83,12 @@ BottomAppBar getBottomBar({required BuildContext context}) {
             Column(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => RoteiroPage()),
+                    );
+                  },
                   icon: Icon(
                     Icons.edit_road_rounded,
                     color: Colors.white,

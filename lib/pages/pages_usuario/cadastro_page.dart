@@ -1,4 +1,4 @@
-import 'package:emulando_figma/pages_usuario/login_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/login_page.dart';
 import 'package:flutter/material.dart';
 
 class CadastroPage extends StatefulWidget {

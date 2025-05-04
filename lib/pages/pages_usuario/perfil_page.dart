@@ -1,9 +1,9 @@
 import 'package:emulando_figma/_core/appcolors.dart';
 import 'package:emulando_figma/_core/widgets/appbar.dart';
 import 'package:emulando_figma/_core/widgets/bottombar.dart';
-import 'package:emulando_figma/pages_usuario/inicial_page.dart';
-import 'package:emulando_figma/pages_usuario/perfil_editar_page.dart';
-import 'package:emulando_figma/pages_usuario/perfil_sobre_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/inicial_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/perfil_editar_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/perfil_sobre_page.dart';
 import 'package:flutter/material.dart';
 
 class PerfilPage extends StatelessWidget {

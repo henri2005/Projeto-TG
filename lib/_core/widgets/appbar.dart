@@ -1,10 +1,11 @@
 import 'package:emulando_figma/_core/appcolors.dart';
-import 'package:emulando_figma/pages_usuario/destaques_page.dart';
-import 'package:emulando_figma/pages_usuario/estabelecimentos_page.dart';
-import 'package:emulando_figma/pages_usuario/favoritos_page.dart';
-import 'package:emulando_figma/pages_usuario/mapa_page.dart';
-import 'package:emulando_figma/pages_usuario/p_turisticos_page.dart';
-import 'package:emulando_figma/pages_usuario/perfil_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/destaques_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/estabelecimentos_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/favoritos_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/mapa_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/p_turisticos_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/perfil_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/roteiro_page.dart';
 import 'package:flutter/material.dart';
 
 AppBar getAppBar({required BuildContext context, String? title}) {
@@ -92,7 +93,12 @@ Drawer getDrawer({required BuildContext context}) {
             children: [
               Icon(Icons.edit_road, size: 40),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => RoteiroPage()),
+                  );
+                },
                 child: Text(
                   "Roteiro de Viagem",
                   style: TextStyle(fontSize: 20),

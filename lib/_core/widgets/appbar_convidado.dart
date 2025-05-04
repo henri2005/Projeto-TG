@@ -1,8 +1,8 @@
 import 'package:emulando_figma/_core/appcolors.dart';
-import 'package:emulando_figma/pages_usuario/destaques_page.dart';
-import 'package:emulando_figma/pages_usuario/estabelecimentos_page.dart';
-import 'package:emulando_figma/pages_usuario/mapa_page.dart';
-import 'package:emulando_figma/pages_usuario/p_turisticos_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/destaques_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/estabelecimentos_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/mapa_page.dart';
+import 'package:emulando_figma/pages/pages_usuario/p_turisticos_page.dart';
 import 'package:flutter/material.dart';
 
 Drawer getDrawerConvidado({required BuildContext context}) {
