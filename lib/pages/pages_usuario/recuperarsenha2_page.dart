@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:turisr/_core/widgets/botoes.dart';
+import 'package:turisr/pages/pages_usuario/login_page.dart';
 
 class Recuperar2Page extends StatefulWidget {
   const Recuperar2Page({super.key, required this.title});
@@ -23,7 +25,7 @@ class _MyHomePageState extends State<Recuperar2Page> {
                 padding: EdgeInsets.only(left: 25),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 60,
+                  spacing: 40,
                   children: [
                     Text(
                       "Enviamos um código para o seu e-mail",
@@ -157,25 +159,7 @@ class _MyHomePageState extends State<Recuperar2Page> {
                 ),
               ),
 
-              Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.08,
-                decoration: BoxDecoration(
-                  color: Colors.cyan[700],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  spacing: 15,
-                  children: [
-                    Text(
-                      "REENVIAR CÓDIGO",
-                      style: TextStyle(fontSize: 28, color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
+              Botao(texto: 'REENVIAR CÓDIGO', pagina: LoginPage(title: '')),
             ],
           ),
         ),

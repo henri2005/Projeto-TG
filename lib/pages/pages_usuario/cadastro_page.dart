@@ -1,4 +1,7 @@
-import 'package:emulando_figma/pages/pages_usuario/login_page.dart';
+import 'package:turisr/_core/appcolors.dart';
+import 'package:turisr/_core/widgets/botoes_replacement.dart';
+import 'package:turisr/_core/widgets/input.dart';
+import 'package:turisr/pages/pages_usuario/login_page.dart';
 import 'package:flutter/material.dart';
 
 class CadastroPage extends StatefulWidget {
@@ -13,6 +16,7 @@ class CadastroPage extends StatefulWidget {
 class _MyHomePageState extends State<CadastroPage> {
   @override
   Widget build(BuildContext context) {
+    String groupValue = '';
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -20,11 +24,11 @@ class _MyHomePageState extends State<CadastroPage> {
             padding: const EdgeInsets.only(bottom: 50.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 10,
+              spacing: 20,
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.35,
+                  height: MediaQuery.of(context).size.height * 0.3,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -33,7 +37,7 @@ class _MyHomePageState extends State<CadastroPage> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Image.asset(
-                          'assets/imagens/logo.png',
+                          'assets/imagens/logo_turisr.png',
                           width: MediaQuery.of(context).size.width * 0.7,
                         ),
                       ),
@@ -42,197 +46,136 @@ class _MyHomePageState extends State<CadastroPage> {
                 ),
 
                 SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.7,
                   child: Column(
                     spacing: 5,
                     children: [
-                      Column(
-                        spacing: 5,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Nome:", style: TextStyle(fontSize: 20)),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.05,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 211, 211, 211),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Text(''),
-                          ),
-                        ],
+                      Input(visibilidade: true, label: 'Nome'),
+
+                      Input(
+                        visibilidade: true,
+                        label: 'Digite um nome de usuário',
                       ),
 
+                      Input(visibilidade: true, label: 'Senha'),
+
                       Column(
-                        spacing: 5,
+                        spacing: 10,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Digite um nome de usuário:",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.05,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 211, 211, 211),
-                              borderRadius: BorderRadius.circular(6),
+                            'Qual tipo de turismo/passeio você costuma fazer?',
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
+                              fontSize: 17,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w300,
                             ),
-                            child: Text(''),
-                          ),
-                        ],
-                      ),
-
-                      Column(
-                        spacing: 5,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Senha:", style: TextStyle(fontSize: 20)),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.05,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 211, 211, 211),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Text(''),
-                          ),
-                        ],
-                      ),
-
-                      Column(
-                        spacing: 5,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Confirmar senha:",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.05,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 211, 211, 211),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Text(''),
-                          ),
-                        ],
-                      ),
-
-                      Column(
-                        spacing: 5,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 38.0),
-                            child: Text(
-                              "Qual tipo de turismo/passeio você costuma fazer?",
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.05,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 211, 211, 211),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 260.0),
-                              child: Icon(
-                                Icons.label_important_outline_sharp,
-                                color: Colors.black,
+                          ), // espaço entre o label e o campo
+                          TextFormField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 15,
+                                horizontal: 20,
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color:
+                                      AppColors
+                                          .mainColor, // mesma cor da borda ao focar
+                                  width: 2,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color: AppColors.mainColor,
+                                  width: 2,
+                                ),
                               ),
                             ),
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ],
                       ),
 
                       Column(
-                        spacing: 5,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        spacing: 10,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "O que gosta de fazer em viagens?",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.05,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 211, 211, 211),
-                              borderRadius: BorderRadius.circular(6),
+                            'O que gosta de fazer em viagens?',
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
+                              fontSize: 17,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w300,
                             ),
-                            child: Text(''),
+                          ), // espaço entre o label e o campo
+                          TextFormField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 15,
+                                horizontal: 20,
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color:
+                                      AppColors
+                                          .mainColor, // mesma cor da borda ao focar
+                                  width: 2,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color: AppColors.mainColor,
+                                  width: 2,
+                                ),
+                              ),
+                            ),
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ],
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.only(right: 45.0),
-                        child: Row(
-                          spacing: 5,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.check_box_outline_blank,
-                              color: Colors.grey,
-                            ),
-                            Text("Estou de acordo com a Política de Uso"),
-                          ],
-                        ),
                       ),
                     ],
                   ),
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.only(top: 15.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(4, 139, 168, 1),
-                      borderRadius: BorderRadius.circular(7),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LoginPage(title: ''),
-                            ),
-                          );
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: Row(
+                    children: [
+                      Radio(
+                        value: "false",
+                        activeColor: AppColors.buttonColor,
+                        groupValue: groupValue,
+                        onChanged: (value) {
+                          setState(() {
+                            groupValue = value!;
+                          });
                         },
-                        child: Text(
-                          "CADASTRAR",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
                       ),
-                    ),
+                      Text("Estou de acordo com a Política de Uso"),
+                    ],
                   ),
                 ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '------------------------',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Text(" ou ", style: TextStyle(fontSize: 20)),
-                    Text(
-                      '-----------------------',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ],
+                BotaoReplacement(
+                  altura: 0.09,
+                  largura: 0.8,
+                  texto: 'CADASTRO',
+                  pagina: LoginPage(title: ''),
                 ),
 
                 Column(
@@ -242,7 +185,7 @@ class _MyHomePageState extends State<CadastroPage> {
                       width: MediaQuery.of(context).size.width * 0.7,
                       height: MediaQuery.of(context).size.height * 0.1,
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 199, 199, 199),
+                        color: const Color.fromARGB(255, 225, 225, 225),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Row(

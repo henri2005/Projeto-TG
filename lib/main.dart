@@ -1,4 +1,4 @@
-import 'package:emulando_figma/appturismo.dart';
+import 'package:turisr/appturismo.dart';
 import 'package:flutter/material.dart';
 
 void main() {

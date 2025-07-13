@@ -1,6 +1,6 @@
-import 'package:emulando_figma/_core/appcolors.dart';
-import 'package:emulando_figma/_core/widgets/appbar.dart';
-import 'package:emulando_figma/_core/widgets/bottombar.dart';
+import 'package:turisr/_core/appcolors.dart';
+import 'package:turisr/_core/widgets/appbar.dart';
+import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:flutter/material.dart';
 
 class RoteiroPage extends StatefulWidget {

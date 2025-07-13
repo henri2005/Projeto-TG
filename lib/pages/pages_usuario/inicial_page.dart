@@ -1,5 +1,6 @@
-import 'package:emulando_figma/pages/pages_usuario/cadastro_page.dart';
-import 'package:emulando_figma/pages/pages_usuario/login_page.dart';
+import 'package:turisr/_core/widgets/botoes_replacement.dart';
+import 'package:turisr/pages/pages_usuario/cadastro_page.dart';
+import 'package:turisr/pages/pages_usuario/login_page.dart';
 import 'package:flutter/material.dart';
 
 class InicialPage extends StatefulWidget {
@@ -49,56 +50,18 @@ class _MyHomePageState extends State<InicialPage> {
               child: Column(
                 spacing: 20,
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(200, 22, 122, 189),
-                      borderRadius: BorderRadius.circular(7),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LoginPage(title: ''),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          "Login",
-                          style: TextStyle(color: Colors.white, fontSize: 28),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
+                  BotaoReplacement(
+                    largura: 0.8,
+                    altura: 0.09,
+                    texto: 'Login',
+                    pagina: LoginPage(title: ''),
                   ),
 
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(200, 22, 122, 189),
-                      borderRadius: BorderRadius.circular(7),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CadastroPage(title: ''),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          "Criar Conta",
-                          style: TextStyle(color: Colors.white, fontSize: 28),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
+                  BotaoReplacement(
+                    largura: 0.8,
+                    altura: 0.09,
+                    texto: 'Criar Conta',
+                    pagina: CadastroPage(title: ''),
                   ),
                 ],
               ),

@@ -1,4 +1,6 @@
-import 'package:emulando_figma/pages/pages_usuario/recuperarsenha2_page.dart';
+import 'package:turisr/_core/widgets/botoescomicone.dart';
+import 'package:turisr/_core/widgets/input.dart';
+import 'package:turisr/pages/pages_usuario/recuperarsenha2_page.dart';
 import 'package:flutter/material.dart';
 
 class RecuperarPage extends StatefulWidget {
@@ -16,84 +18,23 @@ class _MyHomePageState extends State<RecuperarPage> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 100,
-                  children: [
-                    Text(
-                      "Qual é o seu e-mail?",
-                      style: TextStyle(fontSize: 30),
-                    ),
+          padding: const EdgeInsets.symmetric(vertical: 60.0),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Input(visibilidade: false, label: 'Qual é o seu email?'),
 
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: MediaQuery.of(context).size.height * 0.07,
-                      margin: EdgeInsets.only(bottom: 10.0),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[400],
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        spacing: 15,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20.0),
-                            child: Text(
-                              "Email:",
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                BotaoIcone(
+                  largura: 1,
+                  altura: 0.07,
+                  texto: 'Continuar',
+                  icone: Icons.arrow_forward_rounded,
+                  pagina: Recuperar2Page(title: ''),
                 ),
-              ),
-
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Recuperar2Page(title: ''),
-                    ),
-                  );
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  padding: EdgeInsets.only(left: 20.0),
-                  decoration: BoxDecoration(
-                    color: Colors.cyan[700],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    spacing: 15,
-                    children: [
-                      Text(
-                        "Continuar",
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-
-                      Icon(
-                        Icons.arrow_right_outlined,
-                        color: Colors.white,
-                        size: 50,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

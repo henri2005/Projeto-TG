@@ -1,7 +1,7 @@
-import 'package:emulando_figma/_core/appcolors.dart';
-import 'package:emulando_figma/_core/widgets/appbar.dart';
-import 'package:emulando_figma/_core/widgets/bottombar.dart';
-import 'package:emulando_figma/pages/pages_usuario/perfil_page.dart';
+import 'package:turisr/_core/appcolors.dart';
+import 'package:turisr/_core/widgets/appbar.dart';
+import 'package:turisr/_core/widgets/bottombar.dart';
+import 'package:turisr/pages/pages_usuario/perfil_page.dart';
 // import 'package:emulando_figma/pages/login_page.dart';
 // import 'package:emulando_figma/pages/perfil_page.dart';
 import 'package:flutter/material.dart';

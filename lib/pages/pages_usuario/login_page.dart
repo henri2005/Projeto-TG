@@ -1,6 +1,9 @@
-import 'package:emulando_figma/pages/pages_usuario/cadastro_page.dart';
-import 'package:emulando_figma/pages/pages_usuario/home_page.dart';
-import 'package:emulando_figma/pages/pages_usuario/recuperarsenha1_page.dart';
+import 'package:turisr/_core/appcolors.dart';
+import 'package:turisr/_core/widgets/botoes_replacement.dart';
+import 'package:turisr/_core/widgets/input.dart';
+import 'package:turisr/pages/pages_usuario/cadastro_page.dart';
+import 'package:turisr/pages/pages_usuario/home_page.dart';
+import 'package:turisr/pages/pages_usuario/recuperarsenha1_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,6 +18,7 @@ class LoginPage extends StatefulWidget {
 class _MyHomePageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    String groupValue = 'Yes';
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -22,11 +26,11 @@ class _MyHomePageState extends State<LoginPage> {
             padding: const EdgeInsets.only(bottom: 70.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 10,
+              spacing: 20,
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.32,
+                  height: MediaQuery.of(context).size.height * 0.3,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -44,53 +48,35 @@ class _MyHomePageState extends State<LoginPage> {
                 ),
 
                 SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.8,
                   child: Column(
                     spacing: 5,
                     children: [
-                      Column(
-                        spacing: 5,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Usuário:", style: TextStyle(fontSize: 20)),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.05,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 211, 211, 211),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Text(''),
-                          ),
-                        ],
-                      ),
+                      Input(visibilidade: true, label: 'Nome/Usuário: '),
 
-                      Column(
-                        spacing: 5,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Senha:", style: TextStyle(fontSize: 20)),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.05,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 211, 211, 211),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Text(''),
-                          ),
-                        ],
-                      ),
+                      Input(visibilidade: true, label: 'Senha: '),
 
                       Row(
-                        spacing: 20,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
-                            Icons.check_box_outline_blank,
-                            color: Colors.grey,
+                          Row(
+                            children: [
+                              Radio(
+                                value: "false",
+                                activeColor:
+                                    Theme.of(context).colorScheme.secondary,
+                                groupValue: groupValue,
+                                onChanged: (value) {
+                                  setState(() {
+                                    groupValue = value!;
+                                  });
+                                },
+                              ),
+                              Text("Lembrar-me"),
+                            ],
                           ),
-                          Text("Lembrar-me"),
+
                           TextButton(
                             onPressed: () {
                               Navigator.push(
@@ -104,7 +90,7 @@ class _MyHomePageState extends State<LoginPage> {
                             child: Text(
                               "Esqueceu a senha?",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 15,
                                 decoration: TextDecoration.underline,
                               ),
                             ),
@@ -115,52 +101,11 @@ class _MyHomePageState extends State<LoginPage> {
                   ),
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.only(top: 15.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(4, 139, 168, 1),
-                      borderRadius: BorderRadius.circular(7),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MyHomePage(title: ''),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          "LOGIN",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '------------------------',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Text(" ou ", style: TextStyle(fontSize: 16)),
-                    Text(
-                      '-----------------------',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ],
+                BotaoReplacement(
+                  largura: 0.8,
+                  altura: 0.09,
+                  texto: 'LOGIN',
+                  pagina: MyHomePage(title: ''),
                 ),
 
                 Column(
@@ -170,7 +115,7 @@ class _MyHomePageState extends State<LoginPage> {
                       width: MediaQuery.of(context).size.width * 0.8,
                       height: MediaQuery.of(context).size.height * 0.1,
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 199, 199, 199),
+                        color: const Color.fromARGB(255, 225, 225, 225),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Row(
@@ -190,7 +135,7 @@ class _MyHomePageState extends State<LoginPage> {
                       width: MediaQuery.of(context).size.width * 0.8,
                       height: MediaQuery.of(context).size.height * 0.1,
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 199, 199, 199),
+                        color: const Color.fromARGB(255, 225, 225, 225),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Row(

@@ -1,19 +1,19 @@
-import 'package:emulando_figma/_core/appcolors.dart';
-import 'package:emulando_figma/_core/widgets/appbar.dart';
-import 'package:emulando_figma/_core/widgets/appbar_convidado.dart';
-import 'package:emulando_figma/_core/widgets/bottombar.dart';
+import 'package:turisr/_core/appcolors.dart';
+import 'package:turisr/_core/widgets/appbar.dart';
+import 'package:turisr/_core/widgets/appbar_convidado.dart';
+import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:flutter/material.dart';
 
-class EstabelecimentosPage extends StatefulWidget {
-  const EstabelecimentosPage({super.key, required this.title});
+class EstabelecimentoConvidadoPage extends StatefulWidget {
+  const EstabelecimentoConvidadoPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<EstabelecimentosPage> createState() => _MyHomePageState();
+  State<EstabelecimentoConvidadoPage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<EstabelecimentosPage> {
+class _MyHomePageState extends State<EstabelecimentoConvidadoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

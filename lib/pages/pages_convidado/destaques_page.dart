@@ -1,18 +1,18 @@
-import 'package:emulando_figma/_core/widgets/appbar.dart';
-import 'package:emulando_figma/_core/widgets/appbar_convidado.dart';
-import 'package:emulando_figma/_core/widgets/bottombar.dart';
+import 'package:turisr/_core/widgets/appbar.dart';
+import 'package:turisr/_core/widgets/appbar_convidado.dart';
+import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:flutter/material.dart';
 
-class DestaquesPage extends StatefulWidget {
-  const DestaquesPage({super.key, required this.title});
+class DestaqueConvidadoPage extends StatefulWidget {
+  const DestaqueConvidadoPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<DestaquesPage> createState() => _MyHomePageState();
+  State<DestaqueConvidadoPage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<DestaquesPage> {
+class _MyHomePageState extends State<DestaqueConvidadoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

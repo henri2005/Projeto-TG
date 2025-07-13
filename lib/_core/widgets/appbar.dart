@@ -1,11 +1,12 @@
-import 'package:emulando_figma/_core/appcolors.dart';
-import 'package:emulando_figma/pages/pages_usuario/destaques_page.dart';
-import 'package:emulando_figma/pages/pages_usuario/estabelecimentos_page.dart';
-import 'package:emulando_figma/pages/pages_usuario/favoritos_page.dart';
-import 'package:emulando_figma/pages/pages_usuario/mapa_page.dart';
-import 'package:emulando_figma/pages/pages_usuario/p_turisticos_page.dart';
-import 'package:emulando_figma/pages/pages_usuario/perfil_page.dart';
-import 'package:emulando_figma/pages/pages_usuario/roteiro_page.dart';
+import 'package:turisr/_core/appcolors.dart';
+import 'package:turisr/pages/pages_usuario/cidade_page.dart';
+import 'package:turisr/pages/pages_usuario/destaques_page.dart';
+import 'package:turisr/pages/pages_usuario/estabelecimentos_page.dart';
+import 'package:turisr/pages/pages_usuario/favoritos_page.dart';
+import 'package:turisr/pages/pages_usuario/mapa_page.dart';
+import 'package:turisr/pages/pages_usuario/p_turisticos_page.dart';
+import 'package:turisr/pages/pages_usuario/perfil_page.dart';
+import 'package:turisr/pages/pages_usuario/roteiro_page.dart';
 import 'package:flutter/material.dart';
 
 AppBar getAppBar({required BuildContext context, String? title}) {
@@ -22,7 +23,7 @@ AppBar getAppBar({required BuildContext context, String? title}) {
         ),
       ],
     ),
-    iconTheme: IconThemeData(size: 60, opacity: 0.9),
+    iconTheme: IconThemeData(size: 60, opacity: 0.9, color: Colors.white),
   );
 }
 
@@ -33,8 +34,26 @@ Drawer getDrawer({required BuildContext context}) {
       margin: EdgeInsets.only(top: 90),
       padding: EdgeInsets.symmetric(horizontal: 35),
       child: Column(
-        spacing: 58,
+        spacing: 45,
         children: [
+          Row(
+            children: [
+              Icon(Icons.location_city, size: 40),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => CidadePage()),
+                  );
+                },
+                child: Text(
+                  "A Cidade",
+                  style: TextStyle(fontSize: 22, color: Colors.black),
+                ),
+              ),
+            ],
+          ),
+
           Row(
             children: [
               Icon(Icons.map, size: 40),
@@ -47,7 +66,10 @@ Drawer getDrawer({required BuildContext context}) {
                     ),
                   );
                 },
-                child: Text("Mapa", style: TextStyle(fontSize: 20)),
+                child: Text(
+                  "Mapa",
+                  style: TextStyle(fontSize: 22, color: Colors.black),
+                ),
               ),
             ],
           ),
@@ -64,7 +86,10 @@ Drawer getDrawer({required BuildContext context}) {
                     ),
                   );
                 },
-                child: Text("Estabelecimentos", style: TextStyle(fontSize: 20)),
+                child: Text(
+                  "Estabelecimentos",
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
               ),
             ],
           ),
@@ -83,7 +108,7 @@ Drawer getDrawer({required BuildContext context}) {
                 },
                 child: Text(
                   "Pontos Turísticos",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
               ),
             ],
@@ -101,7 +126,7 @@ Drawer getDrawer({required BuildContext context}) {
                 },
                 child: Text(
                   "Roteiro de Viagem",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
               ),
             ],
@@ -119,7 +144,10 @@ Drawer getDrawer({required BuildContext context}) {
                     ),
                   );
                 },
-                child: Text("Destaques", style: TextStyle(fontSize: 20)),
+                child: Text(
+                  "Destaques",
+                  style: TextStyle(fontSize: 22, color: Colors.black),
+                ),
               ),
             ],
           ),
@@ -136,7 +164,10 @@ Drawer getDrawer({required BuildContext context}) {
                     ),
                   );
                 },
-                child: Text("Favoritos", style: TextStyle(fontSize: 20)),
+                child: Text(
+                  "Favoritos",
+                  style: TextStyle(fontSize: 22, color: Colors.black),
+                ),
               ),
             ],
           ),
@@ -153,7 +184,7 @@ Drawer getDrawer({required BuildContext context}) {
                 },
                 child: Text(
                   "Perfil do Usuário",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 22, color: Colors.black),
                 ),
               ),
             ],

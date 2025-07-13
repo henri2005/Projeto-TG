@@ -1,20 +1,21 @@
-import 'package:emulando_figma/_core/appcolors.dart';
-import 'package:emulando_figma/_core/widgets/appbar.dart';
-import 'package:emulando_figma/_core/widgets/appbar_convidado.dart';
-import 'package:emulando_figma/_core/widgets/bottombar.dart';
-import 'package:emulando_figma/pages/pages_usuario/mapa_page.dart';
+import 'package:turisr/_core/appcolors.dart';
+import 'package:turisr/_core/widgets/appbar.dart';
+import 'package:turisr/_core/widgets/appbar_convidado.dart';
+import 'package:turisr/_core/widgets/botoes.dart';
+import 'package:turisr/_core/widgets/bottombar.dart';
+import 'package:turisr/pages/pages_convidado/destaques_page.dart';
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class HomeConvidado extends StatefulWidget {
+  const HomeConvidado({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomeConvidado> createState() => _HomeConvidadoState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeConvidadoState extends State<HomeConvidado> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,95 +79,113 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.9,
                   height: MediaQuery.of(context).size.height * 0.37,
+                  padding: EdgeInsets.all(20),
                   margin: EdgeInsets.only(bottom: 10.0),
                   decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
                     border: Border(
                       bottom: BorderSide(
                         color: const Color.fromARGB(255, 104, 104, 104),
                         width: 3.0,
                       ),
                     ),
+                    color: Colors.white,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 28.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: 15,
-                      children: [
-                        Text(
-                          "Evento em Destaque",
-                          style: TextStyle(fontSize: 25),
-                        ),
-                        Image.asset(
-                          'imagens/carnaval.png',
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.2,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: AppColors.buttonColor,
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Icon(
-                                    Icons.search,
-                                    size: 40,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.37,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 15,
+                    spacing: 7,
                     children: [
                       Text("Conheça São Roque", style: TextStyle(fontSize: 25)),
                       Image.asset(
-                        'imagens/portal.png',
+                        'assets/imagens/carnaval.png',
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 0.2,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.buttonColor,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MapaPage(title: ''),
-                                  ),
-                                );
-                              },
-                              icon: Icon(
-                                Icons.search,
-                                size: 40,
-                                color: Colors.white,
-                              ),
-                            ),
+                          Botao(
+                            texto: 'Veja Mais',
+                            pagina: DestaqueConvidadoPage(title: ''),
                           ),
                         ],
+                      ),
+                    ],
+                  ),
+                ),
+
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.37,
+                  padding: EdgeInsets.all(20),
+                  margin: EdgeInsets.only(bottom: 10.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border(
+                      bottom: BorderSide(
+                        color: const Color.fromARGB(255, 104, 104, 104),
+                        width: 3.0,
+                      ),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 7,
+                    children: [
+                      Text(
+                        "Evento em Destaque",
+                        style: TextStyle(fontSize: 25),
+                      ),
+                      Image.asset(
+                        'assets/imagens/carnaval.png',
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.2,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Botao(
+                            texto: 'Veja Mais',
+                            pagina: DestaqueConvidadoPage(title: ''),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.37,
+                  padding: EdgeInsets.all(20),
+                  margin: EdgeInsets.only(bottom: 30.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border(
+                      bottom: BorderSide(
+                        color: const Color.fromARGB(255, 104, 104, 104),
+                        width: 3.0,
+                      ),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 7,
+                    children: [
+                      Text(
+                        "Encontre os locais mais próximos de você!",
+                        style: TextStyle(fontSize: 25),
+                      ),
+                      Image.asset(
+                        'assets/imagens/portal.png',
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.2,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [Botao(texto: 'Veja Mais')],
                       ),
                     ],
                   ),
