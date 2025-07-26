@@ -1,39 +1,41 @@
-import 'dart:async';
-
-import 'package:turisr/_core/appcolors.dart';
+import 'package:provider/provider.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:turisr/controller/locaiscontroller.dart';
 
-class MapaPage extends StatefulWidget {
-  const MapaPage({super.key, required this.title});
+final appKey = GlobalKey();
 
-  final String title;
-
-  @override
-  State<MapaPage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MapaPage> {
-  late GoogleMapController mapController;
-
-  final LatLng _center = const LatLng(45.521563, -122.677433);
-
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
+class MapaPage extends StatelessWidget {
+  const MapaPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
+        key: appKey,
         appBar: getAppBar(context: context),
         endDrawer: getDrawer(context: context),
-        backgroundColor: AppColors.backgroundColor,
-        body: GoogleMap(
-          initialCameraPosition: CameraPosition(target: _center, zoom: 11.0),
-          onMapCreated: _onMapCreated,
+        body: ChangeNotifierProvider<LocaisController>(
+          create: (context) => LocaisController(),
+          child: Builder(
+            builder: (context) {
+              final local = context.watch<LocaisController>();
+
+              return GoogleMap(
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(local.lat, local.long),
+                  zoom: 17,
+                ),
+                zoomControlsEnabled: true,
+                myLocationEnabled: true,
+                onMapCreated: local.onMapCreated,
+                markers: local.markers,
+              );
+            },
+          ),
         ),
 
         bottomNavigationBar: getBottomBar(context: context),

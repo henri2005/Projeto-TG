@@ -1,45 +1,48 @@
-import 'dart:convert';
-
 class PontoTuristico {
-  final String nome;
-  final String caminhoImagem;
-  final String rua;
-  final int numero;
-  final String servicos;
+  int id;
+  String nome;
+  String caminhoImagem;
+  String rua;
+  int numero;
+  List<String> servicos;
+  int notaAvaliacao;
 
-  PontoTuristico(
-    this.nome,
-    this.caminhoImagem,
-    this.rua,
-    this.numero,
-    this.servicos,
-  );
+  PontoTuristico({
+    required this.id,
+    required this.nome,
+    required this.caminhoImagem,
+    required this.rua,
+    required this.numero,
+    required this.servicos,
+    required this.notaAvaliacao,
+  });
 
-  PontoTuristico.fromJson(
-    Map<String, dynamic> json,
-    this.nome,
-    this.caminhoImagem,
-    this.rua,
-    this.numero,
-    this.servicos,
-  ) {
-    nome:
-    json['nome'];
-    caminhoImagem:
-    json['caminhoImagem'];
-    rua:
-    json['rua'];
-    numero:
-    json['numero'];
-    servicos:
-    json['servicos'];
+  factory PontoTuristico.fromJson(Map<String, dynamic> json) {
+    return PontoTuristico(
+      id: json['id'],
+      nome: json['nome'],
+      caminhoImagem: json['caminhoImagem'],
+      rua: json['rua'],
+      numero: json['numero'],
+      servicos: List<String>.from(json['servicos']),
+      notaAvaliacao: json['notaAvaliacao'],
+    );
   }
 
-  Map<String, dynamic> toJson() => {
-    'nome': nome,
-    'caminhoImagem': caminhoImagem,
-    'rua': rua,
-    'numero': numero,
-    'serviços': servicos,
-  };
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'nome': nome,
+      'caminhoImagem': caminhoImagem,
+      'rua': rua,
+      'numero': numero,
+      'serviços': servicos,
+      'nota_avaliacao': notaAvaliacao,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'PontoTuristico{id: $id, nome: $nome, caminhoImagem: $caminhoImagem, rua: $rua, numero: $numero, serviços: $servicos, nota_avaliação: $notaAvaliacao}';
+  }
 }

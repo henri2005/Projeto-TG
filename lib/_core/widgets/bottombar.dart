@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 BottomAppBar getBottomBar({required BuildContext context}) {
   return BottomAppBar(
+    shape: CircularNotchedRectangle(),
     height: MediaQuery.of(context).size.height * 0.1,
     color: AppColors.mainColor,
     padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 6.0),

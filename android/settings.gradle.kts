@@ -22,4 +22,5 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.8.22" apply false
 }
 
-include(":app")
+include(":app", ":flutter_config")
+project(":flutter_config").projectDir = File(rootDir, "../flutter_config/android")

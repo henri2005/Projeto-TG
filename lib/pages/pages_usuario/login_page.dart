@@ -1,4 +1,3 @@
-import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/botoes_replacement.dart';
 import 'package:turisr/_core/widgets/input.dart';
 import 'package:turisr/pages/pages_usuario/cadastro_page.dart';

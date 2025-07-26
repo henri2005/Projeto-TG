@@ -61,9 +61,7 @@ Drawer getDrawer({required BuildContext context}) {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => MapaPage(title: ''),
-                    ),
+                    MaterialPageRoute(builder: (context) => MapaPage()),
                   );
                 },
                 child: Text(

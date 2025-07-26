@@ -1,6 +1,6 @@
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
-import 'package:turisr/_core/widgets/botoescomicone.dart';
+import 'package:turisr/_core/widgets/botoescomiconemenor.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:turisr/pages/pages_usuario/cidade_page.dart';
 import 'package:turisr/pages/pages_usuario/destaques_page.dart';
@@ -108,9 +108,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          BotaoIcone(
-                            largura: 0.6,
-                            altura: 0.07,
+                          BotaoIconeMenor(
+                            largura: 0.45,
+                            altura: 0.06,
                             icone: Icons.arrow_forward_rounded,
                             texto: 'Veja Mais',
                             pagina: CidadePage(),
@@ -154,9 +154,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          BotaoIcone(
-                            largura: 0.6,
-                            altura: 0.07,
+                          BotaoIconeMenor(
+                            largura: 0.45,
+                            altura: 0.06,
                             icone: Icons.arrow_forward_rounded,
                             texto: 'Veja Mais',
                             pagina: DestaquesPage(title: ''),
@@ -200,12 +200,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          BotaoIcone(
-                            largura: 0.6,
-                            altura: 0.07,
+                          BotaoIconeMenor(
+                            largura: 0.45,
+                            altura: 0.06,
                             icone: Icons.arrow_forward_rounded,
                             texto: 'Veja Mais',
-                            pagina: MapaPage(title: ''),
+                            pagina: MapaPage(),
                           ),
                         ],
                       ),
