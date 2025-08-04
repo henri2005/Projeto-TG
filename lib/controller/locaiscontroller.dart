@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:turisr/_core/appcolors.dart';
-import 'package:turisr/_core/widgets/botoes_replacement.dart';
-import 'package:turisr/_core/widgets/botoescomiconemenor.dart';
 import 'package:turisr/controller/locaisrepository.dart';
+import 'package:turisr/pages/pages_usuario/estabelecimento_screen.dart';
 import 'package:turisr/pages/pages_usuario/mapa_page.dart';
+import 'package:turisr/pages/pages_usuario/ponto_turistico_screen.dart';
 
 class LocaisController extends ChangeNotifier {
   double lat = 0.0;
@@ -78,31 +78,60 @@ class LocaisController extends ChangeNotifier {
                                         "${local.rua}, ${local.numero}",
                                       ),
                                     ),
-                                    Container(
-                                      width:
-                                          MediaQuery.of(context).size.width *
-                                          0.35,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                          0.08,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.buttonColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Veja Mais",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
+                                    TextButton(
+                                      onPressed: () {
+                                        if (local.tipo == 'P') {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (context) =>
+                                                      PontoTuristicoScreen(
+                                                        ponto: local,
+                                                      ),
                                             ),
+                                          );
+                                        } else {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (context) =>
+                                                      EstabelecimentoScreen(
+                                                        estabelecimento: local,
+                                                      ),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                            0.3,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                            0.08,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.buttonColor,
+                                          borderRadius: BorderRadius.circular(
+                                            10,
                                           ),
-                                        ],
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Veja Mais",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],

@@ -161,7 +161,6 @@ class Usuario extends CI_Controller{
                 //fazendo os setters
                 $this->setIdUsuario($resultado->idUsuario);
                 $this->setNome($resultado->nome);
-                $this->setEmail($resultado->email);
                 $this->setUsuario($resultado->usuario);
 
                 if (trim($this->getIdUsuario()) == '') {
@@ -169,20 +168,15 @@ class Usuario extends CI_Controller{
                         'codigo' => 2,
                         'msg' => 'ID do usuário não informado'
                     );
-                } elseif (trim($this->getNome()) == '' && trim($this->getSenha()) == '' && trim($this->getEmail()) == '') {
+                } elseif (trim($this->getNome()) == '' && trim($this->getSenha()) == '') {
                     $retorno = array(
                         'codigo' => 3,
                         'msg' => 'Pelo menos um dos parâmetros precisa ser passado.'
                     );
-                } elseif (!filter_var($this->getEmail(), FILTER_VALIDATE_EMAIL) && $this->getEmail() != '') {
-                    $retorno = array( // se o usuário alterar o email, ele deverá permanecer nos padrões certos
-                        'codigo' => 6,
-                        'msg' => 'Email em formato inválido'
-                    );
                 } else{
                     $this->load->model('M_usuario');
 
-                    $retorno = $this->M_usuario->alterar($this->getIdUsuario(), $this->getNome(), $this->getEmail(), $this->getUsuario());
+                    $retorno = $this->M_usuario->alterar($this->getIdUsuario(), $this->getNome(), $this->getUsuario());
                 }
             } else{
                 $retorno = array(

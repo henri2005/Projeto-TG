@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
-import 'package:turisr/classes/pontoturistico.dart';
+import 'package:turisr/classes/estabelecimento.dart';
 
 class PontoTuristicoScreen extends StatelessWidget {
   const PontoTuristicoScreen({super.key, required this.ponto});
-  final PontoTuristico ponto;
+  final Estabelecimento ponto;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class PontoTuristicoScreen extends StatelessWidget {
             children: [
               Image.asset(ponto.caminhoImagem, width: double.infinity),
               Container(
-                width: MediaQuery.of(context).size.width * 0.8,
+                width: MediaQuery.of(context).size.width * 0.9,
                 height: MediaQuery.of(context).size.height * 0.1,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -28,6 +28,7 @@ class PontoTuristicoScreen extends StatelessWidget {
                   border: Border.all(color: Colors.black),
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   spacing: 10,
                   children: [
                     ListTile(
@@ -44,26 +45,65 @@ class PontoTuristicoScreen extends StatelessWidget {
               ),
 
               Container(
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: MediaQuery.of(context).size.height * 0.15,
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.18,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.black),
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   spacing: 10,
                   children: [
                     ListTile(
-                      title: Text('Endereço', style: TextStyle(fontSize: 25)),
-                      subtitle: Text('${ponto.rua}, ${ponto.numero}'),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: 5,
+                        children: [
+                          Text('Endereço', style: TextStyle(fontSize: 25)),
+                          Text(
+                            '${ponto.rua}, ${ponto.numero}',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.2,
+                              height: MediaQuery.of(context).size.height * 0.06,
+                              decoration: BoxDecoration(
+                                color: AppColors.buttonColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "IR",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
 
               Container(
-                width: MediaQuery.of(context).size.width * 0.8,
+                width: MediaQuery.of(context).size.width * 0.9,
                 height: MediaQuery.of(context).size.height * 0.25,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -76,29 +116,76 @@ class PontoTuristicoScreen extends StatelessWidget {
                     ListTile(
                       title: Text('Serviços', style: TextStyle(fontSize: 25)),
                       subtitle: Text('1'),
-                      minTileHeight: 10,
                     ),
                   ],
                 ),
               ),
 
               Container(
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: MediaQuery.of(context).size.height * 0.22,
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.21,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.black),
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   spacing: 10,
                   children: [
                     ListTile(
-                      title: Text(
-                        'Avaliação Geral',
-                        style: TextStyle(fontSize: 25),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: 5,
+                        children: [
+                          Text(
+                            'Avaliação Geral',
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          Row(
+                            spacing: 5,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(ponto.notaAvaliacao, (
+                              index,
+                            ) {
+                              return Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 55,
+                              );
+                            }),
+                          ),
+                        ],
                       ),
-                      subtitle: Text('Lorem'),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              height: MediaQuery.of(context).size.height * 0.06,
+                              decoration: BoxDecoration(
+                                color: AppColors.buttonColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "DEIXE A SUA!",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -107,7 +194,7 @@ class PontoTuristicoScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 20.0),
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 0.6,
+                  width: MediaQuery.of(context).size.width * 0.7,
                   height: MediaQuery.of(context).size.height * 0.08,
                   decoration: BoxDecoration(
                     color: AppColors.buttonColor,

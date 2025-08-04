@@ -1,9 +1,9 @@
-import 'package:turisr/_core/widgets/botoes_replacement.dart';
-import 'package:turisr/_core/widgets/input.dart';
+import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/pages/pages_usuario/cadastro_page.dart';
 import 'package:turisr/pages/pages_usuario/home_page.dart';
 import 'package:turisr/pages/pages_usuario/recuperarsenha1_page.dart';
 import 'package:flutter/material.dart';
+import 'package:turisr/controller/usuario.php';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.title});
@@ -15,6 +15,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<LoginPage> {
+  final TextEditingController _controllerUser = TextEditingController();
+  final TextEditingController _controllerSenha = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     String groupValue = 'Yes';
@@ -51,9 +54,97 @@ class _MyHomePageState extends State<LoginPage> {
                   child: Column(
                     spacing: 5,
                     children: [
-                      Input(visibilidade: true, label: 'Nome/Usuário: '),
+                      Column(
+                        spacing: 10,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Nome/Usuário',
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
+                              fontSize: 17,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                          TextFormField(
+                            controller: _controllerUser,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 15,
+                                horizontal: 20,
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color:
+                                      AppColors
+                                          .mainColor, // mesma cor da borda ao focar
+                                  width: 2,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color: AppColors.mainColor,
+                                  width: 2,
+                                ),
+                              ),
+                            ),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ],
+                      ), // espaço entre o label e o campo
 
-                      Input(visibilidade: true, label: 'Senha: '),
+                      Column(
+                        spacing: 10,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Senha',
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
+                              fontSize: 17,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                          TextFormField(
+                            controller: _controllerSenha,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 15,
+                                horizontal: 20,
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color:
+                                      AppColors
+                                          .mainColor, // mesma cor da borda ao focar
+                                  width: 2,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color: AppColors.mainColor,
+                                  width: 2,
+                                ),
+                              ),
+                            ),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ],
+                      ), // espaço entre o label e o campo
 
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,11 +191,134 @@ class _MyHomePageState extends State<LoginPage> {
                   ),
                 ),
 
-                BotaoReplacement(
-                  largura: 0.8,
-                  altura: 0.09,
-                  texto: 'LOGIN',
-                  pagina: MyHomePage(title: ''),
+                TextButton(
+                  onPressed: () {
+                    if (_controllerUser.text == '') {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (_) {
+                          return Container(
+                            padding: EdgeInsets.all(8),
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height * 0.2,
+                            decoration: BoxDecoration(
+                              color: AppColors.buttonColor,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Você precisa informar o usuário!",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    } else if (_controllerSenha.text == '') {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (_) {
+                          return Container(
+                            padding: EdgeInsets.all(8),
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height * 0.2,
+                            decoration: BoxDecoration(
+                              color: AppColors.buttonColor,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Você precisa informar a senha!",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    }
+                    // else if (_controllerUser.text != Usuario().$nome ||
+                    //     _controllerSenha.text != Usuario().$senha) {
+                    //   showModalBottomSheet(
+                    //     context: context,
+                    //     builder: (_) {
+                    //       return Container(
+                    //         padding: EdgeInsets.all(8),
+                    //         width: double.infinity,
+                    //         height: MediaQuery.of(context).size.height * 0.2,
+                    //         decoration: BoxDecoration(
+                    //           color: AppColors.buttonColor,
+                    //           borderRadius: BorderRadius.only(
+                    //             topLeft: Radius.circular(20),
+                    //             topRight: Radius.circular(20),
+                    //           ),
+                    //         ),
+                    //         child: Column(
+                    //           mainAxisAlignment: MainAxisAlignment.center,
+                    //           crossAxisAlignment: CrossAxisAlignment.center,
+                    //           children: [
+                    //             Text(
+                    //               "Usuário e senha inválidos! Verifique!",
+                    //               style: TextStyle(
+                    //                 color: Colors.white,
+                    //                 fontSize: 22,
+                    //                 fontWeight: FontWeight.bold,
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       );
+                    //     },
+                    //   );
+                    // }
+                    else {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyHomePage(title: ''),
+                        ),
+                      );
+                    }
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: MediaQuery.of(context).size.height * 0.09,
+                    decoration: BoxDecoration(
+                      color: AppColors.buttonColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'LOGIN',
+                          style: TextStyle(color: Colors.white, fontSize: 30),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
 
                 Column(

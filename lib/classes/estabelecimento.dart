@@ -9,6 +9,7 @@ class Estabelecimento {
   double longitude;
   List<String> servicos;
   int notaAvaliacao;
+  String tipo;
 
   Estabelecimento({
     required this.id,
@@ -21,6 +22,7 @@ class Estabelecimento {
     required this.longitude,
     required this.servicos,
     required this.notaAvaliacao,
+    required this.tipo,
   });
 
   Map<String, dynamic> toJson() {
@@ -35,6 +37,7 @@ class Estabelecimento {
       'longitude': longitude,
       'serviços': servicos,
       'notaAvaliacao': notaAvaliacao,
+      'tipo': tipo,
     };
   }
 
@@ -50,11 +53,12 @@ class Estabelecimento {
       longitude: json['longitude'],
       servicos: List<String>.from(json['servicos']),
       notaAvaliacao: json['notaAvaliacao'],
+      tipo: json['tipo'],
     );
   }
 
   @override
   String toString() {
-    return 'Estabelecimento{id: $id, nome: $nome, caminhoImagem: $caminhoImagem, descrição: $descricao, rua: $rua, numero: $numero, latitude: $latitude, longitude: $longitude, serviços: $servicos, nota_avaliação: $notaAvaliacao}';
+    return 'Estabelecimento{id: $id, nome: $nome, caminhoImagem: $caminhoImagem, descrição: $descricao, rua: $rua, numero: $numero, latitude: $latitude, longitude: $longitude, serviços: $servicos, nota_avaliação: $notaAvaliacao, tipo: $tipo}';
   }
 }
