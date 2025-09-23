@@ -15,6 +15,8 @@ class LocaisRepository extends ChangeNotifier {
       latitude: -23.610702,
       longitude: -47.160289,
       notaAvaliacao: 5,
+      estatus: "",
+      adicionadoRoteiro: "N",
       tipo: 'E',
     ),
     Estabelecimento(
@@ -29,8 +31,11 @@ class LocaisRepository extends ChangeNotifier {
       longitude: -47.128581,
       servicos: List.empty(),
       notaAvaliacao: 4,
+      estatus: "",
+      adicionadoRoteiro: "N",
       tipo: 'E',
     ),
+
     Estabelecimento(
       id: 7,
       nome: "Divina Cantina",
@@ -43,8 +48,11 @@ class LocaisRepository extends ChangeNotifier {
       longitude: -47.123478,
       servicos: List.empty(),
       notaAvaliacao: 4,
+      estatus: "",
+      adicionadoRoteiro: "N",
       tipo: 'E',
     ),
+
     Estabelecimento(
       id: 8,
       nome: "Villa don Patto",
@@ -57,8 +65,11 @@ class LocaisRepository extends ChangeNotifier {
       longitude: -47.135612,
       servicos: List.empty(),
       notaAvaliacao: 5,
+      estatus: "",
+      adicionadoRoteiro: "N",
       tipo: 'E',
     ),
+
     Estabelecimento(
       id: 9,
       nome: "Vin\u00edcola XV de Novembro",
@@ -71,6 +82,8 @@ class LocaisRepository extends ChangeNotifier {
       longitude: -47.142257,
       servicos: List.empty(),
       notaAvaliacao: 3,
+      estatus: "",
+      adicionadoRoteiro: "N",
       tipo: 'E',
     ),
     Estabelecimento(
@@ -85,8 +98,11 @@ class LocaisRepository extends ChangeNotifier {
       longitude: -47.139178,
       servicos: List.empty(),
       notaAvaliacao: 3,
+      estatus: "",
+      adicionadoRoteiro: "N",
       tipo: 'E',
     ),
+
     Estabelecimento(
       id: 11,
       nome: "Caracol Chocolates",
@@ -99,8 +115,11 @@ class LocaisRepository extends ChangeNotifier {
       longitude: -47.126712,
       servicos: List.empty(),
       notaAvaliacao: 4,
+      estatus: "",
+      adicionadoRoteiro: "N",
       tipo: 'E',
     ),
+
     Estabelecimento(
       id: 12,
       nome: "Emp\u00f3rio QN",
@@ -113,6 +132,8 @@ class LocaisRepository extends ChangeNotifier {
       longitude: -47.123387,
       servicos: List.empty(),
       notaAvaliacao: 4,
+      estatus: "",
+      adicionadoRoteiro: "N",
       tipo: 'E',
     ),
     Estabelecimento(
@@ -127,6 +148,8 @@ class LocaisRepository extends ChangeNotifier {
       longitude: -47.12138447639987,
       servicos: List.empty(),
       notaAvaliacao: 4,
+      estatus: "",
+      adicionadoRoteiro: "N",
       tipo: 'P',
     ),
     Estabelecimento(
@@ -141,6 +164,8 @@ class LocaisRepository extends ChangeNotifier {
       longitude: -47.08909053982698,
       servicos: List.empty(),
       notaAvaliacao: 4,
+      estatus: "",
+      adicionadoRoteiro: "N",
       tipo: 'P',
     ),
   ];

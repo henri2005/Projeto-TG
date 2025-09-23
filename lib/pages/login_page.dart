@@ -1,9 +1,8 @@
 import 'package:turisr/_core/appcolors.dart';
-import 'package:turisr/pages/pages_usuario/cadastro_page.dart';
-import 'package:turisr/pages/pages_usuario/home_page.dart';
-import 'package:turisr/pages/pages_usuario/recuperarsenha1_page.dart';
+import 'package:turisr/pages/cadastro_page.dart';
+import 'package:turisr/pages/home_page.dart';
+import 'package:turisr/pages/recuperarsenha1_page.dart';
 import 'package:flutter/material.dart';
-import 'package:turisr/controller/usuario.php';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.title});
@@ -50,100 +49,55 @@ class _MyHomePageState extends State<LoginPage> {
                 ),
 
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.8,
+                  width: MediaQuery.of(context).size.width * 0.85,
                   child: Column(
-                    spacing: 5,
+                    spacing: 20,
                     children: [
-                      Column(
-                        spacing: 10,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Nome/Usuário',
-                            style: Theme.of(
-                              context,
-                            ).textTheme.bodyMedium?.copyWith(
-                              fontSize: 17,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w300,
-                            ),
+                      TextFormField(
+                        controller: _controllerUser,
+                        obscureText: false,
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 15,
+                            horizontal: 20,
                           ),
-                          TextFormField(
-                            controller: _controllerUser,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                vertical: 15,
-                                horizontal: 20,
-                              ),
-                              filled: true,
-                              fillColor: Colors.white,
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color:
-                                      AppColors
-                                          .mainColor, // mesma cor da borda ao focar
-                                  width: 2,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: AppColors.mainColor,
-                                  width: 2,
-                                ),
-                              ),
-                            ),
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
+                          labelText: 'Nome/Usuário',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(),
+                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        validator: (value) {
+                          if (value!.isEmpty || value == '') {
+                            return 'Você deve preencher seu nome de usuário!';
+                          }
+
+                          return null;
+                        },
                       ), // espaço entre o label e o campo
 
-                      Column(
-                        spacing: 10,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Senha',
-                            style: Theme.of(
-                              context,
-                            ).textTheme.bodyMedium?.copyWith(
-                              fontSize: 17,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w300,
-                            ),
+                      TextFormField(
+                        controller: _controllerSenha,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: 'Senha',
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 15,
+                            horizontal: 20,
                           ),
-                          TextFormField(
-                            controller: _controllerSenha,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                vertical: 15,
-                                horizontal: 20,
-                              ),
-                              filled: true,
-                              fillColor: Colors.white,
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color:
-                                      AppColors
-                                          .mainColor, // mesma cor da borda ao focar
-                                  width: 2,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: AppColors.mainColor,
-                                  width: 2,
-                                ),
-                              ),
-                            ),
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(),
+                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        validator: (value) {
+                          if (value!.isEmpty || value == '') {
+                            return 'Você deve preencher sua senha!';
+                          }
+
+                          return null;
+                        },
                       ), // espaço entre o label e o campo
 
                       Row(
@@ -257,42 +211,7 @@ class _MyHomePageState extends State<LoginPage> {
                           );
                         },
                       );
-                    }
-                    // else if (_controllerUser.text != Usuario().$nome ||
-                    //     _controllerSenha.text != Usuario().$senha) {
-                    //   showModalBottomSheet(
-                    //     context: context,
-                    //     builder: (_) {
-                    //       return Container(
-                    //         padding: EdgeInsets.all(8),
-                    //         width: double.infinity,
-                    //         height: MediaQuery.of(context).size.height * 0.2,
-                    //         decoration: BoxDecoration(
-                    //           color: AppColors.buttonColor,
-                    //           borderRadius: BorderRadius.only(
-                    //             topLeft: Radius.circular(20),
-                    //             topRight: Radius.circular(20),
-                    //           ),
-                    //         ),
-                    //         child: Column(
-                    //           mainAxisAlignment: MainAxisAlignment.center,
-                    //           crossAxisAlignment: CrossAxisAlignment.center,
-                    //           children: [
-                    //             Text(
-                    //               "Usuário e senha inválidos! Verifique!",
-                    //               style: TextStyle(
-                    //                 color: Colors.white,
-                    //                 fontSize: 22,
-                    //                 fontWeight: FontWeight.bold,
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       );
-                    //     },
-                    //   );
-                    // }
-                    else {
+                    } else {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(

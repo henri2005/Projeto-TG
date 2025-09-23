@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turisr/pages/pages_usuario/inicial_page.dart';
+import 'package:turisr/pages/inicial_page.dart';
 
 class AppTurismo extends StatelessWidget {
   const AppTurismo({super.key});

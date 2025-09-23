@@ -3,9 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/controller/locaisrepository.dart';
-import 'package:turisr/pages/pages_usuario/estabelecimento_screen.dart';
-import 'package:turisr/pages/pages_usuario/mapa_page.dart';
-import 'package:turisr/pages/pages_usuario/ponto_turistico_screen.dart';
+import 'package:turisr/pages/mapa_page.dart';
 
 class LocaisController extends ChangeNotifier {
   double lat = 0.0;
@@ -79,31 +77,7 @@ class LocaisController extends ChangeNotifier {
                                       ),
                                     ),
                                     TextButton(
-                                      onPressed: () {
-                                        if (local.tipo == 'P') {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder:
-                                                  (context) =>
-                                                      PontoTuristicoScreen(
-                                                        ponto: local,
-                                                      ),
-                                            ),
-                                          );
-                                        } else {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder:
-                                                  (context) =>
-                                                      EstabelecimentoScreen(
-                                                        estabelecimento: local,
-                                                      ),
-                                            ),
-                                          );
-                                        }
-                                      },
+                                      onPressed: () {},
                                       child: Container(
                                         width:
                                             MediaQuery.of(context).size.width *

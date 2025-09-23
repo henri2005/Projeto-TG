@@ -1,26 +1,27 @@
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
-import 'package:turisr/_core/widgets/appbar_convidado.dart';
-import 'package:turisr/_core/widgets/botoes.dart';
+import 'package:turisr/_core/widgets/botoescomiconemenor.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
-import 'package:turisr/pages/pages_convidado/destaques_page.dart';
+import 'package:turisr/pages/cidade_page.dart';
+import 'package:turisr/pages/destaques_page.dart';
+import 'package:turisr/pages/mapa_page.dart';
 import 'package:flutter/material.dart';
 
-class HomeConvidado extends StatefulWidget {
-  const HomeConvidado({super.key, required this.title});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<HomeConvidado> createState() => _HomeConvidadoState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _HomeConvidadoState extends State<HomeConvidado> {
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getAppBar(context: context),
-      endDrawer: getDrawerConvidado(context: context),
+      endDrawer: getDrawer(context: context),
       backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Center(
@@ -28,6 +29,7 @@ class _HomeConvidadoState extends State<HomeConvidado> {
             padding: const EdgeInsets.only(top: 25.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
+              spacing: 20,
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.9,
@@ -83,13 +85,15 @@ class _HomeConvidadoState extends State<HomeConvidado> {
                   margin: EdgeInsets.only(bottom: 10.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    border: Border(
-                      bottom: BorderSide(
-                        color: const Color.fromARGB(255, 104, 104, 104),
-                        width: 3.0,
-                      ),
-                    ),
+                    border: Border.all(color: Colors.black, width: 2),
                     color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color.fromARGB(68, 153, 152, 152),
+                        offset: Offset(0, 2),
+                        spreadRadius: 1,
+                      ),
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,9 +108,12 @@ class _HomeConvidadoState extends State<HomeConvidado> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Botao(
+                          BotaoIconeMenor(
+                            largura: 0.45,
+                            altura: 0.06,
+                            icone: Icons.arrow_forward_rounded,
                             texto: 'Veja Mais',
-                            pagina: DestaqueConvidadoPage(title: ''),
+                            pagina: CidadePage(),
                           ),
                         ],
                       ),
@@ -121,13 +128,15 @@ class _HomeConvidadoState extends State<HomeConvidado> {
                   margin: EdgeInsets.only(bottom: 10.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    border: Border(
-                      bottom: BorderSide(
-                        color: const Color.fromARGB(255, 104, 104, 104),
-                        width: 3.0,
-                      ),
-                    ),
+                    border: Border.all(color: Colors.black, width: 2),
                     color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color.fromARGB(68, 153, 152, 152),
+                        offset: Offset(0, 2),
+                        spreadRadius: 1,
+                      ),
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,9 +154,12 @@ class _HomeConvidadoState extends State<HomeConvidado> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Botao(
+                          BotaoIconeMenor(
+                            largura: 0.45,
+                            altura: 0.06,
+                            icone: Icons.arrow_forward_rounded,
                             texto: 'Veja Mais',
-                            pagina: DestaqueConvidadoPage(title: ''),
+                            pagina: DestaquesPage(title: ''),
                           ),
                         ],
                       ),
@@ -157,18 +169,20 @@ class _HomeConvidadoState extends State<HomeConvidado> {
 
                 Container(
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.37,
+                  height: MediaQuery.of(context).size.height * 0.41,
                   padding: EdgeInsets.all(20),
                   margin: EdgeInsets.only(bottom: 30.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    border: Border(
-                      bottom: BorderSide(
-                        color: const Color.fromARGB(255, 104, 104, 104),
-                        width: 3.0,
-                      ),
-                    ),
+                    border: Border.all(color: Colors.black, width: 2),
                     color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color.fromARGB(68, 153, 152, 152),
+                        offset: Offset(0, 2),
+                        spreadRadius: 1,
+                      ),
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,7 +199,15 @@ class _HomeConvidadoState extends State<HomeConvidado> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: [Botao(texto: 'Veja Mais')],
+                        children: [
+                          BotaoIconeMenor(
+                            largura: 0.45,
+                            altura: 0.06,
+                            icone: Icons.arrow_forward_rounded,
+                            texto: 'Veja Mais',
+                            pagina: MapaPage(),
+                          ),
+                        ],
                       ),
                     ],
                   ),

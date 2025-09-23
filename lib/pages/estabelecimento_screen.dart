@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
-import 'package:turisr/classes/estabelecimento.dart';
+import 'package:turisr/classes/local_model.dart';
 
-class PontoTuristicoScreen extends StatelessWidget {
-  const PontoTuristicoScreen({super.key, required this.ponto});
-  final Estabelecimento ponto;
+class EstabelecimentoScreen extends StatelessWidget {
+  const EstabelecimentoScreen({super.key, required this.estabelecimento});
+  final LocalModel estabelecimento;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +18,13 @@ class PontoTuristicoScreen extends StatelessWidget {
           child: Column(
             spacing: 20,
             children: [
-              Image.asset(ponto.caminhoImagem, width: double.infinity),
+              Image.asset(
+                estabelecimento.caminhoImagem,
+                width: double.infinity,
+              ),
               Container(
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.1,
+                height: MediaQuery.of(context).size.height * 0.28,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -35,9 +38,16 @@ class PontoTuristicoScreen extends StatelessWidget {
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(ponto.nome, style: TextStyle(fontSize: 25)),
+                          Text(
+                            estabelecimento.nome,
+                            style: TextStyle(fontSize: 25),
+                          ),
                           Icon(Icons.favorite_border_rounded, size: 30),
                         ],
+                      ),
+                      subtitle: Text(
+                        estabelecimento.descricao,
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                   ],
@@ -46,7 +56,7 @@ class PontoTuristicoScreen extends StatelessWidget {
 
               Container(
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.18,
+                height: MediaQuery.of(context).size.height * 0.2,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -63,7 +73,7 @@ class PontoTuristicoScreen extends StatelessWidget {
                         children: [
                           Text('Endereço', style: TextStyle(fontSize: 25)),
                           Text(
-                            '${ponto.rua}, ${ponto.numero}',
+                            '${estabelecimento.rua}, ${estabelecimento.numero}',
                             style: TextStyle(fontSize: 16),
                           ),
                         ],
@@ -145,15 +155,16 @@ class PontoTuristicoScreen extends StatelessWidget {
                           Row(
                             spacing: 5,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: List.generate(ponto.notaAvaliacao, (
-                              index,
-                            ) {
-                              return Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                                size: 55,
-                              );
-                            }),
+                            children: List.generate(
+                              int.parse(estabelecimento.notaAvaliacao),
+                              (index) {
+                                return Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                  size: 55,
+                                );
+                              },
+                            ),
                           ),
                         ],
                       ),

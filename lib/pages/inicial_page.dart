@@ -1,6 +1,6 @@
 import 'package:turisr/_core/widgets/botoes_replacement.dart';
-import 'package:turisr/pages/pages_usuario/cadastro_page.dart';
-import 'package:turisr/pages/pages_usuario/login_page.dart';
+import 'package:turisr/pages/cadastro_page.dart';
+import 'package:turisr/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class InicialPage extends StatefulWidget {

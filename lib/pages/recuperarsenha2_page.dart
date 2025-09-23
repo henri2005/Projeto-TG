@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turisr/_core/widgets/botoes.dart';
-import 'package:turisr/pages/pages_usuario/login_page.dart';
+import 'package:turisr/pages/login_page.dart';
 
 class Recuperar2Page extends StatefulWidget {
   const Recuperar2Page({super.key, required this.title});

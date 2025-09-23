@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
-import 'package:turisr/pages/pages_usuario/estabelecimentos_page.dart';
-import 'package:turisr/pages/pages_usuario/home_page.dart';
+import 'package:turisr/pages/estabelecimentos_page.dart';
+import 'package:turisr/pages/home_page.dart';
 
 class CidadePage extends StatelessWidget {
   const CidadePage({super.key});

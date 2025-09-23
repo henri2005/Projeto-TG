@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="emulando_figma"
+        android:label="TuriSR"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -9,6 +9,7 @@
             android:launchMode="singleTop"
             android:taskAffinity=""
             android:theme="@style/LaunchTheme"
+            android:enableOnBackInvokedCallback="true"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
@@ -31,7 +32,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
         <meta-data android:name= "com.google.android.geo.API_KEY"
-              android:value="AIzaSyAwTuLPTj4JLzRT6wJYqK8hTMGQe9iOUGQ"/>
+              android:value="AIzaSyDzan4jOQPhcqYF0pYVp05H526Fapc_1do"/>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

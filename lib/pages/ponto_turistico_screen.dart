@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
-import 'package:turisr/classes/estabelecimento.dart';
+import 'package:turisr/classes/local_model.dart';
 
-class EstabelecimentoScreen extends StatelessWidget {
-  const EstabelecimentoScreen({super.key, required this.estabelecimento});
-  final Estabelecimento estabelecimento;
+class PontoTuristicoScreen extends StatelessWidget {
+  const PontoTuristicoScreen({super.key, required this.ponto});
+  final LocalModel ponto;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +18,10 @@ class EstabelecimentoScreen extends StatelessWidget {
           child: Column(
             spacing: 20,
             children: [
-              Image.asset(
-                estabelecimento.caminhoImagem,
-                width: double.infinity,
-              ),
+              Image.asset(ponto.caminhoImagem, width: double.infinity),
               Container(
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.28,
+                height: MediaQuery.of(context).size.height * 0.1,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -38,16 +35,9 @@ class EstabelecimentoScreen extends StatelessWidget {
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            estabelecimento.nome,
-                            style: TextStyle(fontSize: 25),
-                          ),
+                          Text(ponto.nome, style: TextStyle(fontSize: 25)),
                           Icon(Icons.favorite_border_rounded, size: 30),
                         ],
-                      ),
-                      subtitle: Text(
-                        estabelecimento.descricao,
-                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                   ],
@@ -56,7 +46,7 @@ class EstabelecimentoScreen extends StatelessWidget {
 
               Container(
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.2,
+                height: MediaQuery.of(context).size.height * 0.18,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -73,7 +63,7 @@ class EstabelecimentoScreen extends StatelessWidget {
                         children: [
                           Text('Endereço', style: TextStyle(fontSize: 25)),
                           Text(
-                            '${estabelecimento.rua}, ${estabelecimento.numero}',
+                            '${ponto.rua}, ${ponto.numero}',
                             style: TextStyle(fontSize: 16),
                           ),
                         ],
@@ -156,7 +146,7 @@ class EstabelecimentoScreen extends StatelessWidget {
                             spacing: 5,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(
-                              estabelecimento.notaAvaliacao,
+                              int.parse(ponto.notaAvaliacao),
                               (index) {
                                 return Icon(
                                   Icons.star,

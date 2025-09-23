@@ -1,9 +1,9 @@
 import 'package:turisr/_core/appcolors.dart';
-import 'package:turisr/pages/pages_usuario/estabelecimentos_page.dart';
-import 'package:turisr/pages/pages_usuario/home_page.dart';
-import 'package:turisr/pages/pages_usuario/p_turisticos_page.dart';
-import 'package:turisr/pages/pages_usuario/perfil_page.dart';
-import 'package:turisr/pages/pages_usuario/roteiro_page.dart';
+import 'package:turisr/pages/estabelecimentos_page.dart';
+import 'package:turisr/pages/home_page.dart';
+import 'package:turisr/pages/p_turisticos_page.dart';
+import 'package:turisr/pages/perfil_page.dart';
+import 'package:turisr/pages/roteiro_page.dart';
 import 'package:flutter/material.dart';
 
 BottomAppBar getBottomBar({required BuildContext context}) {
