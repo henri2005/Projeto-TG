@@ -1,13 +1,13 @@
-import 'package:turisr/classes/estabelecimento.dart';
+import 'package:turisr/classes/local_model.dart';
 
 class UsuarioModel {
-  int idUsuario = 0;
+  String idUsuario = "";
   String nome = "";
   String username = "";
   String senha = "";
   String estatus = "";
   String tipoTurismo = "";
-  List<Estabelecimento> favoritos = [];
+  List<LocalModel> favoritos = [];
 
   UsuarioModel();
 

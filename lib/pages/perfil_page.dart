@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:turisr/_core/appcolors.dart';
+import 'package:turisr/_core/modal.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:turisr/pages/inicial_page.dart';
@@ -6,8 +8,52 @@ import 'package:turisr/pages/perfil_editar_page.dart';
 import 'package:turisr/pages/perfil_sobre_page.dart';
 import 'package:flutter/material.dart';
 
-class PerfilPage extends StatelessWidget {
-  const PerfilPage({super.key});
+class PerfilPage extends StatefulWidget {
+  const PerfilPage({super.key, this.usuario});
+
+  final String? usuario;
+
+  @override
+  State<PerfilPage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<PerfilPage> {
+  void carregarInfoUsuarios() async {
+    try {
+      Dio dio = Dio(
+        BaseOptions(
+          connectTimeout: Duration(seconds: 10),
+          receiveTimeout: Duration(seconds: 10),
+          sendTimeout: Duration(seconds: 30),
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+
+      final response = await dio.get(
+        'http://10.0.0.94/api_turismo/usuario/${widget.usuario}',
+      );
+
+      var data = response.data;
+
+      if (response.statusCode == 200) {
+        setState(() {});
+      } else {
+        showModalErro(context, data["message"]);
+      }
+    } catch (e) {
+      showModalErro(context, e.toString());
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      carregarInfoUsuarios();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,23 +124,27 @@ class PerfilPage extends StatelessWidget {
                 Column(
                   children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
-                      ),
                       radius: 80,
+                      child: Icon(Icons.person, size: 80),
                     ),
-                    Text("João da Silva", style: TextStyle(fontSize: 20)),
+                    Text("${widget.usuario}", style: TextStyle(fontSize: 20)),
                   ],
                 ),
 
                 TextButton(
-                  onPressed: () {
-                    Navigator.push(
+                  onPressed: () async {
+                    var retorno = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PerfilEditarPage(),
+                        builder:
+                            (context) =>
+                                PerfilEditarPage(usuario: widget.usuario),
                       ),
                     );
+
+                    if (retorno != "" && retorno) {
+                      return;
+                    }
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.35,
@@ -118,30 +168,13 @@ class PerfilPage extends StatelessWidget {
 
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Média de Avaliações",
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.8,
                   height: MediaQuery.of(context).size.height * 0.25,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 20,
                     children: [
                       Text(
-                        "Locais já visitados",
+                        "Locais favoritados",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,

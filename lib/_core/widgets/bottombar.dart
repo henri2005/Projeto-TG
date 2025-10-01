@@ -20,7 +20,7 @@ BottomAppBar getBottomBar({required BuildContext context}) {
           children: [
             IconButton(
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => MyHomePage(title: ''),
@@ -36,7 +36,7 @@ BottomAppBar getBottomBar({required BuildContext context}) {
           children: [
             IconButton(
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => EstabelecimentosPage(title: ''),
@@ -59,7 +59,7 @@ BottomAppBar getBottomBar({required BuildContext context}) {
           children: [
             IconButton(
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => PontosTuristicosPage(title: ''),
@@ -85,7 +85,7 @@ BottomAppBar getBottomBar({required BuildContext context}) {
               children: [
                 IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => RoteiroPage()),
                     );
@@ -111,9 +111,14 @@ BottomAppBar getBottomBar({required BuildContext context}) {
               children: [
                 IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PerfilPage()),
+                      MaterialPageRoute(
+                        builder:
+                            (context) => PerfilPage(
+                              usuario: MyHomePage(title: '').usuario,
+                            ),
+                      ),
                     );
                   },
                   icon: Icon(Icons.person_pin, color: Colors.white, size: 30),

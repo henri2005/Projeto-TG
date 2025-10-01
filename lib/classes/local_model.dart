@@ -5,6 +5,8 @@ class LocalModel {
   String caminhoImagem = "";
   String rua = "";
   String numero = "";
+  String latitude = "";
+  String longitude = "";
   String notaAvaliacao = "0";
   String estatus = "";
   String adicionadoRoteiro = "";
@@ -19,6 +21,8 @@ class LocalModel {
     caminhoImagem = json['caminho_imagem'];
     rua = json['rua'];
     numero = json['numero'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
     notaAvaliacao = json['nota_avaliacao'];
     estatus = json['estatus'];
     adicionadoRoteiro = json['adicionado_roteiro'];

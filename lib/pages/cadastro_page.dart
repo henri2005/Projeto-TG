@@ -55,14 +55,12 @@ class _MyHomePageState extends State<CadastroPage> {
 
       if (response.statusCode == 201) {
         Loading.hide();
-        Navigator.of(
-          context,
-        ).push(MaterialPageRoute(builder: (context) => LoginPage(title: '')));
+        Navigator.pop(context);
         setState(() {});
+      } else {
+        Loading.hide();
+        showModalErro(context, response.data['message']);
       }
-
-      Loading.hide();
-      showModalErro(context, response.data['mensagem']);
     } catch (e) {
       Loading.hide();
       showModalErro(context, e.toString());

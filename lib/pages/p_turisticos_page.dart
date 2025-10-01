@@ -52,7 +52,6 @@ class _MyHomePageState extends State<PontosTuristicosPage> {
 
       Loading.hide();
     } catch (e) {
-      print(e);
       Loading.hide();
       // ignore: use_build_context_synchronously
       showModalErro(context, 'Erro ao carregar dados!');

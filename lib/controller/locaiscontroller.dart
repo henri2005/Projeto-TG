@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:turisr/_core/appcolors.dart';
-import 'package:turisr/controller/locaisrepository.dart';
+import 'package:turisr/classes/local_model.dart';
 import 'package:turisr/pages/mapa_page.dart';
 
 class LocaisController extends ChangeNotifier {
@@ -25,12 +25,15 @@ class LocaisController extends ChangeNotifier {
   }
 
   loadLocais() {
-    final locais = LocaisRepository().locais;
+    List<LocalModel> locais = [];
     locais.forEach((local) async {
       markers.add(
         Marker(
           markerId: MarkerId(local.nome),
-          position: LatLng(local.latitude, local.longitude),
+          position: LatLng(
+            double.parse(local.latitude),
+            double.parse(local.longitude),
+          ),
           onTap:
               () => {
                 showModalBottomSheet(

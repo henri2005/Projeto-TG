@@ -3,6 +3,7 @@ import 'package:turisr/pages/cidade_page.dart';
 import 'package:turisr/pages/destaques_page.dart';
 import 'package:turisr/pages/estabelecimentos_page.dart';
 import 'package:turisr/pages/favoritos_page.dart';
+import 'package:turisr/pages/home_page.dart';
 import 'package:turisr/pages/mapa_page.dart';
 import 'package:turisr/pages/p_turisticos_page.dart';
 import 'package:turisr/pages/perfil_page.dart';
@@ -173,7 +174,12 @@ Drawer getDrawer({required BuildContext context}) {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => PerfilPage()),
+                    MaterialPageRoute(
+                      builder:
+                          (context) => PerfilPage(
+                            usuario: MyHomePage(title: '').usuario,
+                          ),
+                    ),
                   );
                 },
                 child: Text(

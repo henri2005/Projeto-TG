@@ -6,161 +6,133 @@ import 'package:turisr/pages/perfil_page.dart';
 // import 'package:emulando_figma/pages/perfil_page.dart';
 import 'package:flutter/material.dart';
 
-class PerfilEditarPage extends StatelessWidget {
-  const PerfilEditarPage({super.key});
+class PerfilEditarPage extends StatefulWidget {
+  const PerfilEditarPage({super.key, this.usuario});
 
+  final String? usuario;
+
+  @override
+  State<PerfilEditarPage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<PerfilEditarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getAppBar(context: context),
       endDrawer: getDrawer(context: context),
       backgroundColor: AppColors.backgroundColor,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 30,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(
-                      context,
-                      MaterialPageRoute(builder: (context) => PerfilPage()),
-                    );
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.38,
-                    height: MediaQuery.of(context).size.height * 0.07,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.black),
-                      color: Colors.white,
-                    ),
-                    child: Row(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 30,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.38,
+                  height: MediaQuery.of(context).size.height * 0.07,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.black),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    spacing: 10,
+                    children: [
+                      Icon(Icons.arrow_back, size: 28),
+                      Text("Cancelar", style: TextStyle(fontSize: 25)),
+                    ],
+                  ),
+                ),
+              ),
+
+              Container(
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.22,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Seus dados", style: TextStyle(fontSize: 25)),
+                      Row(
+                        spacing: 10,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            spacing: 20,
+                            children: [
+                              Text("Usuário: ", style: TextStyle(fontSize: 22)),
+                              Text("Senha: ", style: TextStyle(fontSize: 22)),
+                            ],
+                          ),
+
+                          Column(
+                            spacing: 20,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Nome Usuário',
+                                ),
+                              ),
+                              TextFormField(
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Senha',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => PerfilPage(usuario: widget.usuario),
+                        ),
+                      );
+                    },
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       spacing: 10,
                       children: [
-                        Icon(Icons.arrow_back, size: 28),
-                        Text("Cancelar", style: TextStyle(fontSize: 25)),
-                      ],
-                    ),
-                  ),
-                ),
-
-                CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
-                  ),
-                  radius: 80,
-                ),
-
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.22,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Seus dados", style: TextStyle(fontSize: 25)),
-                        Row(
-                          spacing: 10,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              spacing: 20,
-                              children: [
-                                Text(
-                                  "Usuário: ",
-                                  style: TextStyle(fontSize: 22),
-                                ),
-                                Text("Senha: ", style: TextStyle(fontSize: 22)),
-                              ],
-                            ),
-
-                            Column(
-                              spacing: 20,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.57,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.05,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.backgroundColor,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Text(" "),
-                                ),
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.57,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.05,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.backgroundColor,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Text(" "),
-                                ),
-                              ],
-                            ),
-                          ],
+                        Text(
+                          "SALVAR",
+                          style: TextStyle(fontSize: 28, color: Colors.white),
                         ),
                       ],
                     ),
                   ),
-                ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      height: MediaQuery.of(context).size.height * 0.07,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Colors.black),
-                        color: AppColors.buttonColor,
-                      ),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PerfilPage(),
-                            ),
-                          );
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          spacing: 10,
-                          children: [
-                            Text(
-                              "SALVAR",
-                              style: TextStyle(
-                                fontSize: 28,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

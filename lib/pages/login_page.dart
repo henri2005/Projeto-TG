@@ -1,4 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:turisr/_core/appcolors.dart';
+import 'package:turisr/_core/loading.dart';
+import 'package:turisr/_core/modal.dart';
+import 'package:turisr/classes/usuario_model.dart';
 import 'package:turisr/pages/cadastro_page.dart';
 import 'package:turisr/pages/home_page.dart';
 import 'package:turisr/pages/recuperarsenha1_page.dart';
@@ -16,10 +20,55 @@ class LoginPage extends StatefulWidget {
 class _MyHomePageState extends State<LoginPage> {
   final TextEditingController _controllerUser = TextEditingController();
   final TextEditingController _controllerSenha = TextEditingController();
+  List<UsuarioModel> usuario = [];
+
+  void loginUsuario() async {
+    try {
+      Loading.show(context, mensagem: 'Logando usuário...');
+
+      Dio dio = Dio(
+        BaseOptions(
+          connectTimeout: Duration(seconds: 30),
+          receiveTimeout: Duration(seconds: 30),
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+
+      final dadosLogin = FormData.fromMap({
+        'usuario': _controllerUser.text,
+        'senha': _controllerSenha.text,
+      });
+
+      final response = await dio.post(
+        'http://10.0.0.94/api_turismo/login',
+        data: dadosLogin,
+      );
+
+      if (response.statusCode == 202) {
+        Loading.hide();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder:
+                (context) =>
+                    MyHomePage(title: '', usuario: _controllerUser.text),
+          ),
+        );
+        setState(() {});
+      } else {
+        Loading.hide();
+        showModalErro(context, response.data['message']);
+      }
+    } catch (e) {
+      Loading.hide();
+      print("Erro ao autenticar usuário: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    String groupValue = 'Yes';
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -62,7 +111,7 @@ class _MyHomePageState extends State<LoginPage> {
                             vertical: 15,
                             horizontal: 20,
                           ),
-                          labelText: 'Nome/Usuário',
+                          labelText: 'Usuário',
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(),
@@ -110,12 +159,6 @@ class _MyHomePageState extends State<LoginPage> {
                                 value: "false",
                                 activeColor:
                                     Theme.of(context).colorScheme.secondary,
-                                groupValue: groupValue,
-                                onChanged: (value) {
-                                  setState(() {
-                                    groupValue = value!;
-                                  });
-                                },
                               ),
                               Text("Lembrar-me"),
                             ],
@@ -146,7 +189,7 @@ class _MyHomePageState extends State<LoginPage> {
                 ),
 
                 TextButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_controllerUser.text == '') {
                       showModalBottomSheet(
                         context: context,
@@ -212,12 +255,9 @@ class _MyHomePageState extends State<LoginPage> {
                         },
                       );
                     } else {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MyHomePage(title: ''),
-                        ),
-                      );
+                      setState(() {
+                        loginUsuario();
+                      });
                     }
                   },
                   child: Container(
