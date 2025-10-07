@@ -4,26 +4,56 @@ import 'package:turisr/_core/loading.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/botoescomiconemenor.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
+import 'package:turisr/classes/usuario_model.dart';
 import 'package:turisr/pages/cidade_page.dart';
 import 'package:turisr/pages/destaques_page.dart';
+import 'package:turisr/pages/estabelecimentos_page.dart';
+import 'package:turisr/pages/favoritos_page.dart';
 import 'package:turisr/pages/mapa_page.dart';
 import 'package:flutter/material.dart';
+import 'package:turisr/pages/p_turisticos_page.dart';
+import 'package:turisr/pages/perfil_page.dart';
+import 'package:turisr/pages/roteiro_page.dart';
 
+// ignore: must_be_immutable
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title, this.usuario});
+  const MyHomePage({super.key, required this.title, this.usuarioLogado});
 
   final String title;
-  final String? usuario;
+  final UsuarioModel? usuarioLogado;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  void carregarUsuario() async {
+    try {
+      print(widget.usuarioLogado!.username);
+      Dio dio = Dio(
+        BaseOptions(
+          connectTimeout: Duration(seconds: 10),
+          receiveTimeout: Duration(seconds: 10),
+          sendTimeout: Duration(seconds: 30),
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+
+      final response = await dio.get(
+        'http://10.0.0.94/api_turismo/usuario/${widget.usuarioLogado!.username}',
+      );
+
+      var data = response.data;
+      print(data);
+    } catch (e) {
+      Loading.hide();
+    }
+  }
+
   void deslogar() async {
     Loading.show(context, mensagem: 'Saindo da conta...');
-    print(widget.usuario);
-
     Dio dio = Dio(
       BaseOptions(
         connectTimeout: Duration(seconds: 30),
@@ -35,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
     final response = await dio.put(
-      'http://10.0.0.94/api_turismo/deslogin/${widget.usuario}',
+      'http://10.0.0.94/api_turismo/deslogin/${widget.usuarioLogado!.username}',
     );
 
     if (response.statusCode == 200) {
@@ -47,6 +77,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      carregarUsuario();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PopScope(
       onPopInvokedWithResult: (didPop, result) async {
@@ -54,7 +92,179 @@ class _MyHomePageState extends State<MyHomePage> {
       },
       child: Scaffold(
         appBar: getAppBar(context: context),
-        endDrawer: getDrawer(context: context),
+        endDrawer: Drawer(
+          backgroundColor: AppColors.menuColor,
+          child: Container(
+            margin: EdgeInsets.only(top: 90),
+            padding: EdgeInsets.symmetric(horizontal: 35),
+            child: Column(
+              spacing: 45,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.location_city, size: 40),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CidadePage()),
+                        );
+                      },
+                      child: Text(
+                        "A Cidade",
+                        style: TextStyle(fontSize: 22, color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Icon(Icons.map, size: 40),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MapaPage()),
+                        );
+                      },
+                      child: Text(
+                        "Mapa",
+                        style: TextStyle(fontSize: 22, color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Icon(Icons.local_dining_sharp, size: 40),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => EstabelecimentosPage(title: ''),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Estabelecimentos",
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Icon(Icons.add_location_rounded, size: 40),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => PontosTuristicosPage(title: ''),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Pontos Turísticos",
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Icon(Icons.edit_road, size: 40),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RoteiroPage(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Roteiro de Viagem",
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Icon(Icons.topic, size: 40),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DestaquesPage(title: ''),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Destaques",
+                        style: TextStyle(fontSize: 22, color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Icon(Icons.favorite, size: 40),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) =>
+                                    FavoritosPage(nomeUsuario: 'henry_turi'),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Favoritos",
+                        style: TextStyle(fontSize: 22, color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Icon(Icons.person_pin, size: 40),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) =>
+                                    PerfilPage(usuario: widget.usuarioLogado),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Perfil do Usuário",
+                        style: TextStyle(fontSize: 22, color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
         backgroundColor: AppColors.backgroundColor,
         body: SingleChildScrollView(
           child: Center(

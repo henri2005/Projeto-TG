@@ -6,6 +6,7 @@ import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:flutter/material.dart';
 import 'package:turisr/classes/local_model.dart';
+import 'package:turisr/classes/servico_model.dart';
 import 'package:turisr/pages/ponto_turistico_screen.dart';
 
 class PontosTuristicosPage extends StatefulWidget {
@@ -20,6 +21,7 @@ class PontosTuristicosPage extends StatefulWidget {
 class _MyHomePageState extends State<PontosTuristicosPage> {
   List<LocalModel> listaPontos = [];
   List<LocalModel> itensListados = [];
+  List<ServicoModel> listaServicos = [];
 
   void carregarPontosTuristicos() async {
     try {
@@ -45,6 +47,10 @@ class _MyHomePageState extends State<PontosTuristicosPage> {
         listaPontos =
             (data["locais"] as List)
                 .map((ponto) => LocalModel.fromJson(ponto))
+                .toList();
+        listaServicos =
+            (data["serviços"] as List)
+                .map((servico) => ServicoModel.fromJson(servico))
                 .toList();
         listarPesquisas("");
         setState(() {});
@@ -92,6 +98,7 @@ class _MyHomePageState extends State<PontosTuristicosPage> {
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               LocalModel local = itensListados[index];
+              ServicoModel servico = listaServicos[index];
 
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -157,6 +164,7 @@ class _MyHomePageState extends State<PontosTuristicosPage> {
                                                 (context) =>
                                                     PontoTuristicoScreen(
                                                       ponto: local,
+                                                      servico: servico,
                                                     ),
                                           ),
                                         );

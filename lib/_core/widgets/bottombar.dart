@@ -116,7 +116,7 @@ BottomAppBar getBottomBar({required BuildContext context}) {
                       MaterialPageRoute(
                         builder:
                             (context) => PerfilPage(
-                              usuario: MyHomePage(title: '').usuario,
+                              usuario: MyHomePage(title: '').usuarioLogado,
                             ),
                       ),
                     );

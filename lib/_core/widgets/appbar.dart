@@ -155,7 +155,8 @@ Drawer getDrawer({required BuildContext context}) {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => FavoritosPage(title: ''),
+                      builder:
+                          (context) => FavoritosPage(nomeUsuario: 'henry_turi'),
                     ),
                   );
                 },
@@ -177,7 +178,7 @@ Drawer getDrawer({required BuildContext context}) {
                     MaterialPageRoute(
                       builder:
                           (context) => PerfilPage(
-                            usuario: MyHomePage(title: '').usuario,
+                            usuario: MyHomePage(title: '').usuarioLogado,
                           ),
                     ),
                   );

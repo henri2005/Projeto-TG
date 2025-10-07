@@ -20,7 +20,8 @@ class LoginPage extends StatefulWidget {
 class _MyHomePageState extends State<LoginPage> {
   final TextEditingController _controllerUser = TextEditingController();
   final TextEditingController _controllerSenha = TextEditingController();
-  List<UsuarioModel> usuario = [];
+  String? nomeUsuario;
+  UsuarioModel usuarioLogado = UsuarioModel(username: '', senha: '');
 
   void loginUsuario() async {
     try {
@@ -47,13 +48,15 @@ class _MyHomePageState extends State<LoginPage> {
       );
 
       if (response.statusCode == 202) {
+        usuarioLogado.username = _controllerUser.text;
+        usuarioLogado.senha = _controllerSenha.text;
         Loading.hide();
         Navigator.push(
           context,
           MaterialPageRoute(
             builder:
                 (context) =>
-                    MyHomePage(title: '', usuario: _controllerUser.text),
+                    MyHomePage(title: '', usuarioLogado: usuarioLogado),
           ),
         );
         setState(() {});
@@ -63,7 +66,6 @@ class _MyHomePageState extends State<LoginPage> {
       }
     } catch (e) {
       Loading.hide();
-      print("Erro ao autenticar usuário: $e");
     }
   }
 

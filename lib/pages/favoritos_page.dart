@@ -5,22 +5,21 @@ import 'package:turisr/_core/modal.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:flutter/material.dart';
-import 'package:turisr/classes/usuario_model.dart';
+import 'package:turisr/classes/favoritos_model.dart';
 
 class FavoritosPage extends StatefulWidget {
-  const FavoritosPage({super.key, required this.title, this.usuario});
+  const FavoritosPage({super.key, this.nomeUsuario});
 
-  final String title;
-  final UsuarioModel? usuario;
+  final String? nomeUsuario;
 
   @override
   State<FavoritosPage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<FavoritosPage> {
-  UsuarioModel usuario = UsuarioModel();
+  FavoritosModel favoritos = FavoritosModel();
 
-  Future<void> carregarFavoritos() async {
+  void carregarFavoritos() async {
     try {
       Loading.show(context, mensagem: 'Carregando');
 
@@ -34,23 +33,27 @@ class _MyHomePageState extends State<FavoritosPage> {
       );
 
       final response = await dio.get(
-        'http://10.0.0.94/api_turismo/favoritos/${widget.usuario}',
+        'http://10.0.0.94/api_turismo/favoritos/${widget.nomeUsuario}',
       );
-
       var data = response.data;
 
       if (response.statusCode == 200) {
-        usuario = UsuarioModel.fromJson(data["usuario"]);
         Loading.hide();
+
+        if (response.data is Map<String, dynamic>) {
+          final dataMap = data as Map<String, dynamic>;
+          favoritos = FavoritosModel.fromJson(dataMap["Favoritos"]);
+        }
         setState(() {});
       }
       Loading.hide();
     } catch (e) {
       Loading.hide();
-      showModalErro(context, 'Erro ao carregar favoritos!');
+      showModalErro(context, "'Erro ao carregar favoritos!', ${e.toString()}");
     }
   }
 
+  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -67,52 +70,46 @@ class _MyHomePageState extends State<FavoritosPage> {
       body: SingleChildScrollView(
         child: Center(
           child: ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
+              var local = favoritos;
+
               return Container(
-                width: MediaQuery.of(context).size.width * 0.85,
-                height: MediaQuery.of(context).size.height * 0.3,
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                height: MediaQuery.of(context).size.height * 0.2,
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.black),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromARGB(255, 196, 196, 196),
-                      offset: Offset(0, 6),
-                      blurRadius: 2,
-                      spreadRadius: 1,
-                    ),
-                  ],
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 20,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 15,
-                    children: [
-                      Image.asset(
-                        'assets/imagens/carnaval.png',
-                        width: MediaQuery.of(context).size.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 10,
+                  children: [
+                    Text(
+                      local.nome[index],
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        "Estação Ferroviária de São Roque",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      Text("Endereço tal, rua tal"),
-                    ],
-                  ),
+                    ),
+                    Text(local.rua[index], style: TextStyle(fontSize: 20)),
+                  ],
                 ),
               );
             },
-            itemCount: usuario.favoritos.length,
+            itemCount: favoritos.nome.length,
           ),
         ),
       ),
-
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          carregarFavoritos();
+        },
+        child: Icon(Icons.refresh),
+      ),
       bottomNavigationBar: getBottomBar(context: context),
     );
   }

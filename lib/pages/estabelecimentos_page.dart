@@ -6,6 +6,7 @@ import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:flutter/material.dart';
 import 'package:turisr/classes/local_model.dart';
+import 'package:turisr/classes/servico_model.dart';
 import 'package:turisr/pages/estabelecimento_screen.dart';
 
 class EstabelecimentosPage extends StatefulWidget {
@@ -20,6 +21,7 @@ class EstabelecimentosPage extends StatefulWidget {
 class _MyHomePageState extends State<EstabelecimentosPage> {
   List<LocalModel> listaEstabelecimentos = [];
   List<LocalModel> itensListados = [];
+  List<ServicoModel> listaServicos = [];
 
   void carregarEstabelecimentos() async {
     try {
@@ -45,6 +47,10 @@ class _MyHomePageState extends State<EstabelecimentosPage> {
         listaEstabelecimentos =
             (data["locais"] as List)
                 .map((estabelecimento) => LocalModel.fromJson(estabelecimento))
+                .toList();
+        listaServicos =
+            (data["serviços"] as List)
+                .map((servico) => ServicoModel.fromJson(servico))
                 .toList();
         listarPesquisas("");
         setState(() {});
@@ -92,6 +98,7 @@ class _MyHomePageState extends State<EstabelecimentosPage> {
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               LocalModel local = itensListados[index];
+              ServicoModel servico = listaServicos[index];
 
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -157,6 +164,7 @@ class _MyHomePageState extends State<EstabelecimentosPage> {
                                                 (context) =>
                                                     EstabelecimentoScreen(
                                                       estabelecimento: local,
+                                                      servicos: servico,
                                                     ),
                                           ),
                                         );

@@ -1,15 +1,13 @@
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
-import 'package:turisr/pages/perfil_page.dart';
-// import 'package:emulando_figma/pages/login_page.dart';
-// import 'package:emulando_figma/pages/perfil_page.dart';
 import 'package:flutter/material.dart';
+import 'package:turisr/classes/usuario_model.dart';
 
 class PerfilEditarPage extends StatefulWidget {
   const PerfilEditarPage({super.key, this.usuario});
 
-  final String? usuario;
+  final UsuarioModel? usuario;
 
   @override
   State<PerfilEditarPage> createState() => _MyHomePageState();
@@ -53,84 +51,11 @@ class _MyHomePageState extends State<PerfilEditarPage> {
                 ),
               ),
 
-              Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.22,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
+              TextFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: widget.usuario!.username,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Seus dados", style: TextStyle(fontSize: 25)),
-                      Row(
-                        spacing: 10,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            spacing: 20,
-                            children: [
-                              Text("Usuário: ", style: TextStyle(fontSize: 22)),
-                              Text("Senha: ", style: TextStyle(fontSize: 22)),
-                            ],
-                          ),
-
-                          Column(
-                            spacing: 20,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: 'Nome Usuário',
-                                ),
-                              ),
-                              TextFormField(
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: 'Senha',
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => PerfilPage(usuario: widget.usuario),
-                        ),
-                      );
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      spacing: 10,
-                      children: [
-                        Text(
-                          "SALVAR",
-                          style: TextStyle(fontSize: 28, color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
               ),
             ],
           ),

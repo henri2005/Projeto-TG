@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:turisr/_core/appcolors.dart';
+import 'package:turisr/_core/loading.dart';
 import 'package:turisr/_core/modal.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
+import 'package:turisr/classes/usuario_model.dart';
 import 'package:turisr/pages/inicial_page.dart';
 import 'package:turisr/pages/perfil_editar_page.dart';
 import 'package:turisr/pages/perfil_sobre_page.dart';
@@ -11,13 +13,15 @@ import 'package:flutter/material.dart';
 class PerfilPage extends StatefulWidget {
   const PerfilPage({super.key, this.usuario});
 
-  final String? usuario;
+  final UsuarioModel? usuario;
 
   @override
   State<PerfilPage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<PerfilPage> {
+  UsuarioModel usuarioPerfil = UsuarioModel(username: '', senha: '');
+
   void carregarInfoUsuarios() async {
     try {
       Dio dio = Dio(
@@ -32,13 +36,19 @@ class _MyHomePageState extends State<PerfilPage> {
       );
 
       final response = await dio.get(
-        'http://10.0.0.94/api_turismo/usuario/${widget.usuario}',
+        'http://10.0.0.94/api_turismo/usuario/${widget.usuario!.username}',
       );
 
       var data = response.data;
+      print(widget.usuario!.username);
 
       if (response.statusCode == 200) {
-        setState(() {});
+        Loading.hide();
+
+        if (response.data is Map<String, dynamic>) {
+          final dataMap = data as Map<String, dynamic>;
+          usuarioPerfil = UsuarioModel.fromJson(dataMap["usuario"]);
+        }
       } else {
         showModalErro(context, data["message"]);
       }
@@ -127,7 +137,10 @@ class _MyHomePageState extends State<PerfilPage> {
                       radius: 80,
                       child: Icon(Icons.person, size: 80),
                     ),
-                    Text("${widget.usuario}", style: TextStyle(fontSize: 20)),
+                    Text(
+                      "${widget.usuario!.username}",
+                      style: TextStyle(fontSize: 20),
+                    ),
                   ],
                 ),
 

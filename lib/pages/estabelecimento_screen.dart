@@ -1,12 +1,61 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:turisr/_core/appcolors.dart';
+import 'package:turisr/_core/loading.dart';
+import 'package:turisr/_core/modal.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:turisr/classes/local_model.dart';
+import 'package:turisr/classes/servico_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class EstabelecimentoScreen extends StatelessWidget {
-  const EstabelecimentoScreen({super.key, required this.estabelecimento});
+class EstabelecimentoScreen extends StatefulWidget {
+  const EstabelecimentoScreen({
+    super.key,
+    required this.estabelecimento,
+    this.servicos,
+  });
   final LocalModel estabelecimento;
+  final ServicoModel? servicos;
+
+  @override
+  State<EstabelecimentoScreen> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<EstabelecimentoScreen> {
+  IconData icone = Icons.favorite_border_rounded;
+
+  void favoritar() async {
+    try {
+      Loading.show(context, mensagem: 'Adicionando aos favoritos...');
+
+      Dio dio = Dio(
+        BaseOptions(
+          connectTimeout: Duration(seconds: 30),
+          receiveTimeout: Duration(seconds: 30),
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+
+      final response = await dio.put(
+        'http://10.0.0.94/api_turismo/favoritos/${widget.estabelecimento.idEstabelecimento}',
+        data: {'id_usuario': 1},
+      );
+
+      if (response.statusCode == 202) {
+        Loading.hide();
+        setState(() {});
+      } else {
+        Loading.hide();
+        showModalErro(context, response.data['message']);
+      }
+    } catch (e) {
+      Loading.hide();
+      showModalErro(context, "Erro : $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +68,12 @@ class EstabelecimentoScreen extends StatelessWidget {
             spacing: 20,
             children: [
               Image.asset(
-                estabelecimento.caminhoImagem,
+                widget.estabelecimento.caminhoImagem,
                 width: double.infinity,
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.28,
+                width: MediaQuery.of(context).size.width * 0.92,
+                height: MediaQuery.of(context).size.height * 0.32,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -35,18 +84,35 @@ class EstabelecimentoScreen extends StatelessWidget {
                   spacing: 10,
                   children: [
                     ListTile(
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            estabelecimento.nome,
-                            style: TextStyle(fontSize: 25),
-                          ),
-                          Icon(Icons.favorite_border_rounded, size: 30),
-                        ],
+                      title: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              widget.estabelecimento.nome,
+                              style: TextStyle(fontSize: 25),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                if (icone == Icons.favorite_border_rounded) {
+                                  // favoritar();
+                                  setState(() {
+                                    icone = Icons.favorite;
+                                  });
+                                } else {
+                                  setState(() {
+                                    icone = Icons.favorite_border_rounded;
+                                  });
+                                }
+                              },
+                              icon: Icon(icone, size: 30),
+                            ),
+                          ],
+                        ),
                       ),
                       subtitle: Text(
-                        estabelecimento.descricao,
+                        widget.estabelecimento.descricao,
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
@@ -73,7 +139,7 @@ class EstabelecimentoScreen extends StatelessWidget {
                         children: [
                           Text('Endereço', style: TextStyle(fontSize: 25)),
                           Text(
-                            '${estabelecimento.rua}, ${estabelecimento.numero}',
+                            '${widget.estabelecimento.rua}, ${widget.estabelecimento.numero}',
                             style: TextStyle(fontSize: 16),
                           ),
                         ],
@@ -82,7 +148,13 @@ class EstabelecimentoScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              await launchUrl(
+                                Uri.parse(
+                                  "https://www.google.com/maps/@${widget.estabelecimento.latitude},${widget.estabelecimento.longitude},17z?entry=ttu&g_ep=EgoyMDI1MTAwMS4wIKXMDSoASAFQAw%3D%3D",
+                                ),
+                              );
+                            },
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.2,
                               height: MediaQuery.of(context).size.height * 0.06,
@@ -125,7 +197,10 @@ class EstabelecimentoScreen extends StatelessWidget {
                   children: [
                     ListTile(
                       title: Text('Serviços', style: TextStyle(fontSize: 25)),
-                      subtitle: Text('1'),
+                      subtitle: Text(
+                        widget.servicos!.servicos,
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ),
                   ],
                 ),
@@ -156,7 +231,7 @@ class EstabelecimentoScreen extends StatelessWidget {
                             spacing: 5,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(
-                              int.parse(estabelecimento.notaAvaliacao),
+                              int.parse(widget.estabelecimento.notaAvaliacao),
                               (index) {
                                 return Icon(
                                   Icons.star,

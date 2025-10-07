@@ -51,8 +51,6 @@ class _MyHomePageState extends State<CadastroPage> {
         data: dados,
       );
 
-      print(response.statusCode);
-
       if (response.statusCode == 201) {
         Loading.hide();
         Navigator.pop(context);
@@ -69,7 +67,6 @@ class _MyHomePageState extends State<CadastroPage> {
 
   @override
   Widget build(BuildContext context) {
-    String groupValue = '';
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -210,16 +207,7 @@ class _MyHomePageState extends State<CadastroPage> {
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: Row(
                     children: [
-                      Radio(
-                        value: "false",
-                        activeColor: AppColors.buttonColor,
-                        groupValue: groupValue,
-                        onChanged: (value) {
-                          setState(() {
-                            groupValue = value!;
-                          });
-                        },
-                      ),
+                      Radio(value: "false", activeColor: AppColors.buttonColor),
                       Text("Estou de acordo com a Política de Uso"),
                     ],
                   ),

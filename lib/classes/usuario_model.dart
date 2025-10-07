@@ -3,13 +3,14 @@ import 'package:turisr/classes/local_model.dart';
 class UsuarioModel {
   String idUsuario = "";
   String nome = "";
-  String username = "";
-  String senha = "";
+  String? username;
+  String? senha;
   String estatus = "";
   String tipoTurismo = "";
-  List<LocalModel> favoritos = [];
+  String favoritos = "";
+  List<LocalModel> locaisRoteiro = [];
 
-  UsuarioModel();
+  UsuarioModel({required this.username, required this.senha});
 
   UsuarioModel.fromJson(Map<String, dynamic> json) {
     idUsuario = json['id_usuario'];
@@ -22,7 +23,7 @@ class UsuarioModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id_usuario'] = idUsuario;
     data['nome'] = nome;
     data['username'] = username;

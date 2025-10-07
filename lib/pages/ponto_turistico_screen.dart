@@ -3,10 +3,20 @@ import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:turisr/classes/local_model.dart';
+import 'package:turisr/classes/servico_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class PontoTuristicoScreen extends StatelessWidget {
-  const PontoTuristicoScreen({super.key, required this.ponto});
+class PontoTuristicoScreen extends StatefulWidget {
+  const PontoTuristicoScreen({super.key, required this.ponto, this.servico});
   final LocalModel ponto;
+  final ServicoModel? servico;
+
+  @override
+  State<PontoTuristicoScreen> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<PontoTuristicoScreen> {
+  IconData icone = Icons.favorite_border_rounded;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +28,9 @@ class PontoTuristicoScreen extends StatelessWidget {
           child: Column(
             spacing: 20,
             children: [
-              Image.asset(ponto.caminhoImagem, width: double.infinity),
+              Image.asset(widget.ponto.caminhoImagem, width: double.infinity),
               Container(
-                width: MediaQuery.of(context).size.width * 0.9,
+                width: MediaQuery.of(context).size.width * 0.92,
                 height: MediaQuery.of(context).size.height * 0.1,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -35,8 +45,25 @@ class PontoTuristicoScreen extends StatelessWidget {
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(ponto.nome, style: TextStyle(fontSize: 25)),
-                          Icon(Icons.favorite_border_rounded, size: 30),
+                          Text(
+                            widget.ponto.nome,
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              if (icone == Icons.favorite_border_rounded) {
+                                // favoritar();
+                                setState(() {
+                                  icone = Icons.favorite;
+                                });
+                              } else {
+                                setState(() {
+                                  icone = Icons.favorite_border_rounded;
+                                });
+                              }
+                            },
+                            icon: Icon(icone, size: 30),
+                          ),
                         ],
                       ),
                     ),
@@ -63,7 +90,7 @@ class PontoTuristicoScreen extends StatelessWidget {
                         children: [
                           Text('Endereço', style: TextStyle(fontSize: 25)),
                           Text(
-                            '${ponto.rua}, ${ponto.numero}',
+                            '${widget.ponto.rua}, ${widget.ponto.numero}',
                             style: TextStyle(fontSize: 16),
                           ),
                         ],
@@ -72,7 +99,13 @@ class PontoTuristicoScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              await launchUrl(
+                                Uri.parse(
+                                  "https://www.google.com/maps/@${widget.ponto.latitude},${widget.ponto.longitude},17z?entry=ttu&g_ep=EgoyMDI1MTAwMS4wIKXMDSoASAFQAw%3D%3D",
+                                ),
+                              );
+                            },
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.2,
                               height: MediaQuery.of(context).size.height * 0.06,
@@ -115,7 +148,10 @@ class PontoTuristicoScreen extends StatelessWidget {
                   children: [
                     ListTile(
                       title: Text('Serviços', style: TextStyle(fontSize: 25)),
-                      subtitle: Text('1'),
+                      subtitle: Text(
+                        widget.servico!.servicos,
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ),
                   ],
                 ),
@@ -146,7 +182,7 @@ class PontoTuristicoScreen extends StatelessWidget {
                             spacing: 5,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(
-                              int.parse(ponto.notaAvaliacao),
+                              int.parse(widget.ponto.notaAvaliacao),
                               (index) {
                                 return Icon(
                                   Icons.star,
