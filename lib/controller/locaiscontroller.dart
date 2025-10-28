@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:turisr/_core/appcolors.dart';
-import 'package:turisr/controller/locaisrepository.dart';
-import 'package:turisr/pages/pages_usuario/estabelecimento_screen.dart';
-import 'package:turisr/pages/pages_usuario/mapa_page.dart';
-import 'package:turisr/pages/pages_usuario/ponto_turistico_screen.dart';
+import 'package:turisr/classes/local_model.dart';
+import 'package:turisr/pages/mapa_page.dart';
 
 class LocaisController extends ChangeNotifier {
   double lat = 0.0;
@@ -18,21 +16,24 @@ class LocaisController extends ChangeNotifier {
   //   _getPosicao();
   // }
 
-  get mapsController => _mapsController;
+  GoogleMapController get mapsController => _mapsController;
 
-  onMapCreated(GoogleMapController gmc) async {
+  Future<void> onMapCreated(GoogleMapController gmc) async {
     _mapsController = gmc;
     getPosicao();
     loadLocais();
   }
 
-  loadLocais() {
-    final locais = LocaisRepository().locais;
+  void loadLocais() {
+    List<LocalModel> locais = [];
     locais.forEach((local) async {
       markers.add(
         Marker(
           markerId: MarkerId(local.nome),
-          position: LatLng(local.latitude, local.longitude),
+          position: LatLng(
+            double.parse(local.latitude),
+            double.parse(local.longitude),
+          ),
           onTap:
               () => {
                 showModalBottomSheet(
@@ -79,31 +80,7 @@ class LocaisController extends ChangeNotifier {
                                       ),
                                     ),
                                     TextButton(
-                                      onPressed: () {
-                                        if (local.tipo == 'P') {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder:
-                                                  (context) =>
-                                                      PontoTuristicoScreen(
-                                                        ponto: local,
-                                                      ),
-                                            ),
-                                          );
-                                        } else {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder:
-                                                  (context) =>
-                                                      EstabelecimentoScreen(
-                                                        estabelecimento: local,
-                                                      ),
-                                            ),
-                                          );
-                                        }
-                                      },
+                                      onPressed: () {},
                                       child: Container(
                                         width:
                                             MediaQuery.of(context).size.width *
@@ -148,7 +125,7 @@ class LocaisController extends ChangeNotifier {
     });
   }
 
-  getPosicao() async {
+  Future<void> getPosicao() async {
     try {
       Position position = await _posicaoAtual();
       lat = position.latitude;

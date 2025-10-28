@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:turisr/_core/appcolors.dart';
 
 class BotaoIconeMenor extends StatelessWidget {
@@ -28,7 +29,7 @@ class BotaoIconeMenor extends StatelessWidget {
       ),
       child: TextButton(
         onPressed: () {
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => pagina!),
           );
@@ -37,7 +38,14 @@ class BotaoIconeMenor extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           spacing: 20,
           children: [
-            Text(texto, style: TextStyle(fontSize: 20, color: Colors.white)),
+            Text(
+              texto,
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+                fontFamily: GoogleFonts.ubuntu().fontFamily,
+              ),
+            ),
             Icon(icone, color: Colors.white, size: 40),
           ],
         ),

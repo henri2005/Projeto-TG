@@ -5,14 +5,10 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-// from: "$flutterSdkPath/packages/flutter_tools/gradle/flutter.gradle"
-// from: "${project(':flutter_config').projectDir}/dotenv.gradle"
-
-
 android {
-    namespace = "com.example.emulando_figma"
+    namespace = "com.example.turi_sr"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "27.0.12077973"
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -25,7 +21,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.turisr"
+        applicationId = "com.example.turi_sr"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

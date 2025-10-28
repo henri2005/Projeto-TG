@@ -1,12 +1,16 @@
 import 'package:turisr/_core/appcolors.dart';
-import 'package:turisr/pages/pages_usuario/estabelecimentos_page.dart';
-import 'package:turisr/pages/pages_usuario/home_page.dart';
-import 'package:turisr/pages/pages_usuario/p_turisticos_page.dart';
-import 'package:turisr/pages/pages_usuario/perfil_page.dart';
-import 'package:turisr/pages/pages_usuario/roteiro_page.dart';
+import 'package:turisr/classes/usuario_model.dart';
+import 'package:turisr/pages/estabelecimentos_page.dart';
+import 'package:turisr/pages/home_page.dart';
+import 'package:turisr/pages/p_turisticos_page.dart';
+import 'package:turisr/pages/perfil_page.dart';
+import 'package:turisr/pages/roteiro_page.dart';
 import 'package:flutter/material.dart';
 
-BottomAppBar getBottomBar({required BuildContext context}) {
+BottomAppBar getBottomBar({
+  required BuildContext context,
+  UsuarioModel? usuarioLogado,
+}) {
   return BottomAppBar(
     shape: CircularNotchedRectangle(),
     height: MediaQuery.of(context).size.height * 0.1,
@@ -20,10 +24,11 @@ BottomAppBar getBottomBar({required BuildContext context}) {
           children: [
             IconButton(
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
+                Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => MyHomePage(title: ''),
+                    builder:
+                        (context) =>
+                            MyHomePage(title: '', usuarioLogado: usuarioLogado),
                   ),
                 );
               },
@@ -36,10 +41,13 @@ BottomAppBar getBottomBar({required BuildContext context}) {
           children: [
             IconButton(
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
+                Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => EstabelecimentosPage(title: ''),
+                    builder:
+                        (context) => EstabelecimentosPage(
+                          title: '',
+                          usuarioLogado: usuarioLogado,
+                        ),
                   ),
                 );
               },
@@ -59,10 +67,13 @@ BottomAppBar getBottomBar({required BuildContext context}) {
           children: [
             IconButton(
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
+                Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => PontosTuristicosPage(title: ''),
+                    builder:
+                        (context) => PontosTuristicosPage(
+                          title: '',
+                          usuarioLogado: usuarioLogado,
+                        ),
                   ),
                 );
               },
@@ -85,9 +96,12 @@ BottomAppBar getBottomBar({required BuildContext context}) {
               children: [
                 IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => RoteiroPage()),
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder:
+                            (context) =>
+                                RoteiroPage(usuarioLogado: usuarioLogado),
+                      ),
                     );
                   },
                   icon: Icon(
@@ -111,9 +125,11 @@ BottomAppBar getBottomBar({required BuildContext context}) {
               children: [
                 IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => PerfilPage()),
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder:
+                            (context) => PerfilPage(usuario: usuarioLogado!),
+                      ),
                     );
                   },
                   icon: Icon(Icons.person_pin, color: Colors.white, size: 30),

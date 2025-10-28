@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="emulando_figma"
+        android:label="turi_sr"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -31,7 +31,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
         <meta-data android:name= "com.google.android.geo.API_KEY"
-              android:value="AIzaSyAwTuLPTj4JLzRT6wJYqK8hTMGQe9iOUGQ"/>
+              android:value="AIzaSyDzan4jOQPhcqYF0pYVp05H526Fapc_1do"/>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
@@ -44,7 +44,4 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
-    <uses-permission android:name='android.permission.ACCESS_FINE_LOCATION'/>
-    <uses-permission android:name='android.permission.ACCESS_COARSE_LOCATION'/>
-    <uses-permission android:name='android.permission.ACCESS_BACKGROUND_LOCATION'/>
 </manifest>
