@@ -1,4 +1,3 @@
-import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/classes/usuario_model.dart';
 import 'package:turisr/pages/estabelecimentos_page.dart';
 import 'package:turisr/pages/home_page.dart';
@@ -10,11 +9,12 @@ import 'package:flutter/material.dart';
 BottomAppBar getBottomBar({
   required BuildContext context,
   UsuarioModel? usuarioLogado,
+  Color? bottomColor,
 }) {
   return BottomAppBar(
     shape: CircularNotchedRectangle(),
     height: MediaQuery.of(context).size.height * 0.1,
-    color: AppColors.mainColor,
+    color: bottomColor,
     padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 6.0),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,

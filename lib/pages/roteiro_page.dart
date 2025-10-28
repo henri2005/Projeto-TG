@@ -113,7 +113,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context, headerColor: AppColors.menuColor),
+      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
       endDrawer: getDrawer(
         context: context,
         usuarioLogado: widget.usuarioLogado,
@@ -384,6 +384,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
       bottomNavigationBar: getBottomBar(
         context: context,
         usuarioLogado: widget.usuarioLogado,
+        bottomColor: AppColors.mainColor,
       ),
     );
   }

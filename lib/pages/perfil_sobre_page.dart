@@ -17,7 +17,7 @@ class PerfilSobrePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context, headerColor: AppColors.menuColor),
+      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
       endDrawer: getDrawer(
         context: context,
         usuarioLogado: this.usuario,
@@ -191,7 +191,10 @@ class PerfilSobrePage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: getBottomBar(context: context),
+      bottomNavigationBar: getBottomBar(
+        context: context,
+        bottomColor: AppColors.mainColor,
+      ),
     );
   }
 }

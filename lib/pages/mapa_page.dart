@@ -17,7 +17,7 @@ class MapaPage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         key: appKey,
-        appBar: getAppBar(context: context, headerColor: AppColors.menuColor),
+        appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
         endDrawer: getDrawer(
           context: context,
           // usuarioLogado: widget.usuarioLogado,
@@ -43,7 +43,10 @@ class MapaPage extends StatelessWidget {
           ),
         ),
 
-        bottomNavigationBar: getBottomBar(context: context),
+        bottomNavigationBar: getBottomBar(
+          context: context,
+          bottomColor: AppColors.mainColor,
+        ),
       ),
     );
   }

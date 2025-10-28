@@ -32,13 +32,11 @@ class _MyHomePageState extends State<PerfilPage> {
     senha: '',
   );
   String idUsuario = "";
-  final box = GetStorage();
-  Color corFundo = Colors.white;
-  late String temaEscuro = "isDark";
-  late bool isdark = false;
 
   void carregarInfoUsuarios() async {
     try {
+      Loading.show(context, mensagem: 'Carregando suas informações...');
+
       Dio dio = Dio(
         BaseOptions(
           connectTimeout: Duration(seconds: 10),
@@ -147,6 +145,17 @@ class _MyHomePageState extends State<PerfilPage> {
     }
   }
 
+  void alternaCor() {
+    setState(() {
+      isdark = !isdark;
+      box.write(temaEscuro, isdark); // Salva o novo estado
+    });
+  }
+
+  final box = GetStorage();
+  late String temaEscuro = "isDark";
+  late bool isdark = false;
+
   @override
   void initState() {
     super.initState();
@@ -161,12 +170,12 @@ class _MyHomePageState extends State<PerfilPage> {
     return Scaffold(
       appBar: getAppBar(
         context: context,
-        headerColor: isdark ? DarkColors.menuColor : AppColors.menuColor,
+        headerColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
       ),
       endDrawer: getDrawer(
         context: context,
         usuarioLogado: widget.usuario,
-        menuColor: AppColors.menuColor,
+        menuColor: isdark ? DarkColors.menuColor : AppColors.menuColor,
       ),
       backgroundColor:
           isdark ? DarkColors.backgroundColor : AppColors.backgroundColor,
@@ -204,6 +213,7 @@ class _MyHomePageState extends State<PerfilPage> {
                               style: TextStyle(
                                 fontSize: 25,
                                 fontFamily: GoogleFonts.ubuntu().fontFamily,
+                                color: Colors.black,
                               ),
                             ),
                           ],
@@ -238,6 +248,7 @@ class _MyHomePageState extends State<PerfilPage> {
                               style: TextStyle(
                                 fontSize: 25,
                                 fontFamily: GoogleFonts.ubuntu().fontFamily,
+                                color: Colors.black,
                               ),
                             ),
                           ],
@@ -298,6 +309,7 @@ class _MyHomePageState extends State<PerfilPage> {
                           style: TextStyle(
                             fontSize: 25,
                             fontFamily: GoogleFonts.ubuntu().fontFamily,
+                            color: Colors.black,
                           ),
                         ),
                       ],
@@ -426,8 +438,13 @@ class _MyHomePageState extends State<PerfilPage> {
                                 ),
                               ),
                               IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.square_outlined, size: 45),
+                                onPressed: () {
+                                  alternaCor();
+                                },
+                                icon: Icon(
+                                  isdark ? Icons.square : Icons.square_outlined,
+                                  size: 45,
+                                ),
                               ),
                             ],
                           ),
@@ -444,6 +461,7 @@ class _MyHomePageState extends State<PerfilPage> {
       bottomNavigationBar: getBottomBar(
         context: context,
         usuarioLogado: widget.usuario,
+        bottomColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
       ),
     );
   }

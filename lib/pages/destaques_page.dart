@@ -19,7 +19,7 @@ class _MyHomePageState extends State<DestaquesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context, headerColor: AppColors.menuColor),
+      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
       endDrawer: getDrawer(
         context: context,
         usuarioLogado: widget.usuarioLogado,
@@ -65,7 +65,10 @@ class _MyHomePageState extends State<DestaquesPage> {
           ],
         ),
       ),
-      bottomNavigationBar: getBottomBar(context: context),
+      bottomNavigationBar: getBottomBar(
+        context: context,
+        bottomColor: AppColors.mainColor,
+      ),
     );
   }
 }
