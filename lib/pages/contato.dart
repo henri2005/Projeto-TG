@@ -1,3 +1,4 @@
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
@@ -15,16 +16,30 @@ class ContatoPage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<ContatoPage> {
+  final box = GetStorage();
+  late String temaEscuro = "isDark";
+  late bool isdark = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isdark = box.read(temaEscuro) ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
+      appBar: getAppBar(
+        context: context,
+        headerColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
+      ),
       endDrawer: getDrawer(
         context: context,
         usuarioLogado: widget.usuario,
-        menuColor: AppColors.menuColor,
+        menuColor: isdark ? DarkColors.menuColor : AppColors.menuColor,
       ),
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor:
+          isdark ? DarkColors.backgroundColor : AppColors.backgroundColor,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
@@ -37,6 +52,7 @@ class _MyHomePageState extends State<ContatoPage> {
                   fontSize: 22,
                   fontFamily: GoogleFonts.ubuntu().fontFamily,
                   fontWeight: FontWeight.bold,
+                  color: isdark ? Colors.white : Colors.black,
                 ),
               ),
 
@@ -45,6 +61,7 @@ class _MyHomePageState extends State<ContatoPage> {
                 style: TextStyle(
                   fontSize: 20,
                   fontFamily: GoogleFonts.ubuntu().fontFamily,
+                  color: isdark ? Colors.white : Colors.black,
                 ),
               ),
             ],
@@ -54,7 +71,7 @@ class _MyHomePageState extends State<ContatoPage> {
       bottomNavigationBar: getBottomBar(
         context: context,
         usuarioLogado: widget.usuario,
-        bottomColor: AppColors.mainColor,
+        bottomColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
       ),
     );
   }

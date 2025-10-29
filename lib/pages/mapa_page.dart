@@ -1,3 +1,4 @@
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
@@ -8,8 +9,23 @@ import 'package:turisr/controller/locaiscontroller.dart';
 
 final appKey = GlobalKey();
 
-class MapaPage extends StatelessWidget {
+class MapaPage extends StatefulWidget {
   const MapaPage({super.key});
+
+  @override
+  State<MapaPage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MapaPage> {
+  final box = GetStorage();
+  late String temaEscuro = "isDark";
+  late bool isdark = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isdark = box.read(temaEscuro) ?? false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +33,17 @@ class MapaPage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         key: appKey,
-        appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
+        appBar: getAppBar(
+          context: context,
+          headerColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
+        ),
         endDrawer: getDrawer(
           context: context,
           // usuarioLogado: widget.usuarioLogado,
-          menuColor: AppColors.menuColor,
+          menuColor: isdark ? DarkColors.menuColor : AppColors.menuColor,
         ),
+        backgroundColor:
+            isdark ? DarkColors.backgroundColor : AppColors.backgroundColor,
         body: ChangeNotifierProvider<LocaisController>(
           create: (context) => LocaisController(),
           child: Builder(
@@ -45,7 +66,8 @@ class MapaPage extends StatelessWidget {
 
         bottomNavigationBar: getBottomBar(
           context: context,
-          bottomColor: AppColors.mainColor,
+          // usuarioLogado: widget.usuarioLogado,
+          bottomColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
         ),
       ),
     );

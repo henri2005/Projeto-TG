@@ -1,22 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
+import 'package:turisr/classes/usuario_model.dart';
 import 'package:turisr/pages/estabelecimentos_page.dart';
 
-class CidadePage extends StatelessWidget {
-  const CidadePage({super.key});
+class CidadePage extends StatefulWidget {
+  const CidadePage({super.key, this.usuario});
+
+  final UsuarioModel? usuario;
+
+  @override
+  State<CidadePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<CidadePage> {
+  final box = GetStorage();
+  late String temaEscuro = "isDark";
+  late bool isdark = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isdark = box.read(temaEscuro) ?? false;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
+      appBar: getAppBar(
+        context: context,
+        headerColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
+      ),
       endDrawer: getDrawer(
         context: context,
-        // usuarioLogado: widget.usuarioLogado,
-        menuColor: AppColors.menuColor,
+        usuarioLogado: widget.usuario,
+        menuColor: isdark ? DarkColors.menuColor : AppColors.menuColor,
       ),
+      backgroundColor:
+          isdark ? DarkColors.backgroundColor : AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -193,7 +217,8 @@ class CidadePage extends StatelessWidget {
       ),
       bottomNavigationBar: getBottomBar(
         context: context,
-        bottomColor: AppColors.mainColor,
+        usuarioLogado: widget.usuario,
+        bottomColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
       ),
     );
   }

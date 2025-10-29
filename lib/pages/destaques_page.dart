@@ -1,3 +1,4 @@
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
@@ -16,15 +17,30 @@ class DestaquesPage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<DestaquesPage> {
+  final box = GetStorage();
+  late String temaEscuro = "isDark";
+  late bool isdark = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isdark = box.read(temaEscuro) ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
+      appBar: getAppBar(
+        context: context,
+        headerColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
+      ),
       endDrawer: getDrawer(
         context: context,
         usuarioLogado: widget.usuarioLogado,
-        menuColor: AppColors.menuColor,
+        menuColor: isdark ? DarkColors.menuColor : AppColors.menuColor,
       ),
+      backgroundColor:
+          isdark ? DarkColors.backgroundColor : AppColors.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),
         child: Column(
@@ -37,6 +53,7 @@ class _MyHomePageState extends State<DestaquesPage> {
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
                 fontFamily: GoogleFonts.ubuntu().fontFamily,
+                color: isdark ? Colors.white : Colors.black,
               ),
             ),
             Image.asset('assets/imagens/carnaval.png'),
@@ -50,6 +67,7 @@ class _MyHomePageState extends State<DestaquesPage> {
                     style: TextStyle(
                       fontSize: 18,
                       fontFamily: GoogleFonts.ubuntu().fontFamily,
+                      color: isdark ? Colors.white : Colors.black,
                     ),
                   ),
                   Text(
@@ -57,6 +75,7 @@ class _MyHomePageState extends State<DestaquesPage> {
                     style: TextStyle(
                       fontSize: 18,
                       fontFamily: GoogleFonts.ubuntu().fontFamily,
+                      color: isdark ? Colors.white : Colors.black,
                     ),
                   ),
                 ],
@@ -67,7 +86,8 @@ class _MyHomePageState extends State<DestaquesPage> {
       ),
       bottomNavigationBar: getBottomBar(
         context: context,
-        bottomColor: AppColors.mainColor,
+        usuarioLogado: widget.usuarioLogado,
+        bottomColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
       ),
     );
   }

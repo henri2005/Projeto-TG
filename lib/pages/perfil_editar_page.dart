@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/modal.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
@@ -97,22 +98,33 @@ class _MyHomePageState extends State<PerfilEditarPage> {
     }
   }
 
+  final box = GetStorage();
+  late String temaEscuro = "isDark";
+  late bool isdark = false;
+
   @override
   void initState() {
     super.initState();
-    carregarInfoUsuarios();
+    isdark = box.read(temaEscuro) ?? false;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      carregarInfoUsuarios();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
+      appBar: getAppBar(
+        context: context,
+        headerColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
+      ),
       endDrawer: getDrawer(
         context: context,
         usuarioLogado: widget.usuario,
-        menuColor: AppColors.menuColor,
+        menuColor: isdark ? DarkColors.menuColor : AppColors.menuColor,
       ),
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor:
+          isdark ? DarkColors.backgroundColor : AppColors.backgroundColor,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
@@ -130,7 +142,7 @@ class _MyHomePageState extends State<PerfilEditarPage> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: Colors.black),
-                    color: Colors.white,
+                    color: isdark ? DarkColors.containerColor : Colors.white,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -138,7 +150,10 @@ class _MyHomePageState extends State<PerfilEditarPage> {
                     spacing: 10,
                     children: [
                       Icon(Icons.arrow_back, size: 28),
-                      Text("Cancelar", style: TextStyle(fontSize: 25)),
+                      Text(
+                        "Cancelar",
+                        style: TextStyle(fontSize: 25, color: Colors.black),
+                      ),
                     ],
                   ),
                 ),
@@ -195,7 +210,8 @@ class _MyHomePageState extends State<PerfilEditarPage> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: Colors.black),
-                    color: AppColors.buttonColor,
+                    color:
+                        isdark ? DarkColors.buttonColor : AppColors.buttonColor,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -217,7 +233,7 @@ class _MyHomePageState extends State<PerfilEditarPage> {
       bottomNavigationBar: getBottomBar(
         context: context,
         usuarioLogado: widget.usuario,
-        bottomColor: AppColors.mainColor,
+        bottomColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
       ),
     );
   }

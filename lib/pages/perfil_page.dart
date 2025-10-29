@@ -343,10 +343,7 @@ class _MyHomePageState extends State<PerfilPage> {
                             title: Container(
                               height: MediaQuery.of(context).size.height * 0.1,
                               decoration: BoxDecoration(
-                                color:
-                                    isdark
-                                        ? DarkColors.containerColor
-                                        : Colors.white,
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(7),
                               ),
                               child: Column(

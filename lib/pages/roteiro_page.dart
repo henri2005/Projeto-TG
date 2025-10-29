@@ -101,10 +101,14 @@ class _RoteiroPageState extends State<RoteiroPage> {
     }
   }
 
+  final box = GetStorage();
+  late String temaEscuro = "isDark";
+  late bool isdark = false;
+
   @override
   void initState() {
     super.initState();
-
+    isdark = box.read(temaEscuro) ?? false;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       carregarLocaisRoteiro();
     });
@@ -113,13 +117,17 @@ class _RoteiroPageState extends State<RoteiroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
+      appBar: getAppBar(
+        context: context,
+        headerColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
+      ),
       endDrawer: getDrawer(
         context: context,
         usuarioLogado: widget.usuarioLogado,
-        menuColor: AppColors.menuColor,
+        menuColor: isdark ? DarkColors.menuColor : AppColors.menuColor,
       ),
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor:
+          isdark ? DarkColors.backgroundColor : AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -134,6 +142,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
                   style: TextStyle(
                     fontSize: 25,
                     fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
                   ),
                 ),
                 Container(
@@ -178,6 +187,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
                         style: TextStyle(
                           fontSize: 23,
                           fontFamily: GoogleFonts.ubuntu().fontFamily,
+                          color: isdark ? Colors.white : Colors.black,
                         ),
                       ),
 
@@ -226,6 +236,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
                         style: TextStyle(
                           fontSize: 23,
                           fontFamily: GoogleFonts.ubuntu().fontFamily,
+                          color: isdark ? Colors.white : Colors.black,
                         ),
                       ),
 
@@ -280,7 +291,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
                               horizontal: 10,
                             ),
                             decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.onPrimary,
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
@@ -324,7 +335,10 @@ class _RoteiroPageState extends State<RoteiroPage> {
                               width: MediaQuery.of(context).size.width * 0.72,
                               height: MediaQuery.of(context).size.height * 0.08,
                               decoration: BoxDecoration(
-                                color: AppColors.buttonColor,
+                                color:
+                                    isdark
+                                        ? DarkColors.buttonColor
+                                        : AppColors.buttonColor,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: TextButton(
@@ -354,7 +368,10 @@ class _RoteiroPageState extends State<RoteiroPage> {
                         width: MediaQuery.of(context).size.width * 0.72,
                         height: MediaQuery.of(context).size.height * 0.08,
                         decoration: BoxDecoration(
-                          color: AppColors.buttonColor,
+                          color:
+                              isdark
+                                  ? DarkColors.buttonColor
+                                  : AppColors.buttonColor,
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: TextButton(
@@ -384,7 +401,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
       bottomNavigationBar: getBottomBar(
         context: context,
         usuarioLogado: widget.usuarioLogado,
-        bottomColor: AppColors.mainColor,
+        bottomColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
       ),
     );
   }

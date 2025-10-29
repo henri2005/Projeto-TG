@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/loading.dart';
@@ -44,9 +45,14 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  final box = GetStorage();
+  late String temaEscuro = "isDark";
+  late bool isdark = false;
+
   @override
   void initState() {
     super.initState();
+    isdark = box.read(temaEscuro) ?? false;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       carregarUsuario();
     });
@@ -55,13 +61,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
+      appBar: getAppBar(
+        context: context,
+        headerColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
+      ),
       endDrawer: getDrawer(
         context: context,
         usuarioLogado: widget.usuarioLogado,
-        menuColor: AppColors.menuColor,
+        menuColor: isdark ? DarkColors.menuColor : AppColors.menuColor,
       ),
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor:
+          isdark ? DarkColors.backgroundColor : AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -225,7 +235,7 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: getBottomBar(
         context: context,
         usuarioLogado: widget.usuarioLogado,
-        bottomColor: AppColors.mainColor,
+        bottomColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
       ),
     );
   }

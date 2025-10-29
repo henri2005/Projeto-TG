@@ -41,6 +41,8 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
   late String adicionado = 'isAdicionado';
   late bool isFavorite = false;
   late bool isAdicionado = false;
+  late String temaEscuro = "isDark";
+  late bool isdark = false;
 
   void carregarUsuario() async {
     try {
@@ -70,6 +72,7 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
     adicionado = 'roteiro_${widget.estabelecimento.idEstabelecimento}';
     isFavorite = box.read(key) ?? false;
     isAdicionado = box.read(adicionado) ?? false;
+    isdark = box.read(temaEscuro) ?? false;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       carregarUsuario();
     });
@@ -171,12 +174,17 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
+      appBar: getAppBar(
+        context: context,
+        headerColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
+      ),
       endDrawer: getDrawer(
         context: context,
         usuarioLogado: widget.usuarioLogado,
-        menuColor: AppColors.menuColor,
+        menuColor: isdark ? DarkColors.menuColor : AppColors.menuColor,
       ),
+      backgroundColor:
+          isdark ? DarkColors.backgroundColor : AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -286,7 +294,10 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
                               width: MediaQuery.of(context).size.width * 0.2,
                               height: MediaQuery.of(context).size.height * 0.06,
                               decoration: BoxDecoration(
-                                color: AppColors.buttonColor,
+                                color:
+                                    isdark
+                                        ? DarkColors.buttonColor
+                                        : AppColors.buttonColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Column(
@@ -428,7 +439,10 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
                               width: MediaQuery.of(context).size.width * 0.3,
                               height: MediaQuery.of(context).size.height * 0.06,
                               decoration: BoxDecoration(
-                                color: AppColors.buttonColor,
+                                color:
+                                    isdark
+                                        ? DarkColors.buttonColor
+                                        : AppColors.buttonColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Column(

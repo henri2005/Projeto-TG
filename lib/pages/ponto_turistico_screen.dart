@@ -41,6 +41,8 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
   late String adicionado = 'isAdicionado';
   late bool isFavorite = false;
   late bool isAdicionado = false;
+  late String temaEscuro = "isDark";
+  late bool isdark = false;
 
   void carregarUsuario() async {
     try {
@@ -68,6 +70,7 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
     super.initState();
     key = 'favorite_${widget.ponto.idEstabelecimento}';
     adicionado = 'roteiro_${widget.ponto.idEstabelecimento}';
+    isdark = box.read(temaEscuro) ?? false;
     isFavorite = box.read(key) ?? false;
     isAdicionado = box.read(adicionado) ?? false;
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -172,12 +175,17 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
+      appBar: getAppBar(
+        context: context,
+        headerColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
+      ),
       endDrawer: getDrawer(
         context: context,
         usuarioLogado: widget.usuarioLogado,
-        menuColor: AppColors.menuColor,
+        menuColor: isdark ? DarkColors.menuColor : AppColors.menuColor,
       ),
+      backgroundColor:
+          isdark ? DarkColors.backgroundColor : AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -276,7 +284,10 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
                               width: MediaQuery.of(context).size.width * 0.2,
                               height: MediaQuery.of(context).size.height * 0.06,
                               decoration: BoxDecoration(
-                                color: AppColors.buttonColor,
+                                color:
+                                    isdark
+                                        ? DarkColors.buttonColor
+                                        : AppColors.buttonColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Column(
@@ -383,7 +394,10 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
                               width: MediaQuery.of(context).size.width * 0.3,
                               height: MediaQuery.of(context).size.height * 0.06,
                               decoration: BoxDecoration(
-                                color: AppColors.buttonColor,
+                                color:
+                                    isdark
+                                        ? DarkColors.buttonColor
+                                        : AppColors.buttonColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Column(
@@ -415,9 +429,13 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
                   height: MediaQuery.of(context).size.height * 0.08,
                   decoration: BoxDecoration(
                     color:
-                        isAdicionado
-                            ? AppColors.menuColor
-                            : AppColors.buttonColor,
+                        isdark
+                            ? (isAdicionado
+                                ? DarkColors.menuColor
+                                : DarkColors.buttonColor)
+                            : (isAdicionado
+                                ? AppColors.menuColor
+                                : AppColors.buttonColor),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextButton(
@@ -446,7 +464,7 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
       bottomNavigationBar: getBottomBar(
         context: context,
         usuarioLogado: widget.usuarioLogado,
-        bottomColor: AppColors.mainColor,
+        bottomColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
       ),
     );
   }

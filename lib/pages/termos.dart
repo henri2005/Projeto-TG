@@ -1,3 +1,4 @@
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
@@ -15,16 +16,30 @@ class TermosPage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<TermosPage> {
+  final box = GetStorage();
+  late String temaEscuro = "isDark";
+  late bool isdark = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isdark = box.read(temaEscuro) ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
+      appBar: getAppBar(
+        context: context,
+        headerColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
+      ),
       endDrawer: getDrawer(
         context: context,
         usuarioLogado: widget.usuario,
-        menuColor: AppColors.menuColor,
+        menuColor: isdark ? DarkColors.menuColor : AppColors.menuColor,
       ),
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor:
+          isdark ? DarkColors.backgroundColor : AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -38,6 +53,7 @@ class _MyHomePageState extends State<TermosPage> {
                     fontSize: 22,
                     fontFamily: GoogleFonts.ubuntu().fontFamily,
                     fontWeight: FontWeight.bold,
+                    color: isdark ? Colors.white : Colors.black,
                   ),
                 ),
 
@@ -46,10 +62,15 @@ class _MyHomePageState extends State<TermosPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
                   ),
                 ),
                 Text(
                   "Ao acessar ou utilizar o aplicativo TuriSR, o usuário concorda com os presentes Termos de Uso e com a Política de Privacidade. Caso não concorde, o usuário deve se abster de utilizar o aplicativo.",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
+                  ),
                 ),
 
                 Text(
@@ -57,10 +78,15 @@ class _MyHomePageState extends State<TermosPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
                   ),
                 ),
                 Text(
                   "O TuriSR é um aplicativo voltado à criação personalizada de roteiros turísticos na cidade de São Roque, oferecendo sugestões de atrações, restaurantes, vinícolas, trilhas e outros pontos de interesse com base nas preferências do usuário.",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
+                  ),
                 ),
 
                 Text(
@@ -68,10 +94,15 @@ class _MyHomePageState extends State<TermosPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
                   ),
                 ),
                 Text(
                   "Para utilizar determinadas funcionalidades, o usuário poderá ser solicitado a criar uma conta. O usuário é responsável por manter a confidencialidade de suas credenciais de acesso. É proibido o uso de informações falsas ou de terceiros sem autorização.",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
+                  ),
                 ),
 
                 Text(
@@ -79,10 +110,15 @@ class _MyHomePageState extends State<TermosPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
                   ),
                 ),
                 Text(
                   "O usuário compromete-se a utilizar o TuriSR apenas para fins lícitos e pessoais, respeitando as leis vigentes e os direitos de terceiros. É vedado: Utilizar o aplicativo para fins comerciais sem autorização prévia; Tentar acessar áreas restritas ou modificar o funcionamento do aplicativo; Compartilhar conteúdo ofensivo, ilegal ou que viole direitos autorais.",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
+                  ),
                 ),
 
                 Text(
@@ -90,10 +126,15 @@ class _MyHomePageState extends State<TermosPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
                   ),
                 ),
                 Text(
                   "Todo o conteúdo disponibilizado pelo TuriSR — incluindo textos, imagens, logotipos, mapas e sugestões de roteiro — é protegido por direitos autorais e pertence ao TuriSR ou a seus parceiros. O uso indevido poderá acarretar responsabilização civil e criminal.",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
+                  ),
                 ),
 
                 Text(
@@ -101,10 +142,15 @@ class _MyHomePageState extends State<TermosPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
                   ),
                 ),
                 Text(
                   "O TuriSR se esforça para manter as informações atualizadas, mas não garante a precisão ou disponibilidade contínua dos serviços. O aplicativo não se responsabiliza por eventuais prejuízos decorrentes de informações incorretas, alterações em horários de funcionamento de estabelecimentos ou problemas com terceiros indicados nos roteiros.",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
+                  ),
                 ),
 
                 Text(
@@ -112,10 +158,15 @@ class _MyHomePageState extends State<TermosPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
                   ),
                 ),
                 Text(
                   "O tratamento de dados pessoais será realizado conforme a Política de Privacidade do TuriSR, em conformidade com a Lei Geral de Proteção de Dados (LGPD).",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
+                  ),
                 ),
 
                 Text(
@@ -123,10 +174,15 @@ class _MyHomePageState extends State<TermosPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
                   ),
                 ),
                 Text(
                   "O TuriSR poderá alterar estes Termos de Uso a qualquer momento. As alterações entrarão em vigor após sua publicação no aplicativo. O uso contínuo do serviço implica concordância com os novos termos.",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
+                  ),
                 ),
 
                 Text(
@@ -134,10 +190,15 @@ class _MyHomePageState extends State<TermosPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
                   ),
                 ),
                 Text(
                   "Fica eleito o foro da Comarca de São Roque/SP para dirimir quaisquer questões oriundas destes Termos, com renúncia a qualquer outro, por mais privilegiado que seja.",
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    color: isdark ? Colors.white : Colors.black,
+                  ),
                 ),
               ],
             ),
@@ -147,7 +208,7 @@ class _MyHomePageState extends State<TermosPage> {
       bottomNavigationBar: getBottomBar(
         context: context,
         usuarioLogado: widget.usuario,
-        bottomColor: AppColors.mainColor,
+        bottomColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
       ),
     );
   }
