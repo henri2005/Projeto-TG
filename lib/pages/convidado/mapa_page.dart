@@ -1,7 +1,7 @@
 import 'package:provider/provider.dart';
+import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:turisr/_core/widgets/bottomconvidado.dart';
 import 'package:turisr/controller/locaiscontroller.dart';
 
@@ -16,7 +16,7 @@ class MapaConvidado extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         key: appKey,
-        appBar: getAppBar(context: context),
+        appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
         endDrawer: getDrawerConvidado(context: context),
         body: ChangeNotifierProvider<LocaisController>(
           create: (context) => LocaisController(),
@@ -24,16 +24,17 @@ class MapaConvidado extends StatelessWidget {
             builder: (context) {
               final local = context.watch<LocaisController>();
 
-              return GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(local.lat, local.long),
-                  zoom: 17,
-                ),
-                zoomControlsEnabled: true,
-                myLocationEnabled: true,
-                onMapCreated: local.onMapCreated,
-                markers: local.markers,
-              );
+              return Text('AAA');
+              // GoogleMap(
+              //   initialCameraPosition: CameraPosition(
+              //     target: LatLng(local.lat, local.long),
+              //     zoom: 17,
+              //   ),
+              //   zoomControlsEnabled: true,
+              //   myLocationEnabled: true,
+              //   onMapCreated: local.onMapCreated,
+              //   markers: local.markers,
+              // );
             },
           ),
         ),

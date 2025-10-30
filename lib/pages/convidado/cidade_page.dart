@@ -11,7 +11,7 @@ class CidadeConvidado extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context),
+      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
       endDrawer: getDrawerConvidado(context: context),
       body: SingleChildScrollView(
         child: Center(

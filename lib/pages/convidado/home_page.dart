@@ -21,7 +21,7 @@ class _HomeConvidadoState extends State<HomeConvidado> {
     return PopScope(
       onPopInvokedWithResult: (didPop, result) async {},
       child: Scaffold(
-        appBar: getAppBar(context: context),
+        appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
         endDrawer: getDrawerConvidado(context: context),
         backgroundColor: AppColors.backgroundColor,
         body: SingleChildScrollView(

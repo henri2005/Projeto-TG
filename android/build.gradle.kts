@@ -22,3 +22,9 @@ subprojects {
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
+
+dependencies{
+    'org.jetbrains.kotlin:kotlin-test:2.2.0'
+    'org.mockito:mockito-core:5.8.0'
+    'io.mockk:mockk:1.13.16'
+}

@@ -1,3 +1,4 @@
+import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:turisr/_core/widgets/bottomconvidado.dart';
@@ -15,7 +16,7 @@ class _MyHomePageState extends State<DestaquesConvidado> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context: context),
+      appBar: getAppBar(context: context, headerColor: AppColors.mainColor),
       endDrawer: getDrawerConvidado(context: context),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),

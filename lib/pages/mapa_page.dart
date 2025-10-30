@@ -4,7 +4,7 @@ import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
 import 'package:turisr/controller/locaiscontroller.dart';
 
 final appKey = GlobalKey();
@@ -50,16 +50,17 @@ class _MyHomePageState extends State<MapaPage> {
             builder: (context) {
               final local = context.watch<LocaisController>();
 
-              return GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(local.lat, local.long),
-                  zoom: 17,
-                ),
-                zoomControlsEnabled: true,
-                myLocationEnabled: true,
-                onMapCreated: local.onMapCreated,
-                markers: local.markers,
-              );
+              return Text('AAAA');
+              // GoogleMap(
+              //   initialCameraPosition: CameraPosition(
+              //     target: LatLng(local.lat, local.long),
+              //     zoom: 17,
+              //   ),
+              //   zoomControlsEnabled: true,
+              //   myLocationEnabled: true,
+              //   onMapCreated: local.onMapCreated,
+              //   markers: local.markers,
+              // );
             },
           ),
         ),

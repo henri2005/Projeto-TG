@@ -320,26 +320,32 @@ class _MyHomePageState extends State<LoginPage> {
                 Column(
                   spacing: 20,
                   children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 225, 225, 225),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 10,
-                        children: [
-                          Image.asset('assets/imagens/google.png', width: 45.0),
-                          Text(
-                            "Entrar com Google",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: GoogleFonts.ubuntu().fontFamily,
+                    TextButton(
+                      onPressed: () {},
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 225, 225, 225),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          spacing: 10,
+                          children: [
+                            Image.asset(
+                              'assets/imagens/google.png',
+                              width: 45.0,
                             ),
-                          ),
-                        ],
+                            Text(
+                              "Entrar com Google",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontFamily: GoogleFonts.ubuntu().fontFamily,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
 
