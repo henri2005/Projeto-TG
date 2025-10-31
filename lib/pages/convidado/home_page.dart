@@ -34,53 +34,6 @@ class _HomeConvidadoState extends State<HomeConvidado> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.9,
-                    height: MediaQuery.of(context).size.height * 0.08,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: Colors.black, width: 1.5),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 25),
-                          child: Icon(
-                            Icons.search,
-                            color: Colors.black,
-                            size: 35,
-                          ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 22.0,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            spacing: 10,
-                            children: [
-                              Text(
-                                "Pesquisar",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                ),
-                              ),
-                              Text(
-                                "Encontre os melhores destaques de São Roque",
-                                style: TextStyle(fontSize: 11),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
                     height: MediaQuery.of(context).size.height * 0.37,
                     padding: EdgeInsets.all(20),
                     margin: EdgeInsets.only(bottom: 10.0),
@@ -105,7 +58,7 @@ class _HomeConvidadoState extends State<HomeConvidado> {
                           style: TextStyle(fontSize: 25),
                         ),
                         Image.asset(
-                          'assets/imagens/carnaval.png',
+                          'assets/imagens/saoroque.jpg',
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height * 0.2,
                         ),

@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:turisr/_core/appcolors.dart';
-import 'package:turisr/_core/loading.dart';
 import 'package:turisr/_core/modal.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
@@ -25,6 +24,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
   RoteiroModel locaisRoteiro = RoteiroModel();
   bool _clicado = false;
   final dados = GetStorage();
+  final _formKey = GlobalKey<FormState>();
   final _controllerInicio = TextEditingController();
   final _controllerFim = TextEditingController();
 
@@ -68,7 +68,6 @@ class _RoteiroPageState extends State<RoteiroPage> {
 
   void montarRoteiro() async {
     try {
-      Loading.show(context, mensagem: 'Montando seu roteiro...');
       Dio dio = Dio(
         BaseOptions(
           connectTimeout: Duration(seconds: 10),
@@ -88,15 +87,13 @@ class _RoteiroPageState extends State<RoteiroPage> {
       print(data);
 
       if (response.statusCode == 201 || response.statusCode == 202) {
-        Loading.hide();
-        showModalConfirm(context, response.data['message']);
-        setState(() {});
+        setState(() {
+          locaisRoteiro.nome.shuffle();
+        });
       } else {
-        Loading.hide();
         showModalErro(context, response.data['message']);
       }
     } catch (e) {
-      Loading.hide;
       showModalErro(context, "Ocorreu um erro ${e.toString()}");
     }
   }
@@ -177,7 +174,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
 
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.95,
-                  height: MediaQuery.of(context).size.height * 0.21,
+                  height: MediaQuery.of(context).size.height * 0.25,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 16,
@@ -191,36 +188,44 @@ class _RoteiroPageState extends State<RoteiroPage> {
                         ),
                       ),
 
-                      TextFormField(
-                        keyboardType: TextInputType.datetime,
-                        controller: _controllerInicio,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Insira uma data de início!';
-                          }
-                          return null;
-                        },
-                      ),
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          spacing: 20,
+                          children: [
+                            TextFormField(
+                              keyboardType: TextInputType.datetime,
+                              controller: _controllerInicio,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Insira uma data de início!';
+                                }
+                                return null;
+                              },
+                            ),
 
-                      TextFormField(
-                        keyboardType: TextInputType.datetime,
-                        controller: _controllerFim,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(),
+                            TextFormField(
+                              keyboardType: TextInputType.datetime,
+                              controller: _controllerFim,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Insira uma data de fim!';
+                                }
+                                return null;
+                              },
+                            ),
+                          ],
                         ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Insira uma data de fim!';
-                          }
-                          return null;
-                        },
                       ),
                     ],
                   ),
@@ -300,8 +305,9 @@ class _RoteiroPageState extends State<RoteiroPage> {
                                   "Roteiro de Viagem de ${widget.usuarioLogado!.username}\n ${_controllerInicio.text} - ${_controllerFim.text}",
                                   style: TextStyle(
                                     fontFamily: GoogleFonts.ubuntu().fontFamily,
-                                    fontSize: 22,
+                                    fontSize: 20,
                                   ),
+                                  textAlign: TextAlign.center,
                                 ),
                                 ListView.builder(
                                   physics: NeverScrollableScrollPhysics(),
@@ -317,7 +323,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
                                         child: Text(
                                           local.nome[index],
                                           style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 14,
                                             fontFamily:
                                                 GoogleFonts.ubuntu().fontFamily,
                                           ),
@@ -376,10 +382,50 @@ class _RoteiroPageState extends State<RoteiroPage> {
                         ),
                         child: TextButton(
                           onPressed: () async {
-                            montarRoteiro();
-                            setState(() {
-                              _clicado = true;
-                            });
+                            if (_formKey.currentState!.validate()) {
+                              montarRoteiro();
+                              setState(() {
+                                _clicado = true;
+                              });
+                            } else {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (_) {
+                                  return Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                    ),
+                                    width: double.infinity,
+                                    height:
+                                        MediaQuery.of(context).size.height *
+                                        0.25,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.menuColor,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Você precisa informar uma data de início e fim da viagem!",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            }
                           },
                           child: Text(
                             "MONTAR ROTEIRO",

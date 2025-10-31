@@ -1,3 +1,4 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
@@ -24,17 +25,16 @@ class MapaConvidado extends StatelessWidget {
             builder: (context) {
               final local = context.watch<LocaisController>();
 
-              return Text('AAA');
-              // GoogleMap(
-              //   initialCameraPosition: CameraPosition(
-              //     target: LatLng(local.lat, local.long),
-              //     zoom: 17,
-              //   ),
-              //   zoomControlsEnabled: true,
-              //   myLocationEnabled: true,
-              //   onMapCreated: local.onMapCreated,
-              //   markers: local.markers,
-              // );
+              return GoogleMap(
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(local.lat, local.long),
+                  zoom: 17,
+                ),
+                zoomControlsEnabled: true,
+                myLocationEnabled: true,
+                onMapCreated: local.onMapCreated,
+                markers: local.markers,
+              );
             },
           ),
         ),

@@ -76,7 +76,10 @@ Drawer getDrawer({
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MapaPage()),
+                    MaterialPageRoute(
+                      builder:
+                          (context) => MapaPage(usuarioLogado: usuarioLogado),
+                    ),
                   );
                 },
                 child: Text(

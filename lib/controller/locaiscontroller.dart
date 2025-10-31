@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -11,6 +12,7 @@ class LocaisController extends ChangeNotifier {
   String erro = '';
   Set<Marker> markers = <Marker>{};
   late GoogleMapController _mapsController;
+  List<LocalModel> locais = [];
 
   // LocaisController() {
   //   _getPosicao();
@@ -24,105 +26,136 @@ class LocaisController extends ChangeNotifier {
     loadLocais();
   }
 
-  void loadLocais() {
-    List<LocalModel> locais = [];
-    locais.forEach((local) async {
-      markers.add(
-        Marker(
-          markerId: MarkerId(local.nome),
-          position: LatLng(
-            double.parse(local.latitude),
-            double.parse(local.longitude),
-          ),
-          onTap:
-              () => {
-                showModalBottomSheet(
-                  useSafeArea: true,
-                  context: appKey.currentState!.context,
-                  builder:
-                      (context) => Padding(
-                        padding: EdgeInsets.only(bottom: 70),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          height: MediaQuery.of(context).size.height * 0.35,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black,
-                                blurRadius: 2.0,
-                                offset: Offset(2, 3),
+  void loadLocais() async {
+    try {
+      Dio dio = Dio(
+        BaseOptions(
+          connectTimeout: Duration(seconds: 30),
+          receiveTimeout: Duration(seconds: 30),
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      final response = await dio.get('http://10.0.0.94/api_turismo/locais');
+      var data = response.data;
+
+      if (response.statusCode == 200) {
+        locais =
+            [data["locais"] as List]
+                .map(
+                  (local) =>
+                      LocalModel.fromJson(local as Map<dynamic, dynamic>),
+                )
+                .toList();
+        locais.forEach((local) async {
+          markers.add(
+            Marker(
+              markerId: MarkerId(local.nome),
+              position: LatLng(
+                double.parse(local.latitude),
+                double.parse(local.longitude),
+              ),
+              onTap:
+                  () => {
+                    showModalBottomSheet(
+                      useSafeArea: true,
+                      context: appKey.currentState!.context,
+                      builder:
+                          (context) => Padding(
+                            padding: EdgeInsets.only(bottom: 70),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              height: MediaQuery.of(context).size.height * 0.35,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: Colors.black),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black,
+                                    blurRadius: 2.0,
+                                    offset: Offset(2, 3),
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                            ],
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ListTile(
-                            title: Column(
-                              spacing: 10,
-                              children: [
-                                Text(
-                                  local.nome,
-                                  style: TextStyle(fontSize: 18),
-                                  textAlign: TextAlign.left,
-                                ),
-                                Image.asset(local.caminhoImagem, height: 150),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                              child: ListTile(
+                                title: Column(
+                                  spacing: 10,
                                   children: [
-                                    SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width *
-                                          0.4,
-                                      child: Text(
-                                        "${local.rua}, ${local.numero}",
-                                      ),
+                                    Text(
+                                      local.nome,
+                                      style: TextStyle(fontSize: 18),
+                                      textAlign: TextAlign.left,
                                     ),
-                                    TextButton(
-                                      onPressed: () {},
-                                      child: Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                            0.3,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                            0.08,
-                                        decoration: BoxDecoration(
-                                          color: AppColors.buttonColor,
-                                          borderRadius: BorderRadius.circular(
-                                            10,
+                                    Image.asset(
+                                      local.caminhoImagem,
+                                      height: 150,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          width:
+                                              MediaQuery.of(
+                                                context,
+                                              ).size.width *
+                                              0.4,
+                                          child: Text(
+                                            "${local.rua}, ${local.numero}",
                                           ),
                                         ),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              "Veja Mais",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18,
-                                              ),
+                                        TextButton(
+                                          onPressed: () {},
+                                          child: Container(
+                                            width:
+                                                MediaQuery.of(
+                                                  context,
+                                                ).size.width *
+                                                0.3,
+                                            height:
+                                                MediaQuery.of(
+                                                  context,
+                                                ).size.height *
+                                                0.08,
+                                            decoration: BoxDecoration(
+                                              color: AppColors.buttonColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
-                                          ],
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "Veja Mais",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 18,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                ),
-              },
-        ),
-      );
-    });
+                    ),
+                  },
+            ),
+          );
+        });
+      }
+    } catch (e) {}
+    notifyListeners();
   }
 
   Future<void> getPosicao() async {
