@@ -28,7 +28,7 @@ class _MyHomePageState extends State<PerfilPage> {
   FavoritosModel favoritos = FavoritosModel();
   UsuarioModel usuarioPerfil = UsuarioModel(
     idUsuario: '',
-    username: '',
+    email: '',
     senha: '',
   );
   String idUsuario = "";
@@ -49,7 +49,7 @@ class _MyHomePageState extends State<PerfilPage> {
       );
 
       final response = await dio.get(
-        'http://10.0.0.94/api_turismo/usuario/${widget.usuario!.username}',
+        'http://10.0.0.94/api_turismo/usuario/${widget.usuario!.email}',
       );
 
       var data = response.data;
@@ -106,7 +106,7 @@ class _MyHomePageState extends State<PerfilPage> {
   }
 
   void carregarFavoritos() async {
-    print(widget.usuario!.username);
+    print(widget.usuario!.email);
     try {
       Dio dio = Dio(
         BaseOptions(
@@ -118,7 +118,7 @@ class _MyHomePageState extends State<PerfilPage> {
       );
 
       final response = await dio.get(
-        "http://10.0.0.94/api_turismo/favoritos/${widget.usuario!.username}",
+        "http://10.0.0.94/api_turismo/favoritos/${widget.usuario!.email}",
       );
       var data = response.data;
 
@@ -265,7 +265,7 @@ class _MyHomePageState extends State<PerfilPage> {
                       child: Icon(Icons.person, size: 80),
                     ),
                     Text(
-                      "${widget.usuario!.username}",
+                      "${widget.usuario!.email}",
                       style: TextStyle(
                         fontSize: 20,
                         fontFamily: GoogleFonts.ubuntu().fontFamily,

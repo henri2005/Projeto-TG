@@ -3,7 +3,7 @@ import 'package:turisr/classes/local_model.dart';
 class UsuarioModel {
   String? idUsuario;
   String? nome;
-  String? username;
+  String? email;
   String? senha;
   String? estatus;
   String? tipoTurismo;
@@ -12,14 +12,14 @@ class UsuarioModel {
 
   UsuarioModel({
     required this.idUsuario,
-    required this.username,
+    required this.email,
     required this.senha,
   });
 
   UsuarioModel.fromJson(Map<String, dynamic> json) {
     idUsuario = json['id_usuario'];
     nome = json['nome'];
-    username = json['username'];
+    email = json['email'];
     senha = json['senha'];
     estatus = json['estatus'];
     tipoTurismo = json['tipo_turismo'];
@@ -30,7 +30,7 @@ class UsuarioModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id_usuario'] = idUsuario;
     data['nome'] = nome;
-    data['username'] = username;
+    data['email'] = email;
     data['senha'] = senha;
     data['estatus'] = estatus;
     data['tipo_turismo'] = tipoTurismo;

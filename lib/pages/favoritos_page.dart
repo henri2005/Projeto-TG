@@ -26,7 +26,7 @@ class _MyHomePageState extends State<FavoritosPage> {
   String erro = "";
 
   void carregarFavoritos() async {
-    print(widget.usuarioLogado!.username);
+    print(widget.usuarioLogado!.email);
     try {
       Dio dio = Dio(
         BaseOptions(
@@ -38,7 +38,7 @@ class _MyHomePageState extends State<FavoritosPage> {
       );
 
       final response = await dio.get(
-        "http://10.0.0.94/api_turismo/favoritos/${widget.usuarioLogado!.username}",
+        "http://10.0.0.94/api_turismo/favoritos/${widget.usuarioLogado!.email}",
       );
       var data = response.data;
 
@@ -84,7 +84,7 @@ class _MyHomePageState extends State<FavoritosPage> {
       final dados = FormData.fromMap({
         'favoritos':
             "${favoritos.id}, ${favoritos.nome}, ${favoritos.caminhoImagem}, ${favoritos.rua}",
-        'username': widget.usuarioLogado!.username,
+        'email': widget.usuarioLogado!.email,
       });
       print(dados);
 

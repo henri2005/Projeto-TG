@@ -56,15 +56,8 @@ class _MyHomePageState extends State<PerfilSobrePage> {
                         ? DarkColors.backgroundColor
                         : AppColors.backgroundColor,
                 border: Border(
-                  bottom: BorderSide(color: Colors.black, width: 3),
+                  bottom: BorderSide(color: Colors.black, width: 5),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black45,
-                    spreadRadius: 2,
-                    offset: Offset(0, 3),
-                  ),
-                ],
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,

@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       );
 
       final response = await dio.get(
-        'http://10.0.0.94/api_turismo/usuario/${widget.usuarioLogado!.username}',
+        'http://10.0.0.94/api_turismo/usuario/${widget.usuarioLogado!.email}',
       );
     } catch (e) {
       Loading.hide();

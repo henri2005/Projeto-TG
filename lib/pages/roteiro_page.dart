@@ -42,7 +42,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
       );
 
       final response = await dio.get(
-        'http://10.0.0.94/api_turismo/roteiro/${widget.usuarioLogado!.username}',
+        'http://10.0.0.94/api_turismo/roteiro/${widget.usuarioLogado!.email}',
       );
       var data = response.data;
 
@@ -80,7 +80,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
       );
 
       final response = await dio.get(
-        'http://10.0.0.94/api_turismo/roteiro/gerar/${widget.usuarioLogado!.username}',
+        'http://10.0.0.94/api_turismo/roteiro/gerar/${widget.usuarioLogado!.email}',
       );
 
       var data = response.data;
@@ -302,7 +302,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
                             child: Column(
                               children: [
                                 Text(
-                                  "Roteiro de Viagem de ${widget.usuarioLogado!.username}\n ${_controllerInicio.text} - ${_controllerFim.text}",
+                                  "Roteiro de Viagem de ${widget.usuarioLogado!.email}\n ${_controllerInicio.text} - ${_controllerFim.text}",
                                   style: TextStyle(
                                     fontFamily: GoogleFonts.ubuntu().fontFamily,
                                     fontSize: 20,

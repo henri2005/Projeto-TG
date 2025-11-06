@@ -10,6 +10,7 @@ import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:turisr/classes/local_model.dart';
 import 'package:turisr/classes/servico_model.dart';
 import 'package:turisr/classes/usuario_model.dart';
+import 'package:turisr/controller/estabelecimento.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EstabelecimentoScreen extends StatefulWidget {
@@ -18,10 +19,12 @@ class EstabelecimentoScreen extends StatefulWidget {
     required this.estabelecimento,
     this.servicos,
     this.usuarioLogado,
+    this.local,
   });
   final LocalModel estabelecimento;
   final ServicoModel? servicos;
   final UsuarioModel? usuarioLogado;
+  final Estabelecimento? local;
 
   @override
   State<EstabelecimentoScreen> createState() => _MyHomePageState();
@@ -58,7 +61,7 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
       );
 
       final response = await dio.get(
-        'http://10.0.0.94/api_turismo/usuario/${widget.usuarioLogado!.username}',
+        'http://10.0.0.94/api_turismo/usuario/${widget.usuarioLogado!.email}',
       );
     } catch (e) {
       Loading.hide();
@@ -110,7 +113,7 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
       final dados = FormData.fromMap({
         'favoritos':
             "${widget.estabelecimento.nome}, ${widget.estabelecimento.caminhoImagem}, ${widget.estabelecimento.rua}",
-        'username': widget.usuarioLogado!.username,
+        'email': widget.usuarioLogado!.email,
       });
 
       final response = await dio.post(
@@ -149,7 +152,7 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
       final dados = FormData.fromMap({
         'roteiro':
             "${widget.estabelecimento.nome}, ${widget.estabelecimento.rua}",
-        'username': widget.usuarioLogado!.username,
+        'email': widget.usuarioLogado!.email,
       });
 
       final response = await dio.post(

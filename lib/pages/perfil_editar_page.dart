@@ -22,7 +22,7 @@ class _MyHomePageState extends State<PerfilEditarPage> {
   final _formKey = GlobalKey<FormState>();
   UsuarioModel usuarioPerfil = UsuarioModel(
     idUsuario: '',
-    username: '',
+    email: '',
     senha: '',
   );
   var idUsuario = "";
@@ -41,7 +41,7 @@ class _MyHomePageState extends State<PerfilEditarPage> {
       );
 
       final response = await dio.get(
-        'http://10.0.0.94/api_turismo/usuario/${widget.usuario!.username}',
+        'http://10.0.0.94/api_turismo/usuario/${widget.usuario!.email}',
       );
 
       var data = response.data;

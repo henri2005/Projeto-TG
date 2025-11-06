@@ -58,7 +58,7 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
       );
 
       final response = await dio.get(
-        'http://10.0.0.94/api_turismo/usuario/${widget.usuarioLogado!.username}',
+        'http://10.0.0.94/api_turismo/usuario/${widget.usuarioLogado!.email}',
       );
     } catch (e) {
       Loading.hide();
@@ -110,7 +110,7 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
       final dados = FormData.fromMap({
         'favoritos':
             "${widget.ponto.nome}, ${widget.ponto.caminhoImagem} ${widget.ponto.rua}",
-        'username': widget.usuarioLogado!.username,
+        'email': widget.usuarioLogado!.email,
       });
       print(dados);
 
@@ -149,7 +149,7 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
       );
       final dados = FormData.fromMap({
         'roteiro': "${widget.ponto.nome}, ${widget.ponto.rua}",
-        'username': widget.usuarioLogado!.username,
+        'email': widget.usuarioLogado!.email,
       });
       print(dados);
 

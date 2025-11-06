@@ -26,7 +26,7 @@ class _MyHomePageState extends State<LoginPage> {
   String? nomeUsuario;
   UsuarioModel usuarioLogado = UsuarioModel(
     idUsuario: '',
-    username: '',
+    email: '',
     senha: '',
   );
   bool? _salvarDados = false;
@@ -47,7 +47,7 @@ class _MyHomePageState extends State<LoginPage> {
       );
 
       final dadosLogin = FormData.fromMap({
-        'usuario': _controllerUser.text,
+        'email': _controllerUser.text,
         'senha': _controllerSenha.text,
       });
 
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<LoginPage> {
       );
 
       if (response.statusCode == 202) {
-        usuarioLogado.username = _controllerUser.text;
+        usuarioLogado.email = _controllerUser.text;
         usuarioLogado.senha = _controllerSenha.text;
         Loading.hide();
         Navigator.push(
@@ -122,7 +122,7 @@ class _MyHomePageState extends State<LoginPage> {
                             vertical: 15,
                             horizontal: 20,
                           ),
-                          labelText: 'Usuário',
+                          labelText: 'Email',
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(),
@@ -130,7 +130,7 @@ class _MyHomePageState extends State<LoginPage> {
                         style: Theme.of(context).textTheme.bodyMedium,
                         validator: (value) {
                           if (value!.isEmpty || value == '') {
-                            return 'Você deve preencher seu nome de usuário!';
+                            return 'Você deve preencher seu email!';
                           }
 
                           return null;
