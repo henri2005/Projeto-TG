@@ -406,33 +406,36 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return AlertDialog(
-                                    elevation: 6,
-                                    title: Row(
-                                      children: List.generate(5, (index) {
-                                        return TextButton(
-                                          onPressed: () {
-                                            if (estrelas == Icons.star_border) {
-                                              setState(() {
-                                                estrelas = Icons.star;
-                                                corEstrelas = Colors.yellow;
-                                                avaliacaoApp = index;
-                                              });
-                                            } else {
-                                              setState(() {
-                                                estrelas = Icons.star_border;
-                                                corEstrelas = Colors.grey;
-                                                avaliacaoApp = 0;
-                                              });
-                                            }
-                                          },
-                                          child: Icon(
-                                            estrelas,
-                                            color: corEstrelas,
-                                            size: 25,
-                                          ),
-                                        );
-                                      }),
+                                  return Container(
+                                    child: AlertDialog(
+                                      elevation: 6,
+                                      title: Row(
+                                        children: List.generate(5, (index) {
+                                          return TextButton(
+                                            onPressed: () {
+                                              if (estrelas ==
+                                                  Icons.star_border) {
+                                                setState(() {
+                                                  estrelas = Icons.star;
+                                                  corEstrelas = Colors.yellow;
+                                                  avaliacaoApp = index;
+                                                });
+                                              } else {
+                                                setState(() {
+                                                  estrelas = Icons.star_border;
+                                                  corEstrelas = Colors.grey;
+                                                  avaliacaoApp = 0;
+                                                });
+                                              }
+                                            },
+                                            child: Icon(
+                                              estrelas,
+                                              color: corEstrelas,
+                                              size: 25,
+                                            ),
+                                          );
+                                        }),
+                                      ),
                                     ),
                                   );
                                 },

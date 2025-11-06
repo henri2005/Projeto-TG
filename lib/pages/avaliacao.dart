@@ -48,6 +48,7 @@ class _MyHomePageState extends State<AvaliacaoPage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             spacing: 30,
             children: [
               Text(

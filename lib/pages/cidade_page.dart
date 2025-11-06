@@ -127,8 +127,10 @@ class _MyHomePageState extends State<CidadePage> {
                                     context,
                                     MaterialPageRoute(
                                       builder:
-                                          (context) =>
-                                              EstabelecimentosPage(title: ''),
+                                          (context) => EstabelecimentosPage(
+                                            title: '',
+                                            usuarioLogado: widget.usuario,
+                                          ),
                                     ),
                                   );
                                 },

@@ -58,7 +58,6 @@ class _MyHomePageState extends State<FavoritosPage> {
           print('API retornou como List');
         }
       } else {
-        showModalErro(context, data['message']);
         erro = data['message'];
       }
     } catch (e) {
@@ -117,6 +116,7 @@ class _MyHomePageState extends State<FavoritosPage> {
     isdark = box.read(temaEscuro) ?? false;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       carregarFavoritos();
+      setState(() {});
     });
   }
 
@@ -140,9 +140,7 @@ class _MyHomePageState extends State<FavoritosPage> {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              var local = favoritos;
-
-              if (favoritos.nome == null || favoritos.nome.isEmpty) {
+              if (favoritos.nome.isEmpty) {
                 return Container(
                   height: MediaQuery.of(context).size.height * 0.4,
                   margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -154,6 +152,7 @@ class _MyHomePageState extends State<FavoritosPage> {
                   child: Text(erro),
                 );
               } else {
+                var local = favoritos;
                 return Container(
                   height: MediaQuery.of(context).size.height * 0.4,
                   margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
