@@ -119,7 +119,7 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
         data: dados,
       );
 
-      if (response.statusCode == 202) {
+      if (response.statusCode == 200) {
         Loading.hide();
         showModalConfirm(context, response.data['message']);
         setState(() {});
@@ -158,7 +158,7 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
         data: dados,
       );
 
-      if (response.statusCode == 202) {
+      if (response.statusCode == 200) {
         Loading.hide();
         showModalConfirm(context, response.data['message']);
         setState(() {});

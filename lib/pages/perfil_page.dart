@@ -32,6 +32,7 @@ class _MyHomePageState extends State<PerfilPage> {
     senha: '',
   );
   String idUsuario = "";
+  String nomeUsuario = "";
 
   void carregarInfoUsuarios() async {
     try {
@@ -54,8 +55,10 @@ class _MyHomePageState extends State<PerfilPage> {
 
       var data = response.data;
       var id = data["usuario"]["id_usuario"];
-      print(id);
+      var nome = data["usuario"]["nome"];
+      print("$id - $nome");
       idUsuario = id;
+      nomeUsuario = nome;
 
       if (response.statusCode == 200) {
         Loading.hide();
@@ -64,8 +67,8 @@ class _MyHomePageState extends State<PerfilPage> {
           final dataMap = data as Map<String, dynamic>;
           usuarioPerfil = UsuarioModel.fromJson(dataMap["usuario"]);
           carregarFavoritos();
-          setState(() {});
         }
+        setState(() {});
       } else {
         showModalErro(context, data["message"]);
       }
@@ -94,7 +97,7 @@ class _MyHomePageState extends State<PerfilPage> {
       var data = response.data;
       print(data);
 
-      if (response.statusCode == 202) {
+      if (response.statusCode == 200) {
         Loading.hide();
         Navigator.popUntil(context, (context) => context.isFirst);
       } else {
@@ -106,7 +109,6 @@ class _MyHomePageState extends State<PerfilPage> {
   }
 
   void carregarFavoritos() async {
-    print(widget.usuario!.email);
     try {
       Dio dio = Dio(
         BaseOptions(
@@ -265,7 +267,7 @@ class _MyHomePageState extends State<PerfilPage> {
                       child: Icon(Icons.person, size: 80),
                     ),
                     Text(
-                      "${widget.usuario!.email}",
+                      nomeUsuario,
                       style: TextStyle(
                         fontSize: 20,
                         fontFamily: GoogleFonts.ubuntu().fontFamily,
@@ -277,16 +279,15 @@ class _MyHomePageState extends State<PerfilPage> {
 
                 TextButton(
                   onPressed: () async {
-                    var retorno = await Navigator.push(
-                      context,
+                    var retorno = await Navigator.of(context).push(
                       MaterialPageRoute(
                         builder:
                             (context) =>
-                                PerfilEditarPage(usuario: widget.usuario!),
+                                PerfilEditarPage(usuario: widget.usuario),
                       ),
                     );
 
-                    if (retorno != null && retorno == true) {
+                    if (retorno == true && retorno != null) {
                       carregarInfoUsuarios();
                     }
                   },

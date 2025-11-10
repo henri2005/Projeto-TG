@@ -23,7 +23,7 @@ class FavoritosPage extends StatefulWidget {
 
 class _MyHomePageState extends State<FavoritosPage> {
   FavoritosModel favoritos = FavoritosModel();
-  String erro = "";
+  Widget? erro;
 
   void carregarFavoritos() async {
     print(widget.usuarioLogado!.email);
@@ -57,8 +57,16 @@ class _MyHomePageState extends State<FavoritosPage> {
         } else if (data is List) {
           print('API retornou como List');
         }
-      } else {
-        erro = data['message'];
+      } else if (response.statusCode == 404) {
+        setState(() {
+          erro = Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text("Nenhum favorito encontrado!"),
+          );
+        });
       }
     } catch (e) {
       showModalErro(context, "Erro ao carregar favoritos!, ${e.toString()}");
@@ -141,16 +149,7 @@ class _MyHomePageState extends State<FavoritosPage> {
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               if (favoritos.nome.isEmpty) {
-                return Container(
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 24),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(erro),
-                );
+                return erro;
               } else {
                 var local = favoritos;
                 return Container(

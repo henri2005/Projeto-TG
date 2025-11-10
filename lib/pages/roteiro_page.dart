@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:turisr/_core/appcolors.dart';
@@ -78,6 +80,21 @@ class _RoteiroPageState extends State<RoteiroPage> {
           },
         ),
       );
+
+      final gemini = Gemini.instance
+          .promptStream(
+            parts: [
+              Part.text(
+                'Forme um roteiro de viagem com base nos locais adicionados nessa tela e para os dias informados pelo usuário.',
+              ),
+            ],
+          )
+          .listen((value) {
+            print('Received Gemini response: $value');
+          })
+          .onError((e) {
+            log('exception', error: e);
+          });
 
       final response = await dio.get(
         'http://10.0.0.94/api_turismo/roteiro/gerar/${widget.usuarioLogado!.email}',

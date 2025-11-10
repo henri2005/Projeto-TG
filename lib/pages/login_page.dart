@@ -31,6 +31,7 @@ class _MyHomePageState extends State<LoginPage> {
   );
   bool? _salvarDados = false;
   final dados = GetStorage();
+  Color corbotao = AppColors.buttonColor;
 
   void loginUsuario() async {
     try {
@@ -56,7 +57,7 @@ class _MyHomePageState extends State<LoginPage> {
         data: dadosLogin,
       );
 
-      if (response.statusCode == 202) {
+      if (response.statusCode == 200) {
         usuarioLogado.email = _controllerUser.text;
         usuarioLogado.senha = _controllerSenha.text;
         Loading.hide();
@@ -297,7 +298,7 @@ class _MyHomePageState extends State<LoginPage> {
                     width: MediaQuery.of(context).size.width * 0.8,
                     height: MediaQuery.of(context).size.height * 0.09,
                     decoration: BoxDecoration(
-                      color: AppColors.buttonColor,
+                      color: corbotao,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Column(

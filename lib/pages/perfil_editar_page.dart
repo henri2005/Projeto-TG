@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:turisr/_core/appcolors.dart';
+import 'package:turisr/_core/loading.dart';
 import 'package:turisr/_core/modal.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
@@ -26,6 +27,7 @@ class _MyHomePageState extends State<PerfilEditarPage> {
     senha: '',
   );
   var idUsuario = "";
+  final dados = GetStorage();
 
   void carregarInfoUsuarios() async {
     try {
@@ -65,11 +67,12 @@ class _MyHomePageState extends State<PerfilEditarPage> {
 
   Future editaUsuario() async {
     try {
+      Loading.show(context, mensagem: 'Atualizando usuário...');
       Dio dio = Dio(
         BaseOptions(
           connectTimeout: Duration(seconds: 30),
-          sendTimeout: Duration(seconds: 30),
           receiveTimeout: Duration(seconds: 30),
+          contentType: Headers.formUrlEncodedContentType,
           validateStatus: (status) {
             return status! < 500;
           },
@@ -78,23 +81,24 @@ class _MyHomePageState extends State<PerfilEditarPage> {
 
       // inserção dos dados do usuário
       final dados =
-          'usuario=${_controllerUser.text}&senha=${_controllerSenha.text}';
+          'email=${_controllerUser.text}&senha=${_controllerSenha.text}&id=$idUsuario';
 
       final response = await dio.put(
-        'http://10.0.0.94/api_turismo/usuarios/$idUsuario',
+        'http://10.0.0.94/api_turismo/usuarios',
         data: dados,
       );
-      var dataEdicao = response.data;
-      print(dataEdicao);
 
-      if (response.statusCode == 202) {
-        showModalConfirm(context, 'Usuário atualizado com sucesso!');
+      if (response.statusCode == 200) {
+        Loading.hide();
         Navigator.pop(context, true);
-      } else {
-        showModalErro(context, dataEdicao['message']);
+        setState(() {});
+        return;
       }
+      Loading.hide();
+      showModalErro(context, 'Erro ao atualizar usuário!');
     } catch (e) {
-      print(e);
+      Loading.hide();
+      showModalErro(context, e.toString());
     }
   }
 
@@ -106,6 +110,8 @@ class _MyHomePageState extends State<PerfilEditarPage> {
   void initState() {
     super.initState();
     isdark = box.read(temaEscuro) ?? false;
+    print(dados.read('Usuario'));
+    print(dados.read('Senha'));
     WidgetsBinding.instance.addPostFrameCallback((_) {
       carregarInfoUsuarios();
     });
@@ -166,6 +172,7 @@ class _MyHomePageState extends State<PerfilEditarPage> {
                   children: [
                     TextFormField(
                       controller: _controllerUser,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
@@ -181,6 +188,8 @@ class _MyHomePageState extends State<PerfilEditarPage> {
                     ),
                     TextFormField(
                       controller: _controllerSenha,
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
@@ -202,6 +211,9 @@ class _MyHomePageState extends State<PerfilEditarPage> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     editaUsuario();
+                    dados.write('Usuario', _controllerUser.text);
+                    dados.write('Senha', _controllerSenha.text);
+                    // Navigator.pop(context, true);
                   }
                 },
                 child: Container(
