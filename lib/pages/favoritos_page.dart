@@ -7,10 +7,12 @@ import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/loading.dart';
 import 'package:turisr/_core/modal.dart';
 import 'package:turisr/_core/widgets/appbar.dart';
+import 'package:turisr/_core/widgets/botoes.dart';
 import 'package:turisr/_core/widgets/bottombar.dart';
 import 'package:flutter/material.dart';
 import 'package:turisr/classes/favoritos_model.dart';
 import 'package:turisr/classes/usuario_model.dart';
+import 'package:turisr/pages/estabelecimentos_page.dart';
 
 class FavoritosPage extends StatefulWidget {
   const FavoritosPage({super.key, this.usuarioLogado});
@@ -144,76 +146,130 @@ class _MyHomePageState extends State<FavoritosPage> {
           isdark ? DarkColors.backgroundColor : AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Center(
-          child: ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              if (favoritos.nome.isEmpty) {
-                return erro;
-              } else {
-                var local = favoritos;
-                return Container(
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 24),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ListTile(
-                    title: Padding(
-                      padding: const EdgeInsets.only(bottom: 13.0),
-                      child: Text(
-                        local.nome[index],
-                        style: TextStyle(
-                          fontFamily: GoogleFonts.ubuntu().fontFamily,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                    subtitle: Column(
-                      spacing: 15,
-                      children: [
-                        Image.asset(local.caminhoImagem[index], scale: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              local.rua[index],
-                              style: TextStyle(
-                                fontFamily: GoogleFonts.ubuntu().fontFamily,
-                                fontSize: 18,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () async {
-                                // desfavoritar();
-                                local.id.removeAt(index);
-                                local.nome.removeAt(index);
-                                local.caminhoImagem.removeAt(index);
-                                local.rua.removeAt(index);
-                                setState(() {});
-                              },
-                              icon: Icon(Icons.favorite, size: 40),
-                            ),
-                          ],
+          child:
+              (favoritos.nome.isEmpty || favoritos.nome == null)
+                  ? Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    padding: EdgeInsets.all(10),
+                    margin: EdgeInsets.only(top: 160),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.black, width: 2),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color.fromARGB(255, 95, 95, 95),
+                          blurRadius: 2,
+                          offset: Offset(0, 3),
                         ),
                       ],
                     ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      spacing: 20,
+                      children: [
+                        Icon(Icons.cancel, color: Colors.red, size: 60),
+                        Text(
+                          'Não há nenhum local adicionado aos favoritos!',
+                          style: TextStyle(
+                            fontFamily: GoogleFonts.ubuntu().fontFamily,
+                            fontSize: 18,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Botao(
+                          texto: 'Explorar',
+                          pagina: EstabelecimentosPage(
+                            title: '',
+                            usuarioLogado: widget.usuarioLogado,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                  : ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      if (favoritos.nome.isEmpty) {
+                        return erro;
+                      } else {
+                        var local = favoritos;
+                        return Container(
+                          height: MediaQuery.of(context).size.height * 0.4,
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 10,
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 24,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: ListTile(
+                            title: Padding(
+                              padding: const EdgeInsets.only(bottom: 13.0),
+                              child: Text(
+                                local.nome[index],
+                                style: TextStyle(
+                                  fontFamily: GoogleFonts.ubuntu().fontFamily,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                            subtitle: Column(
+                              spacing: 15,
+                              children: [
+                                Image.asset(
+                                  local.caminhoImagem[index],
+                                  scale: 8,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      local.rua[index],
+                                      style: TextStyle(
+                                        fontFamily:
+                                            GoogleFonts.ubuntu().fontFamily,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () async {
+                                        // desfavoritar();
+                                        local.id.removeAt(index);
+                                        local.nome.removeAt(index);
+                                        local.caminhoImagem.removeAt(index);
+                                        local.rua.removeAt(index);
+                                        setState(() {});
+                                      },
+                                      icon: Icon(Icons.favorite, size: 40),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                    itemCount: favoritos.nome.length,
                   ),
-                );
-              }
-            },
-            itemCount: favoritos.nome.length,
-          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          carregarFavoritos();
-        },
-        child: Icon(Icons.refresh),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     carregarFavoritos();
+      //   },
+      //   child: Icon(Icons.refresh),
+      // ),
       bottomNavigationBar: getBottomBar(
         context: context,
         usuarioLogado: widget.usuarioLogado,

@@ -482,9 +482,13 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
                   height: MediaQuery.of(context).size.height * 0.08,
                   decoration: BoxDecoration(
                     color:
-                        isAdicionado
-                            ? AppColors.menuColor
-                            : AppColors.buttonColor,
+                        isdark
+                            ? (isAdicionado
+                                ? DarkColors.menuColor
+                                : DarkColors.buttonColor)
+                            : (isAdicionado
+                                ? AppColors.menuColor
+                                : AppColors.buttonColor),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextButton(
@@ -513,7 +517,7 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
       bottomNavigationBar: getBottomBar(
         context: context,
         usuarioLogado: widget.usuarioLogado,
-        bottomColor: AppColors.mainColor,
+        bottomColor: isdark ? DarkColors.mainColor : AppColors.mainColor,
       ),
     );
   }

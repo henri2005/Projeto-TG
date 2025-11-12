@@ -69,8 +69,6 @@ class _MyHomePageState extends State<PerfilPage> {
           carregarFavoritos();
         }
         setState(() {});
-      } else {
-        showModalErro(context, data["message"]);
       }
     } catch (e) {
       showModalErro(context, e.toString());
@@ -139,8 +137,6 @@ class _MyHomePageState extends State<PerfilPage> {
         } else if (data is List) {
           print('API retornou como List');
         }
-      } else {
-        showModalErro(context, data['message']);
       }
     } catch (e) {
       showModalErro(context, "Erro ao carregar favoritos!, ${e.toString()}");
@@ -209,7 +205,7 @@ class _MyHomePageState extends State<PerfilPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           spacing: 10,
                           children: [
-                            Icon(Icons.delete, size: 28),
+                            Icon(Icons.delete, size: 28, color: Colors.black),
                             Text(
                               "Excluir",
                               style: TextStyle(
@@ -244,7 +240,11 @@ class _MyHomePageState extends State<PerfilPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           spacing: 10,
                           children: [
-                            Icon(Icons.exit_to_app, size: 28),
+                            Icon(
+                              Icons.exit_to_app,
+                              size: 28,
+                              color: Colors.black,
+                            ),
                             Text(
                               "Sair",
                               style: TextStyle(
@@ -261,15 +261,17 @@ class _MyHomePageState extends State<PerfilPage> {
                 ),
 
                 Column(
+                  spacing: 20,
                   children: [
                     CircleAvatar(
                       radius: 80,
+                      foregroundColor: Colors.red,
                       child: Icon(Icons.person, size: 80),
                     ),
                     Text(
                       nomeUsuario,
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 22,
                         fontFamily: GoogleFonts.ubuntu().fontFamily,
                         color: isdark ? Colors.white : Colors.black,
                       ),
@@ -304,7 +306,7 @@ class _MyHomePageState extends State<PerfilPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       spacing: 10,
                       children: [
-                        Icon(Icons.edit, size: 28),
+                        Icon(Icons.edit, size: 28, color: Colors.black),
                         Text(
                           "Editar",
                           style: TextStyle(
@@ -334,38 +336,66 @@ class _MyHomePageState extends State<PerfilPage> {
                         ),
                       ),
 
-                      ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          var local = favoritos;
-
-                          return ListTile(
-                            title: Container(
-                              height: MediaQuery.of(context).size.height * 0.1,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    local.nome[index],
-                                    style: TextStyle(
-                                      fontSize: 22,
-                                      fontFamily:
-                                          GoogleFonts.ubuntu().fontFamily,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                      (favoritos.nome.isEmpty || favoritos.nome == null)
+                          ? Container(
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            height: MediaQuery.of(context).size.height * 0.15,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.black, width: 2),
                             ),
-                          );
-                        },
-                        itemCount: favoritos.nome.length,
-                      ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              spacing: 20,
+                              children: [
+                                Text(
+                                  'Não há nenhum local adicionado aos favoritos!',
+                                  style: TextStyle(
+                                    fontFamily: GoogleFonts.ubuntu().fontFamily,
+                                    fontSize: 18,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          )
+                          : ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              var local = favoritos;
+
+                              return ListTile(
+                                title: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.1,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(7),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        local.nome[index],
+                                        style: TextStyle(
+                                          fontSize: 22,
+                                          fontFamily:
+                                              GoogleFonts.ubuntu().fontFamily,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            itemCount: favoritos.nome.length,
+                          ),
                     ],
                   ),
                 ),

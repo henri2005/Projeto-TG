@@ -262,38 +262,66 @@ class _RoteiroPageState extends State<RoteiroPage> {
                         ),
                       ),
 
-                      ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          var local = locaisRoteiro;
-
-                          return ListTile(
-                            title: Container(
-                              height: MediaQuery.of(context).size.height * 0.1,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    local.nome[index],
-                                    style: TextStyle(
-                                      fontSize: 22,
-                                      fontFamily:
-                                          GoogleFonts.ubuntu().fontFamily,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                      (locaisRoteiro.nome.isEmpty || locaisRoteiro.nome == null)
+                          ? Container(
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            height: MediaQuery.of(context).size.height * 0.15,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.black, width: 2),
                             ),
-                          );
-                        },
-                        itemCount: locaisRoteiro.nome.length,
-                      ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              spacing: 20,
+                              children: [
+                                Text(
+                                  'Não há nenhum local adicionado ao roteiro!',
+                                  style: TextStyle(
+                                    fontFamily: GoogleFonts.ubuntu().fontFamily,
+                                    fontSize: 18,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          )
+                          : ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              var local = locaisRoteiro;
+
+                              return ListTile(
+                                title: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.1,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(7),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        local.nome[index],
+                                        style: TextStyle(
+                                          fontSize: 22,
+                                          fontFamily:
+                                              GoogleFonts.ubuntu().fontFamily,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            itemCount: locaisRoteiro.nome.length,
+                          ),
                     ],
                   ),
                 ),
