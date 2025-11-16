@@ -76,6 +76,7 @@ class _MyHomePageState extends State<LoginPage> {
       }
     } catch (e) {
       Loading.hide();
+      showModalErro(context, 'Erro ao conectar ao servidor.');
     }
   }
 

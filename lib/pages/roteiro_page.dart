@@ -29,6 +29,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
   final _formKey = GlobalKey<FormState>();
   final _controllerInicio = TextEditingController();
   final _controllerFim = TextEditingController();
+  String nomeUsuario = "";
 
   void carregarLocaisRoteiro() async {
     try {
@@ -46,7 +47,16 @@ class _RoteiroPageState extends State<RoteiroPage> {
       final response = await dio.get(
         'http://10.0.0.94/api_turismo/roteiro/${widget.usuarioLogado!.email}',
       );
+
+      final response2 = await dio.get(
+        'http://10.0.0.94/api_turismo/usuario/${widget.usuarioLogado!.email}',
+      );
+
       var data = response.data;
+      var data2 = response2.data;
+      var nome = data2["usuario"]["nome"];
+      nomeUsuario = nome;
+      print(nomeUsuario);
 
       if (response.statusCode == 200) {
         if (data is String) {
@@ -161,7 +171,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.25,
+                  height: MediaQuery.of(context).size.height * 0.22,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black),
                     borderRadius: BorderRadius.circular(20),
@@ -179,7 +189,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
                         ),
                       ),
                       Text(
-                        "Nossa IA vai te ajudar! Ela vai agrupar e juntar os seus pontos favoritos em um roteiro de viagem único para você, tornando a sua passagem em São Roque inesquecível!",
+                        "Junte os seus pontos favoritos em um roteiro de viagem único para você, tornando a sua passagem em São Roque inesquecível!",
                         style: TextStyle(
                           fontSize: 17,
                           fontFamily: GoogleFonts.ubuntu().fontFamily,
@@ -298,6 +308,7 @@ class _RoteiroPageState extends State<RoteiroPage> {
                                 title: Container(
                                   height:
                                       MediaQuery.of(context).size.height * 0.1,
+
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(7),
@@ -343,11 +354,12 @@ class _RoteiroPageState extends State<RoteiroPage> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.black, width: 2),
                             ),
                             child: Column(
                               children: [
                                 Text(
-                                  "Roteiro de Viagem de ${widget.usuarioLogado!.email}\n ${_controllerInicio.text} - ${_controllerFim.text}",
+                                  "Roteiro de Viagem de $nomeUsuario\n ${_controllerInicio.text} - ${_controllerFim.text}",
                                   style: TextStyle(
                                     fontFamily: GoogleFonts.ubuntu().fontFamily,
                                     fontSize: 20,
@@ -361,10 +373,12 @@ class _RoteiroPageState extends State<RoteiroPage> {
                                     var local = locaisRoteiro;
 
                                     return ListTile(
-                                      title: SizedBox(
+                                      title: Container(
                                         height:
                                             MediaQuery.of(context).size.height *
                                             0.05,
+                                        padding: EdgeInsets.only(top: 10),
+
                                         child: Text(
                                           local.nome[index],
                                           style: TextStyle(
@@ -433,42 +447,19 @@ class _RoteiroPageState extends State<RoteiroPage> {
                                 _clicado = true;
                               });
                             } else {
-                              showModalBottomSheet(
-                                context: context,
-                                builder: (_) {
-                                  return Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 8,
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.red,
+                                  content: Text(
+                                    "Você deve preencher uma data de início e fim da viagem",
+                                    style: TextStyle(
+                                      fontFamily:
+                                          GoogleFonts.ubuntu().fontFamily,
+                                      fontSize: 18,
                                     ),
-                                    width: double.infinity,
-                                    height:
-                                        MediaQuery.of(context).size.height *
-                                        0.25,
-                                    decoration: BoxDecoration(
-                                      color: AppColors.menuColor,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(20),
-                                        topRight: Radius.circular(20),
-                                      ),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Você precisa informar uma data de início e fim da viagem!",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
                               );
                             }
                           },

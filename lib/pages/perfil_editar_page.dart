@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:turisr/_core/appcolors.dart';
 import 'package:turisr/_core/loading.dart';
 import 'package:turisr/_core/modal.dart';
@@ -90,8 +91,18 @@ class _MyHomePageState extends State<PerfilEditarPage> {
 
       if (response.statusCode == 200) {
         Loading.hide();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.green,
+            content: Text(
+              "Dados editados com sucesso!",
+              style: TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
         Navigator.pop(context, true);
-        setState(() {});
+        Loading.hide();
         return;
       }
       Loading.hide();
@@ -158,7 +169,11 @@ class _MyHomePageState extends State<PerfilEditarPage> {
                       Icon(Icons.arrow_back, size: 28),
                       Text(
                         "Cancelar",
-                        style: TextStyle(fontSize: 25, color: Colors.black),
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.black,
+                          fontFamily: GoogleFonts.ubuntu().fontFamily,
+                        ),
                       ),
                     ],
                   ),
@@ -232,7 +247,11 @@ class _MyHomePageState extends State<PerfilEditarPage> {
                     children: [
                       Text(
                         "SALVAR",
-                        style: TextStyle(fontSize: 25, color: Colors.white),
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                          fontFamily: GoogleFonts.ubuntu().fontFamily,
+                        ),
                       ),
                     ],
                   ),

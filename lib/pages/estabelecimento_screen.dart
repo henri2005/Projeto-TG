@@ -33,6 +33,8 @@ class EstabelecimentoScreen extends StatefulWidget {
 class _MyHomePageState extends State<EstabelecimentoScreen> {
   IconData icone = Icons.favorite_border_rounded;
   String textoRoteiro = "ADICIONAR AO ROTEIRO";
+  late String textoMensagem = "Local adicionado aos favoritos!";
+  late String textoMensagemRoteiro = "Local adicionado ao roteiro!";
   Color corBotao = AppColors.buttonColor;
 
   IconData estrelas = Icons.star_border;
@@ -97,7 +99,7 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
 
   void favoritar() async {
     try {
-      Loading.show(context, mensagem: 'Adicionando aos favoritos...');
+      Loading.show(context, mensagem: 'Processando...');
 
       Dio dio = Dio(
         BaseOptions(
@@ -123,7 +125,7 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
 
       if (response.statusCode == 200) {
         Loading.hide();
-        showModalConfirm(context, response.data['message']);
+
         setState(() {});
       } else {
         Loading.hide();
@@ -137,7 +139,7 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
 
   void adicionaRoteiro() async {
     try {
-      Loading.show(context, mensagem: 'Adicionando ao roteiro');
+      Loading.show(context, mensagem: 'Processando...');
 
       Dio dio = Dio(
         BaseOptions(
@@ -162,7 +164,6 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
 
       if (response.statusCode == 200) {
         Loading.hide();
-        showModalConfirm(context, response.data['message']);
         setState(() {});
       } else {
         Loading.hide();
@@ -227,6 +228,21 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
                               onPressed: () {
                                 favoritar();
                                 alternarFavorito();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors.green,
+                                    content: Text(
+                                      isFavorite
+                                          ? "Local adicionado aos favoritos!"
+                                          : "Local removido dos favoritos!",
+                                      style: TextStyle(
+                                        fontFamily:
+                                            GoogleFonts.ubuntu().fontFamily,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                );
                               },
                               icon: Icon(
                                 isFavorite
@@ -406,37 +422,32 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return Container(
-                                    child: AlertDialog(
-                                      elevation: 6,
-                                      title: Row(
-                                        children: List.generate(5, (index) {
-                                          return TextButton(
-                                            onPressed: () {
-                                              if (estrelas ==
-                                                  Icons.star_border) {
-                                                setState(() {
-                                                  estrelas = Icons.star;
-                                                  corEstrelas = Colors.yellow;
-                                                  avaliacaoApp = index;
-                                                });
-                                              } else {
-                                                setState(() {
-                                                  estrelas = Icons.star_border;
-                                                  corEstrelas = Colors.grey;
-                                                  avaliacaoApp = 0;
-                                                });
-                                              }
-                                            },
-                                            child: Icon(
-                                              estrelas,
-                                              color: corEstrelas,
-                                              size: 25,
-                                            ),
-                                          );
-                                        }),
-                                      ),
-                                    ),
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: List.generate(4, (index) {
+                                      return TextButton(
+                                        onPressed: () {
+                                          if (estrelas == Icons.star_border) {
+                                            setState(() {
+                                              estrelas = Icons.star;
+                                              corEstrelas = Colors.yellow;
+                                              avaliacaoApp = index;
+                                            });
+                                          } else {
+                                            setState(() {
+                                              estrelas = Icons.star_border;
+                                              corEstrelas = Colors.grey;
+                                              avaliacaoApp = 0;
+                                            });
+                                          }
+                                        },
+                                        child: Icon(
+                                          estrelas,
+                                          color: corEstrelas,
+                                          size: 40,
+                                        ),
+                                      );
+                                    }),
                                   );
                                 },
                               );
@@ -495,6 +506,20 @@ class _MyHomePageState extends State<EstabelecimentoScreen> {
                     onPressed: () {
                       adicionaRoteiro();
                       alternarRoteiro();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.green,
+                          content: Text(
+                            isAdicionado
+                                ? "Local adicionado ao roteiro!"
+                                : "Local removido do roteiro!",
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.ubuntu().fontFamily,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      );
                     },
                     child: Text(
                       isAdicionado

@@ -94,7 +94,7 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
 
   void favoritar() async {
     try {
-      Loading.show(context, mensagem: 'Adicionando aos favoritos...');
+      Loading.show(context, mensagem: 'Processando...');
 
       Dio dio = Dio(
         BaseOptions(
@@ -121,7 +121,6 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
 
       if (response.statusCode == 200) {
         Loading.hide();
-        showModalConfirm(context, response.data['message']);
         setState(() {});
       } else {
         Loading.hide();
@@ -135,7 +134,7 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
 
   void adicionaRoteiro() async {
     try {
-      Loading.show(context, mensagem: 'Adicionando ao roteiro');
+      Loading.show(context, mensagem: 'Processando...');
 
       Dio dio = Dio(
         BaseOptions(
@@ -160,7 +159,7 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
 
       if (response.statusCode == 200) {
         Loading.hide();
-        showModalConfirm(context, response.data['message']);
+
         setState(() {});
       } else {
         Loading.hide();
@@ -221,6 +220,21 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
                               onPressed: () {
                                 favoritar();
                                 alternarFavorito();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors.green,
+                                    content: Text(
+                                      isFavorite
+                                          ? "Local adicionado aos favoritos!"
+                                          : "Local removido dos favoritos!",
+                                      style: TextStyle(
+                                        fontFamily:
+                                            GoogleFonts.ubuntu().fontFamily,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                );
                               },
                               icon: Icon(
                                 isFavorite
@@ -389,7 +403,40 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: List.generate(4, (index) {
+                                      return TextButton(
+                                        onPressed: () {
+                                          if (estrelas == Icons.star_border) {
+                                            setState(() {
+                                              estrelas = Icons.star;
+                                              corEstrelas = Colors.yellow;
+                                              avaliacaoApp = index;
+                                            });
+                                          } else {
+                                            setState(() {
+                                              estrelas = Icons.star_border;
+                                              corEstrelas = Colors.grey;
+                                              avaliacaoApp = 0;
+                                            });
+                                          }
+                                        },
+                                        child: Icon(
+                                          estrelas,
+                                          color: corEstrelas,
+                                          size: 40,
+                                        ),
+                                      );
+                                    }),
+                                  );
+                                },
+                              );
+                            },
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.3,
                               height: MediaQuery.of(context).size.height * 0.06,
@@ -409,6 +456,8 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
+                                      fontFamily:
+                                          GoogleFonts.ubuntu().fontFamily,
                                     ),
                                   ),
                                 ],
@@ -442,6 +491,20 @@ class _MyHomePageState extends State<PontoTuristicoScreen> {
                     onPressed: () {
                       adicionaRoteiro();
                       alternarRoteiro();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.green,
+                          content: Text(
+                            isFavorite
+                                ? "Local adicionado ao roteiro!"
+                                : "Local removido ao roteiro!",
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.ubuntu().fontFamily,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      );
                     },
                     child: Text(
                       isAdicionado

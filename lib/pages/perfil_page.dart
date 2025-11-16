@@ -36,8 +36,6 @@ class _MyHomePageState extends State<PerfilPage> {
 
   void carregarInfoUsuarios() async {
     try {
-      Loading.show(context, mensagem: 'Carregando suas informações...');
-
       Dio dio = Dio(
         BaseOptions(
           connectTimeout: Duration(seconds: 10),
@@ -61,8 +59,6 @@ class _MyHomePageState extends State<PerfilPage> {
       nomeUsuario = nome;
 
       if (response.statusCode == 200) {
-        Loading.hide();
-
         if (response.data is Map<String, dynamic>) {
           final dataMap = data as Map<String, dynamic>;
           usuarioPerfil = UsuarioModel.fromJson(dataMap["usuario"]);

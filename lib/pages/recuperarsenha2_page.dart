@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:turisr/_core/widgets/botoes.dart';
 import 'package:turisr/pages/login_page.dart';
 
@@ -30,12 +31,18 @@ class _MyHomePageState extends State<Recuperar2Page> {
                   children: [
                     Text(
                       "Enviamos um código para o seu e-mail",
-                      style: TextStyle(fontSize: 30),
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontFamily: GoogleFonts.ubuntu().fontFamily,
+                      ),
                     ),
 
                     Text(
                       "Digite o código enviado para o email\n${widget.email}",
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontFamily: GoogleFonts.ubuntu().fontFamily,
+                      ),
                     ),
 
                     SizedBox(

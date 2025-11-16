@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:turisr/_core/appcolors.dart';
 
 class Botao extends StatelessWidget {
@@ -23,7 +24,14 @@ class Botao extends StatelessWidget {
             MaterialPageRoute(builder: (context) => pagina!),
           );
         },
-        child: Text(texto, style: TextStyle(fontSize: 22, color: Colors.white)),
+        child: Text(
+          texto,
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+            fontFamily: GoogleFonts.ubuntu().fontFamily,
+          ),
+        ),
       ),
     );
   }

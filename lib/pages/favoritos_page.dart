@@ -75,9 +75,9 @@ class _MyHomePageState extends State<FavoritosPage> {
     }
   }
 
-  void desfavoritar() async {
+  void desfavoritar(String idLocal) async {
     try {
-      Loading.show(context, mensagem: 'Adicionando aos favoritos...');
+      Loading.show(context, mensagem: 'Removendo aos favoritos...');
 
       Dio dio = Dio(
         BaseOptions(
@@ -98,7 +98,7 @@ class _MyHomePageState extends State<FavoritosPage> {
       print(dados);
 
       final response = await dio.post(
-        'http://10.0.0.94/api_turismo/locais/desfavoritar/${int.parse(favoritos.id as String)}',
+        'http://10.0.0.94/api_turismo/locais/desfavoritar/$idLocal',
         data: dados,
       );
 
@@ -108,7 +108,6 @@ class _MyHomePageState extends State<FavoritosPage> {
         setState(() {});
       } else {
         Loading.hide();
-        showModalErro(context, response.data['message']);
       }
     } catch (e) {
       Loading.hide();
@@ -243,11 +242,28 @@ class _MyHomePageState extends State<FavoritosPage> {
                                     ),
                                     IconButton(
                                       onPressed: () async {
-                                        // desfavoritar();
+                                        desfavoritar(local.id[index]);
                                         local.id.removeAt(index);
                                         local.nome.removeAt(index);
                                         local.caminhoImagem.removeAt(index);
                                         local.rua.removeAt(index);
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          SnackBar(
+                                            backgroundColor: Colors.green,
+                                            content: Text(
+                                              "Local removido dos favoritos",
+                                              style: TextStyle(
+                                                fontFamily:
+                                                    GoogleFonts.ubuntu()
+                                                        .fontFamily,
+                                                fontSize: 18,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        );
                                         setState(() {});
                                       },
                                       icon: Icon(Icons.favorite, size: 40),
