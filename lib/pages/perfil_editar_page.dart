@@ -101,7 +101,8 @@ class _MyHomePageState extends State<PerfilEditarPage> {
             ),
           ),
         );
-        Navigator.pop(context, true);
+        // Navigator.popUntil(context, (context) => context.isFirst);
+        Navigator.pop(context);
         Loading.hide();
         return;
       }
@@ -225,10 +226,9 @@ class _MyHomePageState extends State<PerfilEditarPage> {
               TextButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    editaUsuario();
                     dados.write('Usuario', _controllerUser.text);
                     dados.write('Senha', _controllerSenha.text);
-                    // Navigator.pop(context, true);
+                    editaUsuario();
                   }
                 },
                 child: Container(

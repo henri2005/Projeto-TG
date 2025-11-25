@@ -260,9 +260,10 @@ class _MyHomePageState extends State<PerfilPage> {
                   spacing: 20,
                   children: [
                     CircleAvatar(
+                      backgroundImage: AssetImage(
+                        'assets/imagens/icone_perfil.avif',
+                      ),
                       radius: 80,
-                      foregroundColor: Colors.red,
-                      child: Icon(Icons.person, size: 80),
                     ),
                     Text(
                       nomeUsuario,
