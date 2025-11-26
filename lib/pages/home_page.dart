@@ -121,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             altura: 0.06,
                             icone: Icons.arrow_forward_rounded,
                             texto: 'Veja Mais',
-                            pagina: CidadePage(),
+                            pagina: CidadePage(usuario: widget.usuarioLogado),
                           ),
                         ],
                       ),
